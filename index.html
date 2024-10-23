@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campari Spritz Campaign</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="text-white">
+
+  <!-- Section 1: Promotion Section -->
+  <div id="promotion-section" class="flex flex-col items-center justify-center h-screen text-white relative">
+    <div class="text-center">
+      <img src="./src/assets/images/logo.png" alt="Campari Logo" class="mx-auto w-40 mb-8">
+    </div>
+    <h1 class="text-4xl font-bold mb-2 text-center">YOUR FREE CAMPARI SPRITZ AWAITS</h1>
+    <p class="text-lg mb-8 text-center">FIND A BAR NEAR YOU AND REDEEM YOUR VOUCHER!</p>
+    <div class="text-center">
+      <button id="claim-drink-button" class="bg-white text-red-700 px-6 py-3 font-semibold rounded-lg hover:bg-red-200 transition duration-300">CLAIM MY FREE DRINK</button>
+    </div>
+  </div>
+
+  <!-- Section 2: Bar Listing & Map Section -->
+  <div id="bar-listing-section" class="hidden p-8 bg-gray-100 text-gray-800 min-h-screen">
+    <!-- Heading -->
+    <div class="text-center mb-8">
+      <h2 class="text-4xl font-bold mb-2">FIND A BAR NEAR YOU</h2>
+      <p class="text-lg">CHOOSE A BAR FROM THE MAP OR LIST TO CLAIM YOUR FREE DRINKS 🍹</p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="flex justify-center mb-6">
+      <input type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 border rounded-lg shadow-md">
+      <button class="ml-2 p-2 bg-white text-gray-800 rounded-lg shadow-md">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 1114 0 7 7 0 01-14 0z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex justify-center gap-4 mb-8">
+      <select class="p-2 rounded-md border">
+        <option>Distance</option>
+        <option>Nearest</option>
+        <option>Farthest</option>
+      </select>
+      <select class="p-2 rounded-md border">
+        <option>Popularity</option>
+        <option>Top Rated</option>
+        <option>Most Visited</option>
+      </select>
+    </div>
+
+    <!-- Bar List & Map -->
+    <div class="flex gap-6">
+      <!-- Bar List -->
+      <div class="w-1/2 space-y-6">
+        <!-- Bar Item -->
+        <div class="bg-white p-4 rounded-lg shadow-lg flex items-center">
+          <img src="./src/assets/images/bar-image.png" alt="Bar Image" class="w-24 h-24 rounded-md mr-4 object-cover">
+          <div>
+            <h3 class="font-bold text-xl">BIG PONS</h3>
+            <p>1 Raffles Place, Singapore 048616</p>
+            <div class="text-yellow-500 mb-2">
+              ⭐⭐⭐⭐⭐ (5.0)
+            </div>
+            <p class="text-green-600 font-semibold">Open - Closes 2 AM</p>
+            <button data-modal-target="voucherModal" class="claim-voucher-button bg-red-600 text-white px-4 py-2 rounded-md mt-2 hover:bg-red-700">CLAIM VOUCHER</button>
+          </div>
+        </div>
+        <!-- Add more bar items as needed -->
+      </div>
+
+      <!-- Map Section -->
+      <div id="map" class="w-1/2 h-96 bg-gray-300 rounded-lg">
+        <!-- Placeholder for the map, you would need to add Google Maps API here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="voucherModal" class="modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="modal-content bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+      <div id="modal-body">
+        <!-- Aquí se insertará el contenido dinámico -->
+      </div>
+      <div class="text-right mt-6">
+        <button data-modal-close="voucherModal" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript -->
+  <script type="module" src="./src/index.js"></script>
+</body>
+</html>

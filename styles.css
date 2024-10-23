@@ -1,0 +1,7 @@
+#promotion-section {
+    background-color: #D0011B;
+    background-image: url('./src/assets/images/bg.png'); /* Replace with the path to your image */
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }

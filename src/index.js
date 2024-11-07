@@ -1,4 +1,4 @@
-/* import { initMap } from './components/map.js';
+import { initMap } from './components/map.js';
 import { setupModals } from './components/modal.js';
 import { setupFormHandlers } from './components/form.js';
 
@@ -18,4 +18,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
- */

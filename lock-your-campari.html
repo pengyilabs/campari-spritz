@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campari Spritz Campaign</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@500&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@500&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link href="./src/output.css" rel="stylesheet">
+</head>
+<body>
+  <div id="lock-your-campari-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center py-4">
+    <!-- Modal Content -->
+    <div class=" text-white w-full h-full relative">
+        <!-- Close button -->
+        <button class="absolute right-4 top-4" onclick="closeModal()">
+            <i class="fas fa-times w-6 h-6"></i>
+        </button>
+
+        <!-- Content container -->
+        <div class="p-6 text-center">
+            <!-- Logo -->
+            <div class="inline-block border-2 border-white px-3 py-1 mb-4">
+                <img src="./src/assets/images/logo-2-campari-milano.svg" alt="">
+            </div>
+
+            <!-- Main heading -->
+            <h1 class="text-2xl font-bold mb-4">
+                LOCK YOUR FREE<br>
+                CAMPARI SPRITZ
+            </h1>
+
+            <p class="text-sm mb-4">
+                ENTER YOUR EMAIL BELOW AND<br>
+                RECEIVE YOUR VOUCHER INSTANTLY
+            </p>
+
+            <!-- How easy section -->
+            <div class=" p-3 mb-6 text-sm">
+                HOW EASY IT IS:<br>
+                Submit the participation form, and you're in the draw! The entry deadline is 29.02.2024
+            </div>
+
+            <p class="text-sm mb-6">
+                Participation is for those aged 18 and above
+            </p>
+
+            <!-- Location card -->
+            <div class="bg-white text-black p-4 mb-6">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fas fa-map-marker-alt w-5 h-5"></i>
+                    <span class="font-semibold">BIG PONS</span>
+                </div>
+                <p class="text-sm text-gray-600">1 Raffles Place, Singapore 048616</p>
+                <div class="flex items-center gap-1 mt-2">
+                    <span class="text-yellow-400">★★★★★</span>
+                    <span class="text-sm text-gray-600 ml-2">5.0</span>
+                </div>
+                <p class="text-sm text-gray-600 mt-1">Open · Closes 2 AM</p>
+            </div>
+
+            <!-- Form -->
+            <form onsubmit="handleSubmit(event)">
+                <input
+                    type="text"
+                    placeholder="Enter your first name here"
+                    class="w-full p-3 mb-3 text-black"
+                >
+                <input
+                    type="email"
+                    placeholder="Enter your email here"
+                    class="w-full p-3 mb-4 text-black"
+                >
+
+                <!-- Terms -->
+                <p class="text-xs text-left mb-6">
+                    By submitting the form, I confirm that I have read and accepted the
+                    terms and conditions of the contest. The Privacy Policy was amended to
+                    include Newsletter.<br><br>
+                    I also confirm that I would like to subscribe to the newsletter to receive
+                    exclusive news about events, offers and promotions from Campari
+                    Deutschland GmbH and Davide Campari-Milano N.V. I agree that Campari
+                    Deutschland GmbH and Davide Campari-Milano N.V. may use my personal data
+                    to send messages according to my preferences or to personalize
+                    them based on my location. I understand that I can unsubscribe at any
+                    time by clicking the unsubscribe link in the newsletter.
+                </p>
+
+                <!-- Submit button -->
+                <button class="w-full bg-white font-bold py-3">
+                    CLAIM MY FREE DRINK
+                </button>
+            </form>
+
+            <!-- Footer -->
+            <p class="text-sm mt-4">#ENJOYRESPONSIBLY</p>
+        </div>
+    </div>
+</div>
+<script>
+  // Funciones para controlar el modal
+  function openModal() {
+      document.getElementById('campariModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Previene el scroll del body
+  }
+  
+  function closeModal() {
+      document.getElementById('campariModal').style.display = 'none';
+      document.body.style.overflow = 'auto'; // Restaura el scroll del body
+  }
+  
+  function handleSubmit(event) {
+      event.preventDefault();
+      // Aquí puedes agregar la lógica para manejar el envío del formulario
+      console.log('Form submitted');
+  }
+  
+  // Cerrar el modal al hacer clic fuera de él
+  document.getElementById('campariModal').addEventListener('click', function(event) {
+      if (event.target === this) {
+          closeModal();
+      }
+  });
+  </script>
+</body>
+</html>

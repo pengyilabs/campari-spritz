@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Rubik";
+  --red-campari: #c8102e;
+}
+#promotion-section {
+  background-color: var(--red-campari);
+  background-image: url('./assets/images/glass.png'),
+    url('./assets/images/orange-right.png'),
+    url('./assets/images/orange-left.png'),
+    url('./assets/images/ice-1.png'),
+    url('./assets/images/ice-2.png'),
+    url('./assets/images/ice-3.png');
+  background-position: 73% bottom,
+    right bottom,
+    left bottom,
+    left bottom,
+    right 70%,
+    right 90%;
+  background-size: 80%, 70%, 40%, 33%, 30%, 25%;
+  background-repeat: no-repeat;
+}
+
+#claim-drink-button::before {
+  content: url('./assets/icons/arrow-to-left.svg');
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#claim-drink-button::after {
+  content: url('./assets/icons/arrow-to-right.svg');
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Find a Bar Section */
+
+#find-a-bar-section {
+  background-color: var(--red-campari);
+}
+
+/* Look your Campari Section */
+
+#lock-your-campari-modal {
+  background-color: var(--red-campari);
+}

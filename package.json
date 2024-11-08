@@ -1,5 +1,14 @@
 {
+  "name": "campari-spritz",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
   "devDependencies": {
     "tailwindcss": "^3.4.14"
-  }
+  },
+  "scripts": {
+    "tailwind": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

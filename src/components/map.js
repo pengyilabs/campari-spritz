@@ -10,8 +10,7 @@ export async function initMap() {
       return;
     }
 
-    // Asegúrate de que el div del mapa tenga un alto definido
-    mapElement.style.height = '400px'; // O el alto que prefieras
+    mapElement.style.height = '400px'; 
 
     const mapOptions = {
       center: { lat: latitude, lng: longitude },

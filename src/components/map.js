@@ -15,12 +15,12 @@ export async function initMap() {
     const mapOptions = {
       center: { lat: latitude, lng: longitude },
       zoom: 14,
-      styles: [], // Puedes agregar estilos personalizados aquí
+      styles: [],
     };
 
     const map = new google.maps.Map(mapElement, mapOptions);
     
-    // Crear un marcador la ubicación del usuario
+    // Marcador con la locación del usuario
     new google.maps.Marker({
       position: { lat: latitude, lng: longitude },
       map: map,
@@ -38,6 +38,7 @@ export async function initMap() {
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && results) {
         results.forEach(place => createMarker(place, map));
+        console.log(results)
       } else {
         console.error('Error in location search:', status);
       }
@@ -50,12 +51,12 @@ export async function initMap() {
 function createMarker(place, map) {
   if (!place.geometry || !place.geometry.location) return;
 
-  const marker = new google.maps.AdvancedMarkerElement ({
+  const marker = new google.maps.Marker ({
     map: map,
     position: place.geometry.location,
     title: place.name,
     icon: {
-      url: '../assets/images/map-marker.svg',
+      url: './src/assets/images/map-marker.svg',
       scaledSize: new google.maps.Size(32, 32)
     }
   });

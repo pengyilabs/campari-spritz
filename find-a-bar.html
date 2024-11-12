@@ -13,12 +13,16 @@
   <!-- Section 2: Bar Listing & Map Section -->
 <div id="find-a-bar-section" class="py-8 bg-gray-100 text-white min-h-screen">
   <!-- Heading -->
-  <div class="text-center mb-8 px-8">
-    <h2 class="text-4xl font-bold mb-2">FIND A BAR NEAR YOU</h2>
-    <p class="text-lg">CHOOSE A BAR FROM THE MAP OR LIST TO CLAIM YOUR FREE DRINKS 🍹</p>
+  <div class="text-center mb-4 px-8">
+    <h2 class="text-3xl font-bold mb-5">FIND A BAR NEAR YOU</h2>
+    <p class="text-base font-medium">CHOOSE A BAR FROM THE MAP OR LIST TO CLAIM YOUR FREE DRINKS 🍹</p>
   </div>
 
   <!-- Search Bar -->
+  <button class="m-auto mb-4 text-sm font-light flex gap-2">
+    <img class="" src="./src/assets/icons/map-pin-white.svg"/>
+     use my current location
+    </button>
   <div class="flex justify-center mb-6 px-8">
     <input type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 border shadow-md">
     <button class="ml-2 p-2 bg-white text-gray-800 shadow-md">
@@ -27,13 +31,13 @@
   </div>
 
   <!-- Filters -->
-  <div class="flex justify-center gap-4 mb-8  text-gray-800">
-    <select class="p-2 rounded-md border">
+  <div class="flex justify-center gap-4 mb-8  text-gray-800 border-y border-light-red py-4">
+    <select class="p-2 py-3 border">
       <option>Distance</option>
       <option>Nearest</option>
       <option>Farthest</option>
     </select>
-    <select class="p-2 rounded-md border">
+    <select class="p-2 py-3 border">
       <option>Popularity</option>
       <option>Top Rated</option>
       <option>Most Visited</option>

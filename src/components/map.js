@@ -4,7 +4,7 @@ export async function initMap() {
   try {
     const placeIds = await fetchPlaceIdList();
     const { lat, lng } = await getLocation();
-    
+
     const mapElement = document.getElementById('map');
     if (!mapElement) {
       console.error('Map element not found');
@@ -32,9 +32,12 @@ export async function initMap() {
     const service = new google.maps.places.PlacesService(map);
 
     const barListBox = document.querySelector("#bar-list");
+
+    console.time("fetchPlaceDetails");
     const HTMLContent = await fetchPlaceDetails(service, placeIds);
-    console.log("aber", HTMLContent);
-    barListBox.insertAdjacentHTML('beforeend', HTMLContent);
+    console.timeEnd("fetchPlaceDetails");
+
+    barListBox.insertAdjacentHTML('beforeend', HTMLContent.join(""));
   } catch (error) {
     console.error('Error initializing the map:', error);
   }
@@ -72,13 +75,13 @@ function createMarker(place, map) {
   });
 }
 
-export const fetchPlaceIdList = async () => {
+const fetchPlaceIdList = async () => {
   const result = await fetch("https://guarded-bayou-29112-bff154a21112.herokuapp.com/https://dev-api.gratisspritz.com/places");
   const data = await result.json();
   return data;
 }
 
-export const fetchPlaceDetails = async (service, placeIds) => {
+const fetchPlaceDetails = async (service, placeIds) => {
   const { spherical } = await google.maps.importLibrary("geometry");
   const placesList = [];
   const userLocation = await getLocation();
@@ -86,7 +89,7 @@ export const fetchPlaceDetails = async (service, placeIds) => {
   for (const placeId of placeIds) {
     const request = {
       placeId: placeId,
-      fields: ["name", "rating", "formatted_address", "geometry", "vicinity", "photos"],
+      fields: ["name", "rating", "formatted_address", "geometry", "vicinity", "photos", "opening_hours"],
     };
 
     try {
@@ -112,11 +115,43 @@ export const fetchPlaceDetails = async (service, placeIds) => {
   }
 
   const orderedPlacesList = await filterAndOrderPlaces(placesList.filter(Boolean), 3000, 2);
-  return orderedPlacesList;
+  const htmlPlacesList = createHtmlPlacesList(orderedPlacesList);
+  return htmlPlacesList;
 };
 
 const filterAndOrderPlaces = async (places, maxDistance, minPopularity) => {
   return await places
     .filter(place => place.radius <= maxDistance && place.rating >= minPopularity)
     .sort((a, b) => a.radius - b.radius);
+}
+
+const createHtmlPlacesList = (places) => {
+  console.log(places[0].photos[0].getUrl());
+  const htmlPlacesList = places.map(place => {
+    console.log(places[0]);
+    return `
+      <div class="bar-item">
+        <div class="bar-item__info-container">
+          <h3 class="bar-item__title">${place.name || 'Bar Name'}</h3>
+          <div class="bar-item__address-container flex gap-2">
+            <img src="src/assets/icons/map-pin.svg" />
+            <p class="bar-item__address-text">${place.formatted_address || 'Address not available'}</p>
+          </div>
+          <div class="bar-item__rating text-yellow-500 mb-2">
+          ${place.rating || 'N/A'} ${'<img src="./src/assets/icons/star.svg" />'.repeat(Math.round(place.rating || 0))}
+          </div>
+          <p class="bar-item__is-opening">
+            ${place.opening_hours?.isOpen() ?
+              '<span class="bar-item__is-opening__open">Open</span> - Closes 12:00 PM' :
+              `<span class="bar-item__is-opening__closed">Closed</span> - Opens 09:00 AM`}
+          </p>
+          <button data-modal-target="voucherModal" class="bar-item__claim-voucher-button hover:bg-red-700">CLAIM VOUCHER</button>
+        </div>
+        <figure class="bar-item__bar-image-container">
+          <img class="bar-item__bar-image-container_img" src=${place.photos[0].getUrl()} alt="Bar Image">
+        </figure>
+      </div>
+    `;
+  })
+  return htmlPlacesList;
 }

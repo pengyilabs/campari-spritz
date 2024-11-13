@@ -58,6 +58,13 @@
   font-family: "Roboto Condensed";
 }
 
+.font-rubik {
+  font-family: "Rubik";
+}
+
+.bg-red-campari {
+  background: var(--red-campari);
+}
 /* Styling Bar item (Tailwind behaves weirdly with elements dynamically inserted as strings) */
 .bar-item {
   background: white;
@@ -79,9 +86,6 @@
   font-family: "Rubik";
   font-weight: bold;
   font-size: 1rem;
-}
-
-.bar-item__address-text {
 }
 
 .bar-item__is-opening {

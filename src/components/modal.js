@@ -10,7 +10,7 @@ export function setupModals() {
       const modalId = button.getAttribute('data-modal-target');
       const modal = document.getElementById(modalId);
       if (modal) {
-        addModalContent(modal, button); // Add dynamic content when opening the modal
+        addModalContent(modal, button);
         openModal(modal);
       }
     });
@@ -48,10 +48,34 @@ function closeModal(modal) {
 // Function to add dynamic content to the modal
 function addModalContent(modal, button) {
   const modalBody = modal.querySelector('#modal-body');
-  if (modalBody) {
+  const modalName = modalBody?.getAttribute("data-modal-name")
+
+  if (modalName && modalName === "vouchersModal") {
     modalBody.innerHTML = `
       <h2 class="text-xl font-semibold mb-4 text-gray-600">Congratulations!</h2>
       <p class="text-gray-600">You have successfully claimed a voucher for your free drink. Please show this confirmation at the bar.</p>
     `;
+  } else if (modalName && modalName === "filtersModal") {
+    modalBody.innerHTML = `
+      <h2 class="text-white text-lg font-semibold mb-4 mt-0 text-gray-600 font-rubik">FILTERS</h2>
+    <div className="space-y-2">
+      <div className="flex justify-between text-sm text-gray-600">
+        <span>Distance</span>
+        <span>{distance} miles</span>
+      </div>
+      <div className="relative">
+        <input
+          id="distanceInput"
+          type="range"
+          min="1"
+          max="15"
+          value={distance}
+        />
+    `;
+
+    const distanceInput = document.querySelector("#distanceInput");
+    distanceInput.addEventListener("change", (e) => {
+      console.log(e.target.value);
+    });
   }
 }

@@ -126,9 +126,7 @@ const filterAndOrderPlaces = async (places, maxDistance, minPopularity) => {
 }
 
 const createHtmlPlacesList = (places) => {
-  console.log(places[0].photos[0].getUrl());
   const htmlPlacesList = places.map(place => {
-    console.log(places[0]);
     return `
       <div class="bar-item">
         <div class="bar-item__info-container">

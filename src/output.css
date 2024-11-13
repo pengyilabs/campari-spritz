@@ -711,10 +711,6 @@ video {
   margin-top: 2rem;
 }
 
-.mt-0 {
-  margin-top: 0px;
-}
-
 .inline-block {
   display: inline-block;
 }
@@ -791,10 +787,6 @@ video {
   justify-content: center;
 }
 
-.justify-between {
-  justify-content: space-between;
-}
-
 .gap-1 {
   gap: 0.25rem;
 }
@@ -821,12 +813,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
-}
-
-.space-y-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
 .border {
@@ -1006,11 +992,6 @@ video {
   line-height: 1rem;
 }
 
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -1098,8 +1079,10 @@ video {
 :root {
   font-family: "Rubik";
   --red-campari: #c8102e;
+  --dark-red: #94041c;
   --dark-gray: #2f2f2f;
   --light-green: #4DA166;
+  --light-red: #EA5D74;
 }
 
 #promotion-section {
@@ -1224,6 +1207,75 @@ video {
   -o-object-fit:cover;
      object-fit:cover;
   overflow: hidden;
+}
+
+.filter-modal__container {
+}
+
+.distance-input-range {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: var(--light-red);
+  height: 2px;
+}
+
+.distance-input-range::-webkit-slider-thumb {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+          appearance: none;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  border-radius: 24px;
+  width: 20px;
+  height: 20px;
+}
+
+.distance-input-range::-moz-range-thumb {
+  box-sizing: border-box;
+  -moz-appearance: none;
+       appearance: none;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  border-radius: 24px;
+  width: 20px;
+  height: 20px;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.checkbox {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: var(--dark-red);
+  border: 1px solid var(--light-red);
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  transition: all ease 0.15s;
+  position: relative;
+  /* Necesario para posicionar el pseudo-elemento */
+}
+
+.checkbox:checked {
+  background: var(--light-red);
+}
+
+.checkbox:checked::after {
+  content: "✔";
+  /* Símbolo de tilde o checkmark */
+  color: white;
+  /* Color de la tilde */
+  font-size: 16px;
+  /* Tamaño de la tilde */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Centra la tilde */
 }
 
 .hover\:bg-red-200:hover {

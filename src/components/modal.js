@@ -1,3 +1,5 @@
+import state from "../utils/state.js";
+
 export function setupModals() {
   // Get all buttons that can open modals
   const openModalButtons = document.querySelectorAll('[data-modal-target]');
@@ -57,25 +59,38 @@ function addModalContent(modal, button) {
     `;
   } else if (modalName && modalName === "filtersModal") {
     modalBody.innerHTML = `
-      <h2 class="text-white text-lg font-semibold mb-4 mt-0 text-gray-600 font-rubik">FILTERS</h2>
-    <div className="space-y-2">
-      <div className="flex justify-between text-sm text-gray-600">
-        <span>Distance</span>
-        <span>{distance} miles</span>
+      <h2 class="text-white text-lg font-semibold mb-4 text-gray-600 font-rubik">FILTERS</h2>
+      <div class="w-full space-y-2 pt-8 font-roboto-condensed">
+        <div class="flex justify-between text-base  text-base">
+          <span>Distance</span>
+          <span><span id="distanceLabel">${state.distance}</span> km</span>
+        </div>
+        <div class="w-full">
+          <input
+            id="distanceInput"
+            class="distance-input-range w-full"
+            type="range"
+            min="1"
+            max="15"
+            value=${state.distance}
+          />
+        </div>
+
+        <div>
+        <p class="text-base mt-8">Popularity</p>
+        <div class="flex justify-between">
+          <p class="text-sm mt-4">Order by popularity</p>
+          <input type="checkbox" class="checkbox" />
+        </div>
       </div>
-      <div className="relative">
-        <input
-          id="distanceInput"
-          type="range"
-          min="1"
-          max="15"
-          value={distance}
-        />
     `;
 
     const distanceInput = document.querySelector("#distanceInput");
+    const distanceLabel = document.querySelector("#distanceLabel");
+
     distanceInput.addEventListener("change", (e) => {
-      console.log(e.target.value);
+      state.distance = e.target.value;
+      distanceLabel.textContent = e.target.value;
     });
   }
 }

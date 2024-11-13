@@ -616,10 +616,6 @@ video {
   right: 1rem;
 }
 
-.right-6 {
-  right: 1.5rem;
-}
-
 .top-0 {
   top: 0px;
 }
@@ -651,8 +647,9 @@ video {
   margin-right: auto;
 }
 
-.mb-16 {
-  margin-bottom: 4rem;
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .mb-2 {
@@ -689,10 +686,6 @@ video {
 
 .mt-1 {
   margin-top: 0.25rem;
-}
-
-.mt-16 {
-  margin-top: 4rem;
 }
 
 .mt-2 {
@@ -1087,19 +1080,18 @@ video {
 
 #promotion-section {
   background-color: var(--red-campari);
-  background-image: url('./assets/images/glass.png'),
+  background-image: 
     url('./assets/images/orange-right.png'),
     url('./assets/images/orange-left.png'),
-    url('./assets/images/ice-1.png'),
-    url('./assets/images/ice-2.png'),
-    url('./assets/images/ice-3.png');
-  background-position: 73% bottom,
+    url('./assets/images/campari-cup.png'),
+    url('./assets/images/campari-bottle.png')
+  ;
+  background-position: 
     right bottom,
     left bottom,
-    left bottom,
-    right 70%,
-    right 90%;
-  background-size: 80%, 70%, 40%, 33%, 30%, 25%;
+    76% bottom,
+    12% bottom;
+  background-size: 63%, 40%, 47%, 47%;
   background-repeat: no-repeat;
 }
 
@@ -1117,6 +1109,54 @@ video {
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+@media (min-width: 678px) {
+  #promotion-section {
+    background-position: 
+    right bottom,
+    left bottom,
+    70% bottom,
+    35% bottom;
+    background-size: 520px, 350px, 200px, 200px;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (min-width: 1040px) {
+  #promotion-section {
+    background-position: 
+    right bottom,
+    left bottom,
+    63% bottom,
+    40% bottom;
+    background-size: 520px, 350px, 200px, 200px;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (min-width: 1440px) {
+  #promotion-section {
+    background-position: 
+    right bottom,
+    left bottom,
+    58% bottom,
+    40% bottom;
+    background-size: 520px, 350px, 205px, 205px;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (min-width: 1600px) {
+  #promotion-section {
+    background-position: 
+    right bottom,
+    left bottom,
+    58% bottom,
+    40% bottom;
+    background-size: 520px, 350px, 220px, 220px;
+    background-repeat: no-repeat;
+  }
 }
 
 /* Find a Bar Section */
@@ -1293,6 +1333,40 @@ video {
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
+@media (min-width: 768px) {
+  .md\:bottom-\[130px\] {
+    bottom: 130px;
+  }
+
+  .md\:right-16 {
+    right: 4rem;
+  }
+
+  .md\:my-6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .md\:w-60 {
+    width: 15rem;
+  }
+
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .md\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .lg\:block {
     display: block;
@@ -1308,5 +1382,10 @@ video {
 
   .lg\:flex-row {
     flex-direction: row;
+  }
+
+  .lg\:text-7xl {
+    font-size: 4.5rem;
+    line-height: 1;
   }
 }

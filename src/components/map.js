@@ -34,7 +34,7 @@ export async function initMap() {
     const barListBox = document.querySelector("#bar-list");
 
     console.time("fetchPlaceDetails");
-    const HTMLContent = await fetchPlaceDetails(service, placeIds);
+    const HTMLContent = await fetchPlaceDetails(service, placeIds, map);
     console.timeEnd("fetchPlaceDetails");
 
     barListBox.insertAdjacentHTML('beforeend', HTMLContent.join(""));
@@ -81,7 +81,7 @@ const fetchPlaceIdList = async () => {
   return data;
 }
 
-const fetchPlaceDetails = async (service, placeIds) => {
+const fetchPlaceDetails = async (service, placeIds, map) => {
   const { spherical } = await google.maps.importLibrary("geometry");
   const placesList = [];
   const userLocation = await getLocation();
@@ -114,7 +114,8 @@ const fetchPlaceDetails = async (service, placeIds) => {
     }
   }
 
-  
+  // Esto debería ir fuera del método
+  placesList.map(place => createMarker(place, map));
   const orderedPlacesList = await filterAndOrderPlaces(placesList.filter(Boolean), 3000, 2);
   const htmlPlacesList = createHtmlPlacesList(orderedPlacesList);
   return htmlPlacesList;

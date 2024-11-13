@@ -80,17 +80,24 @@ function addModalContent(modal, button) {
         <p class="text-base mt-8">Popularity</p>
         <div class="flex justify-between">
           <p class="text-sm mt-4">Order by popularity</p>
-          <input type="checkbox" class="checkbox" />
+          <input type="checkbox" class="checkbox" id="orderByPopularityCheckbox"/>
         </div>
       </div>
     `;
 
     const distanceInput = document.querySelector("#distanceInput");
     const distanceLabel = document.querySelector("#distanceLabel");
+    const orderByPopularityCheckbox = document.querySelector("#orderByPopularityCheckbox");
 
+    // Add event to distance input
     distanceInput.addEventListener("change", (e) => {
       state.distance = e.target.value;
       distanceLabel.textContent = e.target.value;
     });
+
+    // Add event to orderByPopularity checkbox
+    orderByPopularityCheckbox.addEventListener("change", (e) => {
+      state.orderByPopularity = e.target.checked;
+    })
   }
 }

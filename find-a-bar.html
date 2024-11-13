@@ -74,15 +74,14 @@
 </div>
 
 <!-- Modals -->
-<div id="voucherModal" class="modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-  <div class="modal-content bg-white p-8 shadow-lg w-full max-w-lg">
-    <div id="modal-body" data-modal-name="voucherModal">
+<div id="voucherModal" class="hidden fixed inset-0 flex items-start justify-center bg-opacity-50 z-50 overflow-y-auto">
+  <div class="bg-red-campari w-full">
+    <div id="modal-body" data-modal-name="voucherModal" class="">
       <!-- Aquí se insertará el contenido dinámico -->
-    </div>
-    <div class="text-right mt-6">
-      <button data-modal-close="voucherModal" class="bg-red-500 text-white px-4 py-2 hover:bg-red-600 transition duration-300">Close</button>
-    </div>
   </div>
+  <button data-modal-close="voucherModal" class="pt-4 pr-4 absolute top-0 right-0">
+    <img src="./src/assets/icons/close-modal-button.svg" alt="">
+  </button>
 </div>
 
 <div id="filtersModal" class="hidden fixed inset-0 z-50">

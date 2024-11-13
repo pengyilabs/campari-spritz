@@ -114,6 +114,7 @@
 .bg-red-campari {
   background: var(--red-campari);
 }
+
 /* Styling Bar item (Tailwind behaves weirdly with elements dynamically inserted as strings) */
 .bar-item {
   background: white;
@@ -177,9 +178,6 @@
   overflow: hidden;
 }
 
-.filter-modal__container {
-}
-
 .distance-input-range {
   appearance: none;
   background-color: var(--light-red);
@@ -218,7 +216,7 @@
   height: 24px;
   border-radius: 2px;
   transition: all ease 0.15s;
-  position: relative; /* Necesario para posicionar el pseudo-elemento */
+  position: relative;
 }
 
 .checkbox:checked {
@@ -226,11 +224,15 @@
 }
 
 .checkbox:checked::after {
-  content: "✔"; /* Símbolo de tilde o checkmark */
-  color: white; /* Color de la tilde */
-  font-size: 16px; /* Tamaño de la tilde */
+  content: "✔"; 
+  color: white;
+  font-size: 16px; 
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centra la tilde */
+  transform: translate(-50%, -50%);
+}
+
+.voucher-modal__container {
+  overflow-y: auto;
 }

@@ -76,7 +76,7 @@ function createMarker(place, map) {
 }
 
 const fetchPlaceIdList = async () => {
-  const result = await fetch("https://guarded-bayou-29112-bff154a21112.herokuapp.com/https://dev-api.gratisspritz.com/places");
+  const result = await fetch("https://dev-api.gratisspritz.com/places");
   const data = await result.json();
   return data;
 }
@@ -114,6 +114,7 @@ const fetchPlaceDetails = async (service, placeIds) => {
     }
   }
 
+  
   const orderedPlacesList = await filterAndOrderPlaces(placesList.filter(Boolean), 3000, 2);
   const htmlPlacesList = createHtmlPlacesList(orderedPlacesList);
   return htmlPlacesList;

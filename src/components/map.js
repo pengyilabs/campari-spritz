@@ -60,15 +60,17 @@ function createMarker(place, map) {
 
   const infoWindow = new google.maps.InfoWindow({
     content: `
-      <div style="color: black; padding: 8px;">
-        <h3 style="font-weight: bold; margin-bottom: 5px;">${place.name}</h3>
-        <p>${place.vicinity || ''}</p>
-        ${place.rating ? `<p>Rating: ${place.rating} ⭐</p>` : ''}
-        <button onclick="claimVoucher('${place.place_id}')" 
-                style="background: #ff0000; color: white; padding: 5px 10px; border: none; border-radius: 4px; margin-top: 5px;">
-          Claim Voucher
-        </button>
+    <div class="bg-white text-dark-gray p-2">
+      <h3 class="font-bold mb-1 lg:text-lg" style="font-weight: bold; margin-bottom: 5px;">${place.name}</h3>
+      <p>${place.vicinity || ''}</p>
+      <div class="flex gap-2 mb-4">
+        ${place.rating ? `<p>Rating: ${place.rating}</p><img src="./src/assets/icons/star.svg"/>` : ''}
       </div>
+      <button onclick="claimVoucher('${place.place_id}')" 
+        class="bg-red-campari text-white py-2 px-4 border-none rounded mt-1">
+        Claim Voucher
+      </button>
+    </div>
     `
   });
 
@@ -78,7 +80,7 @@ function createMarker(place, map) {
 }
 
 const fetchPlaceIdList = async () => {
-  const result = await fetch(" https://api.gratisspritz.com/places");
+  const result = await fetch("https://api.gratisspritz.com/places");
   const data = await result.json();
   return data;
 }

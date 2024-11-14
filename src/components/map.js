@@ -67,7 +67,7 @@ function createMarker(place, map) {
       <div class="flex gap-2 mb-4">
         ${place.rating ? `<p>Rating: ${place.rating}</p><img src="./src/assets/icons/star.svg"/>` : ''}
       </div>
-      <button onclick="claimVoucher('${place.place_id}')" 
+      <button id="claimVoucherButton" 
         class="bg-red-campari text-white py-2 px-4 border-none rounded mt-1">
         Claim Voucher
       </button>
@@ -75,8 +75,15 @@ function createMarker(place, map) {
     `
   });
 
-  marker.addListener('click', () => {
-    infoWindow.open(map, marker);
+  marker.addListener('click', async () => {
+    await infoWindow.open(map, marker);
+    const claimVoucherButton = document.querySelector("#claimVoucherButton");
+    console.log(claimVoucherButton)
+    claimVoucherButton.addEventListener('click', () => {
+      const voucherModal = document.querySelector("#voucherModal");
+      console.log("inside button modal", voucherModal)
+      voucherModal.classList.remove("hidden");
+    })
   });
 }
 

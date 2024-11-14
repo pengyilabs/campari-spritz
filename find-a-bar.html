@@ -11,66 +11,49 @@
 </head>
 <body>
   <!-- Section 2: Bar Listing & Map Section -->
-<div id="find-a-bar-section" class="py-8 bg-gray-100 text-white min-h-screen">
+<div id="find-a-bar-section" class="py-8 bg-gray-100 text-white min-h-screen bg-red-campari pt-[254px] lg:pt-4 shadow-lg">
   <!-- Heading -->
-  <div class="text-center mb-4 px-8">
+  <div class="text-center flex flex-col align-center justify-center w-full pb-4 pt-6 px-8 fixed top-0 bg-red-campari z-50 lg:static lg:px-0 lg:pt-0">
     <h2 class="text-3xl font-bold mb-5">FIND A BAR NEAR YOU</h2>
     <p class="text-base font-medium">CHOOSE A BAR FROM THE MAP OR LIST TO CLAIM YOUR FREE DRINKS 🍹</p>
-  </div>
 
-  <!-- Search Bar -->
-  <button class="m-auto mb-4 text-sm font-light flex gap-2">
-    <img class="" src="./src/assets/icons/map-pin-white.svg"/>
-     use my current location
-    </button>
-  <div class="flex justify-center mb-6 px-8">
-    <input type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 border shadow-md">
-    <button class="ml-2 p-2 bg-white text-gray-800 shadow-md" data-modal-target="filtersModal">
-        <img src="./src/assets/icons/burger-menu.svg">
-    </button>
-  </div>
+    <!-- Search Bar -->
+    <button class="m-auto mb-4 text-sm font-light flex gap-2">
+      <img class="" src="./src/assets/icons/map-pin-white.svg"/>
+      use my current location
+      </button>
+    <div class="flex justify-center mb-6 px-8">
+      <input type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 border shadow-md">
+      <button class="ml-2 p-2 bg-white text-gray-800 shadow-md" data-modal-target="filtersModal">
+          <img src="./src/assets/icons/burger-menu.svg">
+      </button>
+    </div>
 
-  <!-- Filters -->
-  <div class="hidden lg:block flex justify-center gap-4 mb-8  text-gray-800 border-y border-light-red py-4">
-    <select class="p-2 py-3 border">
-      <option>Distance</option>
-      <option>Nearest</option>
-      <option>Farthest</option>
-    </select>
-    <select class="p-2 py-3 border">
-      <option>Popularity</option>
-      <option>Top Rated</option>
-      <option>Most Visited</option>
-    </select>
+    <!-- Filters -->
+    <div class="hidden lg:block flex justify-center gap-4 mb-8 text-gray-800 border-y border-light-red py-4">
+      <select class="p-2 py-3 border ">
+        <option>Distance</option>
+        <option>Nearest</option>
+        <option>Farthest</option>
+      </select>
+      <select class="p-2 py-3 border">
+        <option>Popularity</option>
+        <option>Top Rated</option>
+        <option>Most Visited</option>
+      </select>
+    </div>
   </div>
 
   <!-- Bar List & Map -->
-  <div class="flex flex-col gap-6 lg:flex-row">
+  <div class="grid grid-cols-1 lg:grid-cols-2">
     <!-- Desktop: Bar List -->
-    <div class="hidden space-y-6 lg:block lg:w-1/2">
-      <!-- Bar Item -->
-      <div class="bg-white p-4 shadow-lg flex items-center text-gray-800">
-        <img src="./src/assets/images/bar-image.png" alt="Bar Image" class="w-24 h-24  mr-4 object-cover">
-        <div>
-          <h3 class="font-bold text-xl">BIG PONS</h3>
-          <p>1 Raffles Place, Singapore 048616</p>
-          <div class="text-yellow-500 mb-2">
-            ⭐⭐⭐⭐⭐ (5.0)
-          </div>
-          <p class="text-green-600 font-semibold">Open - Closes 2 AM</p>
-          <button data-modal-target="voucherModal" class="claim-voucher-button bg-red-600 text-white px-4 py-2  mt-2 hover:bg-red-700">CLAIM VOUCHER</button>
-        </div>
-      </div>
-    </div>
+    <div id="bar-list-desktop" class="hidden gap-6 lg:grid grid-col"></div>
 
     <!-- Map Section -->
-    <div id="map" class="min-h-96 bg-gray-300 lg:w-1/2">
-      <!-- Placeholder for the map, you would need to add Google Maps API here -->
-    </div>
-  </div>
+    <div id="map" class="min-h-96 bg-gray-300 lg:min-h-[600px]"></div>
 
-  <!-- Mobile: Bar List -->
-  <div id="bar-list" class="space-y-4 lg:hidden lg:w-1/2 mt-8"></div>
+    <!-- Mobile: Bar List -->
+    <div id="bar-list-mobile" class="space-y-4 lg:hidden mt-8"></div>
 </div>
 
 <!-- Modals -->

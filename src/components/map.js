@@ -31,13 +31,15 @@ export async function initMap() {
     // Búsqueda de lugares cercanos
     const service = new google.maps.places.PlacesService(map);
 
-    const barListBox = document.querySelector("#bar-list");
+    const barListMobile = document.querySelector("#bar-list-mobile");
+    const barListDesktop = document.querySelector("#bar-list-desktop");
 
     console.time("fetchPlaceDetails");
     const HTMLContent = await fetchPlaceDetails(service, placeIds, map);
     console.timeEnd("fetchPlaceDetails");
 
-    barListBox.insertAdjacentHTML('beforeend', HTMLContent.join(""));
+    barListMobile.insertAdjacentHTML('beforeend', HTMLContent.join(""));
+    barListDesktop.insertAdjacentHTML('beforeend', HTMLContent.join(""));
   } catch (error) {
     console.error('Error initializing the map:', error);
   }
@@ -145,7 +147,7 @@ const createHtmlPlacesList = (places) => {
               '<span class="bar-item__is-opening__open">Open</span> - Closes 12:00 PM' :
               `<span class="bar-item__is-opening__closed">Closed</span> - Opens 09:00 AM`}
           </p>
-          <button data-modal-target="voucherModal" class="bar-item__claim-voucher-button hover:bg-red-700">CLAIM VOUCHER</button>
+          <button data-modal-target="voucherModal" class="bar-item__claim-voucher-button hover:bg-light-red transition-all">CLAIM VOUCHER</button>
         </div>
         <figure class="bar-item__bar-image-container">
           <img class="bar-item__bar-image-container_img" src=${place.photos[0].getUrl()} alt="Bar Image">

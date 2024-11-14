@@ -58,11 +58,11 @@ function createMarker(place, map) {
       scaledSize: new google.maps.Size(32, 32)
     }
   });
+  
   let photoUrl = "";
   if(place.photos) {
     photoUrl = place.photos[0].getUrl();
   }
-  
 
   const infoWindow = new google.maps.InfoWindow({
     content: `

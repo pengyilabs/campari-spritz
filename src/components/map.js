@@ -1,4 +1,4 @@
-import { getLocation } from "../utils/helpers.js";
+import { getLocation, calculateClosingHour, calculateOpeningHour } from "../utils/helpers.js";
 import state from "../utils/state.js";
 
 export async function initMap() {
@@ -147,6 +147,9 @@ const filterAndOrderPlaces = async (places, maxDistance, minPopularity) => {
 
 const createHtmlPlacesList = (places) => {
   const htmlPlacesList = places.map(place => {
+    const openingHour = calculateOpeningHour(place.opening_hours);
+    const closingHour = calculateClosingHour(place.opening_hours);
+
     return `
       <div class="bar-item">
         <div class="bar-item__info-container">
@@ -160,8 +163,8 @@ const createHtmlPlacesList = (places) => {
           </div>
           <p class="bar-item__is-opening">
             ${place.opening_hours?.isOpen() ?
-              '<span class="bar-item__is-opening__open">Open</span> - Closes 12:00 PM' :
-              `<span class="bar-item__is-opening__closed">Closed</span> - Opens 09:00 AM`}
+              `<span class="bar-item__is-opening__open">Open</span> - Closes ${closingHour}` :
+              `<span class="bar-item__is-opening__closed">Closed</span> - Opens ${openingHour}`}
           </p>
           <button data-modal-target="voucherModal" class="bar-item__claim-voucher-button hover:bg-light-red transition-all">CLAIM VOUCHER</button>
         </div>
@@ -173,3 +176,4 @@ const createHtmlPlacesList = (places) => {
   })
   return htmlPlacesList;
 }
+

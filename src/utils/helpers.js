@@ -39,3 +39,69 @@ export const getLocation = async () => {
   );
   return userLocation
 };
+
+export const calculateOpeningHour = (openingHours) => {
+  if (!openingHours) {
+    return 'N/A';
+  }
+  
+  try {
+    const today = new Date().getDay();
+    const periods = openingHours.periods;
+    
+    if (!periods || periods.length === 0) {
+      return 'N/A';
+    }
+    
+    const todayPeriod = periods.find(period => period.open.day === today);
+    
+    if (!todayPeriod) {
+      return 'N/A';
+    }
+    
+    const time = todayPeriod.open.time;
+    const hours = parseInt(time.substring(0, 2));
+    const minutes = time.substring(2, 4);
+    
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12;
+    
+    return `${formattedHours.toString().padStart(2, '0')}:${minutes} ${period}`;
+  } catch (error) {
+    console.error('Error calculating opening hour:', error);
+    return 'N/A';
+  }
+}
+
+export const calculateClosingHour = (openingHours) => {
+  if (!openingHours) {
+    return 'N/A';
+  }
+
+  try {
+    const today = new Date().getDay();
+    const periods = openingHours.periods;
+    
+    if (!periods || periods.length === 0) {
+      return 'N/A';
+    }
+
+    const todayPeriod = periods.find(period => period.close.day === today);
+    
+    if (!todayPeriod) {
+      return 'N/A';
+    }
+
+    const time = todayPeriod.close.time;
+    const hours = parseInt(time.substring(0, 2));
+    const minutes = time.substring(2, 4);
+    
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12;
+    
+    return `${formattedHours.toString().padStart(2, '0')}:${minutes} ${period}`;
+  } catch (error) {
+    console.error('Error calculating closing hour:', error);
+    return 'N/A';
+  }
+}

@@ -1,5 +1,6 @@
 import { getLocation } from "../utils/helpers.js";
 import state from "../utils/state.js";
+
 export async function initMap() {
   try {
     const placeIds = await fetchPlaceIdList();

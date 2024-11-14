@@ -78,10 +78,8 @@ function createMarker(place, map) {
   marker.addListener('click', async () => {
     await infoWindow.open(map, marker);
     const claimVoucherButton = document.querySelector("#claimVoucherButton");
-    console.log(claimVoucherButton)
     claimVoucherButton.addEventListener('click', () => {
       const voucherModal = document.querySelector("#voucherModal");
-      console.log("inside button modal", voucherModal)
       voucherModal.classList.remove("hidden");
     })
   });

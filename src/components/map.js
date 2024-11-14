@@ -1,10 +1,10 @@
 import { getLocation } from "../utils/helpers.js";
-
+import state from "../utils/state.js";
 export async function initMap() {
   try {
     const placeIds = await fetchPlaceIdList();
-    const { lat, lng } = await getLocation();
-
+    const { lat, lng } = await state.currentUserLocation;
+    
     const mapElement = document.getElementById('map');
     if (!mapElement) {
       console.error('Map element not found');

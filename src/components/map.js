@@ -76,7 +76,7 @@ function createMarker(place, map) {
 }
 
 const fetchPlaceIdList = async () => {
-  const result = await fetch("https://dev-api.gratisspritz.com/places");
+  const result = await fetch(" https://api.gratisspritz.com/places");
   const data = await result.json();
   return data;
 }

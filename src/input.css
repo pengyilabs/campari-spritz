@@ -9,6 +9,7 @@
   --dark-gray: #2f2f2f;
   --light-green: #4DA166;
   --light-red: #EA5D74;
+  --background-modal-transparency: #00000066;
 }
 #promotion-section {
   background-color: var(--red-campari);
@@ -251,4 +252,15 @@
   left: 0;
   right: 0;
   opacity: 90%;
+  color:#00000021
+}
+
+.success-modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--background-modal-transparency);
 }

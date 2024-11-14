@@ -554,40 +554,6 @@ video {
   display: none;
 }
 
-.container {
-  width: 100%;
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
-}
-
 .fixed {
   position: fixed;
 }
@@ -602,6 +568,10 @@ video {
 
 .inset-0 {
   inset: 0px;
+}
+
+.bottom-\[50px\] {
+  bottom: 50px;
 }
 
 .bottom-\[90px\] {
@@ -620,16 +590,28 @@ video {
   right: 1rem;
 }
 
+.right-\[50px\] {
+  right: 50px;
+}
+
 .top-0 {
   top: 0px;
 }
 
-.top-4 {
-  top: 1rem;
-}
-
 .top-\[35\%\] {
   top: 35%;
+}
+
+.bottom-\[20px\] {
+  bottom: 20px;
+}
+
+.right-\[20px\] {
+  right: 20px;
+}
+
+.z-10 {
+  z-index: 10;
 }
 
 .z-50 {
@@ -660,12 +642,13 @@ video {
   margin-bottom: 2rem;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
+.my-\[16px\] {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
-.mb-3 {
-  margin-bottom: 0.75rem;
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .mb-4 {
@@ -692,10 +675,6 @@ video {
   margin-right: 1rem;
 }
 
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -708,8 +687,8 @@ video {
   margin-top: 2rem;
 }
 
-.inline-block {
-  display: inline-block;
+.mb-10 {
+  margin-bottom: 2.5rem;
 }
 
 .flex {
@@ -724,20 +703,16 @@ video {
   height: 6rem;
 }
 
-.h-5 {
-  height: 1.25rem;
-}
-
-.h-6 {
-  height: 1.5rem;
-}
-
 .h-full {
   height: 100%;
 }
 
 .h-screen {
   height: 100vh;
+}
+
+.max-h-screen {
+  max-height: 100vh;
 }
 
 .min-h-96 {
@@ -756,20 +731,16 @@ video {
   width: 8rem;
 }
 
-.w-5 {
-  width: 1.25rem;
-}
-
-.w-6 {
-  width: 1.5rem;
-}
-
 .w-full {
   width: 100%;
 }
 
 .w-screen {
   width: 100vw;
+}
+
+.max-w-\[424px\] {
+  max-width: 424px;
 }
 
 .max-w-lg {
@@ -792,8 +763,8 @@ video {
   justify-content: center;
 }
 
-.gap-1 {
-  gap: 0.25rem;
+.justify-between {
+  justify-content: space-between;
 }
 
 .gap-2 {
@@ -820,6 +791,10 @@ video {
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .overflow-y-auto {
   overflow-y: auto;
 }
@@ -836,11 +811,6 @@ video {
 .border-light-red {
   --tw-border-opacity: 1;
   border-color: rgb(234 93 116 / var(--tw-border-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-gray-100 {
@@ -881,26 +851,17 @@ video {
   padding: 0.5rem;
 }
 
-.p-3 {
-  padding: 0.75rem;
-}
-
 .p-4 {
   padding: 1rem;
 }
 
-.p-6 {
-  padding: 1.5rem;
+.p-\[15px\] {
+  padding: 15px;
 }
 
 .px-12 {
   padding-left: 3rem;
   padding-right: 3rem;
-}
-
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
 }
 
 .px-4 {
@@ -911,11 +872,6 @@ video {
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
-}
-
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
 }
 
 .py-2 {
@@ -938,10 +894,6 @@ video {
   padding-bottom: 2rem;
 }
 
-.pb-1 {
-  padding-bottom: 0.25rem;
-}
-
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -958,17 +910,8 @@ video {
   padding-top: 1rem;
 }
 
-.text-left {
-  text-align: left;
-}
-
 .text-center {
   text-align: center;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .text-3xl {
@@ -1028,19 +971,9 @@ video {
   line-height: 2rem;
 }
 
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
 .text-dark-gray {
   --tw-text-opacity: 1;
   color: rgb(47 47 47 / var(--tw-text-opacity));
-}
-
-.text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .text-gray-800 {
@@ -1061,11 +994,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-yellow-400 {
-  --tw-text-opacity: 1;
-  color: rgb(250 204 21 / var(--tw-text-opacity));
 }
 
 .text-yellow-500 {
@@ -1342,6 +1270,22 @@ video {
   overflow-y: auto;
 }
 
+#voucher-section {
+  background-image: url("./assets/images/table-with-campari-bottle.png");
+}
+
+#voucher-section::before {
+  content: "";
+  z-index: 0;
+  position: absolute;
+  background-color: var(--red-campari);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 90%;
+}
+
 .hover\:bg-red-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(254 202 202 / var(--tw-bg-opacity));
@@ -1361,13 +1305,38 @@ video {
     right: 4rem;
   }
 
+  .md\:bottom-\[50px\] {
+    bottom: 50px;
+  }
+
+  .md\:right-\[50px\] {
+    right: 50px;
+  }
+
   .md\:my-6 {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
 
+  .md\:mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
   .md\:w-60 {
     width: 15rem;
+  }
+
+  .md\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .md\:pb-0 {
+    padding-bottom: 0px;
   }
 
   .md\:text-2xl {
@@ -1406,6 +1375,11 @@ video {
 
   .lg\:flex-row {
     flex-direction: row;
+  }
+
+  .lg\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
   }
 
   .lg\:text-7xl {

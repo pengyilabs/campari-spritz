@@ -236,3 +236,19 @@
 .voucher-modal__container {
   overflow-y: auto;
 }
+
+#voucher-section {
+  background-image: url("./assets/images/table-with-campari-bottle.png");
+}
+
+#voucher-section::before {
+  content: "";
+  z-index: 0;
+  position: absolute;
+  background-color: var(--red-campari);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 90%;
+}

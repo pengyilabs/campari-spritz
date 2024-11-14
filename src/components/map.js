@@ -58,12 +58,17 @@ function createMarker(place, map) {
       scaledSize: new google.maps.Size(32, 32)
     }
   });
+  let photoUrl = "";
+  if(place.photos) {
+    photoUrl = place.photos[0].getUrl();
+  }
+  
 
   const infoWindow = new google.maps.InfoWindow({
     content: `
     <div class="bg-white text-dark-gray p-2">
       <figure class="w-60 h-32 overflow-hidden">
-        <image src=${place.photos[0].getUrl()} class="fit-fill w-full">
+        <image src=${photoUrl} class="fit-fill w-full">
       </figure>
       <h3 class="font-bold mb-1 lg:text-lg" style="font-weight: bold; margin-bottom: 5px;">${place.name}</h3>
       <p>${place.vicinity || ''}</p>

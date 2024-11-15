@@ -52,20 +52,20 @@ function addModalContent(modal, place) {
   */
   if (modalName && modalName === "voucherModal") {
     modalBody.innerHTML = `
-      <div id="voucher-section" class="flex flex-col items-center p-4 min-h-screen w-screen text-white relative">
-        <img src="./src/assets/images/campari-logo.png" alt="Campari Logo" class="mx-auto w-32 mb-4 md:w-60 md:mb-6 z-10">
-        <h1 class="text-[28px] leading-8 font-semibold mb-4 text-center md:text-5xl lg:text-5xl z-10">LOCK YOUR FREE <br class="md:hidden"> CAMPARI SPRITZ</h1>
-        <p class="text-base leading-5 mb-6 px-8  text-center md:text-2xl bold z-10">ENTER YOUR EMAIL BELOW AND RECEIVE YOUR VOUCHER INSTANTLY</p>
+      <div id="voucher-section" class="voucher-section">
+        <img src="./src/assets/images/campari-logo.png" alt="Campari Logo" class="voucher-section__campari-logo">
+        <h1 class="voucher-section__title">LOCK YOUR FREE <br class="md:hidden"> CAMPARI SPRITZ</h1>
+        <p class="voucher-section__subtitle">ENTER YOUR EMAIL BELOW AND RECEIVE YOUR VOUCHER INSTANTLY</p>
 
-        <div class="text-center text-sm leading-4 md:text-base z-10">
-          <h3 class="font-semibold">HOW EASY IT IS:</h3>
-          <p class="font-light pb-4 md:pb-0 leading-5">Submit the participation form, and you're in the draw! The entry deadline is 28.02.2025.</p>
-          <p class="font-light leading-5">Participation is for those aged 18 and above</p>
+        <div class="voucher-section__info">
+          <h3 class="voucher-section__info-title">HOW EASY IT IS:</h3>
+          <p class="voucher-section__info-description">Submit the participation form, and you're in the draw! The entry deadline is 28.02.2025.</p>
+          <p class="voucher-section__info-age">Participation is for those aged 18 and above</p>
         </div>
 
-        <div class="w-full max-w-[424px] z-10">
+        <div class="voucher-section__bar-item-container">
         <!-- Bar Item -->
-          <div class="bg-white text-dark-gray flex justify-between items-center p-[15px] my-[16px] mt-8 md:px-0 mx-none overflow-hidden">
+          <div class="voucher-section__bar-item">
             <div class="bar-item__info-container">
               <h3 class="bar-item__title">${place.name || 'Bar Name'}</h3>
               <div class="bar-item__address-container flex gap-2">
@@ -89,30 +89,30 @@ function addModalContent(modal, place) {
           </div>
 
         <!-- Form -->
-          <form class="mt-8 w-full relative flex flex-col gap-4">
-            <label class="relative">
-              <figure class="absolute left-4 top-[35%]">
+          <form class="voucher-section__form-container">
+            <label class="voucher-section__form-label">
+              <figure class="voucher-section__input-icon">
                 <img src="./src/assets/icons/user-icon.svg">
               </figure>
-              <input type="text" id="firstNameInput" name="firstName" class="text-dark-gray w-full p-4 pl-12" placeholder="Enter your first name here">
+              <input type="text" id="firstNameInput" name="firstName" class="voucher-section__text-input" placeholder="Enter your name here">
             </label>
 
-            <label class="relative">
-              <figure class="absolute left-4 top-[35%]">
+            <label class="voucher-section__form-label">
+              <figure class="voucher-section__input-icon">
                 <img src="./src/assets/icons/email-icon.svg">
               </figure>
-              <input type="text" id="firstNameInput" name="email" class="text-dark-gray w-full p-4 pl-12" placeholder="Enter your email here">
+              <input type="text" id="firstNameInput" name="email" class="voucher-section__text-input" placeholder="Enter your email here">
             </label>
 
             <div class="text-xs font-light leading-4 md:text-sm mt-4">
               <p>By submitting the form, I confirm that I have read and accepted the Terms and Conditions of the contest. The Privacy Policy was provided to me.</p>
-              <p class="mt-4">I also confirm that I would like to subscribe to the newsletter to receive exclusive news about events, offers, and promotions from Campari Deutschland GmbH and Davide Campari Milano N.V. I agree that Campari Deutschland GmbH and Davide Campari Milano N.V. may use my personal data to send messages according to my preferences or to personalize them based on my location. I understand that I can unsubscribe at any time via the unsubscribe link at the end of the newsletter</p>
+              <p class="second-p">I also confirm that I would like to subscribe to the newsletter to receive exclusive news about events, offers, and promotions from Campari Deutschland GmbH and Davide Campari Milano N.V. I agree that Campari Deutschland GmbH and Davide Campari Milano N.V. may use my personal data to send messages according to my preferences or to personalize them based on my location. I understand that I can unsubscribe at any time via the unsubscribe link at the end of the newsletter</p>
             </div>
 
-            <button trype="submit" id="claim-voucher-button" class="bg-white text-red-700 px-12 py-4 mb-10 font-semibold hover:bg-red-200 transition duration-300 relative mt-4">CLAIM MY FREE DRINK</button>
+            <button trype="submit" id="claim-voucher-button" class="voucher-section__submit-button">CLAIM MY FREE DRINK</button>
           </form>
         </div>
-        <span class="absolute text-base bottom-[20px] right-[20px] md:bottom-[50px] md:right-[50px]">#ENJOYRESPONSIBLY</span>
+        <span class="vouhcer-section__enjoyresponsibly">#ENJOYRESPONSIBLY</span>
       </div>  
     `;
   }

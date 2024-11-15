@@ -1,24 +1,22 @@
 import state from "../utils/state.js";
 
 export function setupModals() {
-  // Get all buttons that can open modals
+
   const openModalButtons = document.querySelectorAll('[data-modal-target]');
-  // Get all buttons that can close modals
   const closeModalButtons = document.querySelectorAll('[data-modal-close]');
 
-  // Add click event listeners to open modal buttons
   openModalButtons.forEach(button => {
     button.addEventListener('click', () => {
       const modalId = button.getAttribute('data-modal-target');
       const modal = document.getElementById(modalId);
       if (modal) {
-        addModalContent(modal, button);
+        //const place = button.getAttribute("data-place");
+        addModalContent(modal, state.place);
         openModal(modal);
       }
     });
   });
 
-  // Add click event listeners to close modal buttons
   closeModalButtons.forEach(button => {
     button.addEventListener('click', () => {
       const modalId = button.getAttribute('data-modal-close');
@@ -29,7 +27,6 @@ export function setupModals() {
     });
   });
 
-  // Close modal if the user clicks outside the modal content
   document.addEventListener('click', (event) => {
     if (event.target.classList.contains('modal') && !event.target.classList.contains('modal-content')) {
       closeModal(event.target);
@@ -37,27 +34,86 @@ export function setupModals() {
   });
 }
 
-// Function to open a modal
 function openModal(modal) {
   modal.classList.remove('hidden');
 }
 
-// Function to close a modal
 function closeModal(modal) {
   modal.classList.add('hidden');
 }
 
-// Function to add dynamic content to the modal
-function addModalContent(modal, button) {
+function addModalContent(modal, place) {
   const modalBody = modal.querySelector('#modal-body');
   const modalName = modalBody?.getAttribute("data-modal-name")
+  console.log(place);
 
   /*
   * VOUCHERS MODAL
   */
   if (modalName && modalName === "voucherModal") {
     modalBody.innerHTML = `
-      
+      <div id="voucher-section" class="flex flex-col items-center p-4 min-h-screen w-screen text-white relative">
+        <img src="./src/assets/images/campari-logo.png" alt="Campari Logo" class="mx-auto w-32 mb-4 md:w-60 md:mb-6 z-10">
+        <h1 class="text-[28px] leading-8 font-semibold mb-4 text-center md:text-5xl lg:text-5xl z-10">LOCK YOUR FREE <br class="md:hidden"> CAMPARI SPRITZ</h1>
+        <p class="text-base leading-5 mb-6 px-8  text-center md:text-2xl bold z-10">ENTER YOUR EMAIL BELOW AND RECEIVE YOUR VOUCHER INSTANTLY</p>
+
+        <div class="text-center text-sm leading-4 md:text-base z-10">
+          <h3 class="font-semibold">HOW EASY IT IS:</h3>
+          <p class="font-light pb-4 md:pb-0 leading-5">Submit the participation form, and you're in the draw! The entry deadline is 28.02.2025.</p>
+          <p class="font-light leading-5">Participation is for those aged 18 and above</p>
+        </div>
+
+        <div class="w-full max-w-[424px] z-10">
+        <!-- Bar Item -->
+          <div class="bg-white text-dark-gray flex justify-between items-center p-[15px] my-[16px] mt-8 md:px-0 mx-none overflow-hidden">
+            <div class="bar-item__info-container">
+              <h3 class="bar-item__title">${place.name || 'Bar Name'}</h3>
+              <div class="bar-item__address-container flex gap-2">
+                <img src="src/assets/icons/map-pin.svg" />
+                <p class="bar-item__address-text">${place.formatted_address || 'Address not available'}</p>
+              </div>
+              <div class="bar-item__rating text-yellow-500 mb-2">
+              ${place.rating || 'N/A'} ${'<img src="./src/assets/icons/star.svg" />'.repeat(Math.round(place.rating || 0))}
+              </div>
+              <p class="bar-item__is-opening">
+                ${place.opening_hours?.isOpen() ?
+                  '<span class="bar-item__is-opening__open">Open</span> - Closes 12:00 PM' :
+                  `<span class="bar-item__is-opening__closed">Closed</span> - Opens 09:00 AM`}
+              </p>
+            </div>
+            ${place.photos && 
+              `<f igure class="bar-item__bar-image-container">
+                <img class="bar-item__bar-image-container_img" src=${place.photos[0]?.getUrl()} alt="Bar Image">
+              </figure>`
+            }
+          </div>
+
+        <!-- Form -->
+          <form class="mt-8 w-full relative flex flex-col gap-4">
+            <label class="relative">
+              <figure class="absolute left-4 top-[35%]">
+                <img src="./src/assets/icons/user-icon.svg">
+              </figure>
+              <input type="text" id="firstNameInput" name="firstName" class="text-dark-gray w-full p-4 pl-12" placeholder="Enter your first name here">
+            </label>
+
+            <label class="relative">
+              <figure class="absolute left-4 top-[35%]">
+                <img src="./src/assets/icons/email-icon.svg">
+              </figure>
+              <input type="text" id="firstNameInput" name="email" class="text-dark-gray w-full p-4 pl-12" placeholder="Enter your email here">
+            </label>
+
+            <div class="text-xs font-light leading-4 md:text-sm mt-4">
+              <p>By submitting the form, I confirm that I have read and accepted the Terms and Conditions of the contest. The Privacy Policy was provided to me.</p>
+              <p class="mt-4">I also confirm that I would like to subscribe to the newsletter to receive exclusive news about events, offers, and promotions from Campari Deutschland GmbH and Davide Campari Milano N.V. I agree that Campari Deutschland GmbH and Davide Campari Milano N.V. may use my personal data to send messages according to my preferences or to personalize them based on my location. I understand that I can unsubscribe at any time via the unsubscribe link at the end of the newsletter</p>
+            </div>
+
+            <button trype="submit" id="claim-voucher-button" class="bg-white text-red-700 px-12 py-4 mb-10 font-semibold hover:bg-red-200 transition duration-300 relative mt-4">CLAIM MY FREE DRINK</button>
+          </form>
+        </div>
+        <span class="absolute text-base bottom-[20px] right-[20px] md:bottom-[50px] md:right-[50px]">#ENJOYRESPONSIBLY</span>
+      </div>  
     `;
   }
   /*
@@ -90,9 +146,6 @@ function addModalContent(modal, button) {
         </div>
       </div>
     `;
-    /* 
-    * SUCCESS MODAL
-    */
     const distanceInput = document.querySelector("#distanceInput");
     const distanceLabel = document.querySelector("#distanceLabel");
     const orderByPopularityCheckbox = document.querySelector("#orderByPopularityCheckbox");
@@ -109,7 +162,7 @@ function addModalContent(modal, button) {
     })
   }
   /*
-  * ALL SET MODAL
+  * SUCCESS MODAL
   */
   else if(modalName && modalName === "successModal") {
     modalBody.innerHTML = `

@@ -1,5 +1,6 @@
 import { getLocation, calculateClosingHour, calculateOpeningHour } from "../utils/helpers.js";
 import state from "../utils/state.js";
+import {setupModals} from "./modal.js"
 
 export async function initMap() {
   try {
@@ -41,6 +42,8 @@ export async function initMap() {
 
     barListMobile.insertAdjacentHTML('beforeend', HTMLContent.join(""));
     barListDesktop.insertAdjacentHTML('beforeend', HTMLContent.join(""));
+
+    setupModals();
   } catch (error) {
     console.error('Error initializing the map:', error);
   }
@@ -67,15 +70,17 @@ function createMarker(place, map) {
   const infoWindow = new google.maps.InfoWindow({
     content: `
     <div class="bg-white text-dark-gray p-2">
-      <figure class="w-60 h-32 overflow-hidden">
-        <image src=${photoUrl} class="fit-fill w-full">
-      </figure>
+      ${photoUrl !== "" && `
+        <figure class="w-60 h-32 overflow-hidden">
+          <image src=${photoUrl} class="fit-fill w-full">
+        </figure>
+      `}
       <h3 class="font-bold mb-1 lg:text-lg" style="font-weight: bold; margin-bottom: 5px;">${place.name}</h3>
       <p>${place.vicinity || ''}</p>
       <div class="flex gap-2 mb-4">
         ${place.rating ? `<p>Rating: ${place.rating}</p><img src="./src/assets/icons/star.svg"/>` : ''}
       </div>
-      <button id="claimVoucherButton" 
+      <button id="claimVoucherButton" data-modal-target="voucherModal"
         class="bg-red-campari text-white py-2 px-4 border-none rounded mt-1">
         Claim Voucher
       </button>
@@ -85,11 +90,7 @@ function createMarker(place, map) {
 
   marker.addListener('click', async () => {
     await infoWindow.open(map, marker);
-    const claimVoucherButton = document.querySelector("#claimVoucherButton");
-    claimVoucherButton.addEventListener('click', () => {
-      const voucherModal = document.querySelector("#voucherModal");
-      voucherModal.classList.remove("hidden");
-    })
+    setupModals()
   });
 }
 
@@ -136,6 +137,7 @@ const fetchPlaceDetails = async (service, placeIds, map) => {
   placesList.map(place => createMarker(place, map));
   const orderedPlacesList = await filterAndOrderPlaces(placesList.filter(Boolean), 3000, 2);
   const htmlPlacesList = createHtmlPlacesList(orderedPlacesList);
+  
   return htmlPlacesList;
 };
 
@@ -145,11 +147,13 @@ const filterAndOrderPlaces = async (places, maxDistance, minPopularity) => {
     .sort((a, b) => a.radius - b.radius);
 }
 
-const createHtmlPlacesList = (places) => {
+const createHtmlPlacesList = async (places) => {
   const htmlPlacesList = places.map(place => {
     const openingHour = calculateOpeningHour(place.opening_hours);
     const closingHour = calculateClosingHour(place.opening_hours);
 
+    //Replace simple and double quotes to avoid breaking the html
+    state.place = place;
     return `
       <div class="bar-item">
         <div class="bar-item__info-container">
@@ -166,7 +170,7 @@ const createHtmlPlacesList = (places) => {
               `<span class="bar-item__is-opening__open">Open</span> - Closes ${closingHour}` :
               `<span class="bar-item__is-opening__closed">Closed</span> - Opens ${openingHour}`}
           </p>
-          <button data-modal-target="voucherModal" class="bar-item__claim-voucher-button hover:bg-light-red transition-all">CLAIM VOUCHER</button>
+          <button data-modal-target="voucherModal" data-place=${place} class="bar-item__claim-voucher-button hover:bg-light-red transition-all">CLAIM VOUCHER</button>
         </div>
         <figure class="bar-item__bar-image-container">
           <img class="bar-item__bar-image-container_img" src=${place.photos[0].getUrl()} alt="Bar Image">
@@ -174,6 +178,6 @@ const createHtmlPlacesList = (places) => {
       </div>
     `;
   })
+
   return htmlPlacesList;
 }
-

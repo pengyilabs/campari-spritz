@@ -40,10 +40,20 @@ async function fetchPlaceDetails(service, placeIds) {
   return placesList;
 }
 
-async function filterAndOrderPlaces(places, maxDistance, minPopularity) {
+async function filterAndOrderPlaces(places, distance, searchByPopularity) {
+
+  // convert km to mts
+  const maxDistance = distance * 1000;
+
   return await places
-    .filter(place => place.radius <= maxDistance && place.rating >= minPopularity)
-    .sort((a, b) => a.radius - b.radius);
+    .filter(place => place.radius <= maxDistance)
+    .sort((a, b) => {
+      if(searchByPopularity) {
+        return b.rating - a.rating;
+      } else {
+        return a.radius - b.radius;
+      }
+    });
 }
 
 function createHtmlPlacesList(places) {
@@ -162,7 +172,7 @@ export async function initMap() {
     const barListDesktop = document.querySelector("#bar-list-desktop");
 
     const placesList = await fetchPlaceDetails(service, placeIds);
-    const orderedPlacesList = await filterAndOrderPlaces(placesList, 3000, 2);
+    const orderedPlacesList = await filterAndOrderPlaces(placesList, state.distance, state.popularity);
     const htmlPlacesList = createHtmlPlacesList(orderedPlacesList);
 
     barListMobile.insertAdjacentHTML('beforeend', htmlPlacesList.join(""));

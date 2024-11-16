@@ -41,7 +41,6 @@ async function fetchPlaceDetails(service, placeIds) {
 }
 
 async function filterAndOrderPlaces(places, distance, searchByPopularity) {
-
   // convert km to mts
   const maxDistance = distance * 1000;
 
@@ -139,9 +138,14 @@ function createMarker(place, map) {
   });
 }
 
+function clearListContainers(containerList) {
+  containerList.forEach((container) => {
+    container.innerHTML = "";
+  })
+}
+
 export async function initMap() {
   try {
-    const placeIds = await fetchPlaceIdList();
     const { lat, lng } = await state.currentUserLocation;
 
     const mapElement = document.getElementById('map');
@@ -170,9 +174,11 @@ export async function initMap() {
     const service = new google.maps.places.PlacesService(map);
     const barListMobile = document.querySelector("#bar-list-mobile");
     const barListDesktop = document.querySelector("#bar-list-desktop");
-
+    
+    const placeIds = await fetchPlaceIdList();
     const placesList = await fetchPlaceDetails(service, placeIds);
     const orderedPlacesList = await filterAndOrderPlaces(placesList, state.distance, state.popularity);
+    clearListContainers([barListMobile, barListDesktop]);
     const htmlPlacesList = createHtmlPlacesList(orderedPlacesList);
 
     barListMobile.insertAdjacentHTML('beforeend', htmlPlacesList.join(""));

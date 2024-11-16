@@ -1,4 +1,5 @@
 import state from "../utils/state.js";
+import { initMap } from "./map.js";
 
 export function setupModals() {
 
@@ -154,11 +155,13 @@ function addModalContent(modal, place) {
     distanceInput.addEventListener("change", (e) => {
       state.distance = e.target.value;
       distanceLabel.textContent = e.target.value;
+      initMap();
     });
 
     // Add event to orderByPopularity checkbox
     orderByPopularityCheckbox.addEventListener("change", (e) => {
       state.orderByPopularity = e.target.checked;
+      initMap();
     })
   }
   /*

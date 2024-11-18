@@ -41,14 +41,14 @@ async function fetchPlaceDetails(service, placeIds) {
   return placesList;
 }
 
-async function filterAndOrderPlaces(places, distance, searchByPopularity) {
+async function filterAndOrderPlaces(places, distance, orderByPopularity) {
   // convert km to mts
   const maxDistance = distance * 1000;
 
   return await places
     .filter(place => place.radius <= maxDistance)
     .sort((a, b) => {
-      if(searchByPopularity) {
+      if(orderByPopularity) {
         return b.rating - a.rating;
       } else {
         return a.radius - b.radius;
@@ -178,7 +178,7 @@ export async function initMap() {
     const placeIds = await fetchPlaceIdList();
     state.placesList = await fetchPlaceDetails(service, placeIds);
 
-    const orderedPlacesList = await filterAndOrderPlaces(state.placesList, state.distance, state.popularity);
+    const orderedPlacesList = await filterAndOrderPlaces(state.placesList, state.distance, state.orderByPopularity);
     clearListContainers([barListMobile, barListDesktop]);
     const htmlPlacesList = createHtmlPlacesList(orderedPlacesList);
 

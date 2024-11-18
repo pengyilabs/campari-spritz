@@ -141,7 +141,7 @@ function addModalContent(modal, place) {
         <p class="text-base mt-8">Popularity</p>
         <div class="flex justify-between">
           <p class="text-sm mt-4">Order by popularity</p>
-          <input type="checkbox" class="checkbox" id="orderByPopularityCheckbox"/>
+          <input type="checkbox" class="checkbox" id="orderByPopularityCheckbox" ${state.orderByPopularity === true && "checked"}/>
         </div>
       </div>
     `;
@@ -159,6 +159,7 @@ function addModalContent(modal, place) {
     // Add event to orderByPopularity checkbox
     orderByPopularityCheckbox.addEventListener("change", (e) => {
       state.orderByPopularity = e.target.checked;
+      console.log(state.orderByPopularity)  
       initMap();
     })
   }

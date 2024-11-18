@@ -11,8 +11,8 @@ export function setupModals() {
       const modalId = button.getAttribute('data-modal-target');
       const modal = document.getElementById(modalId);
       if (modal) {
-        //const place = button.getAttribute("data-place");
-        addModalContent(modal, state.place);
+        const place = state.placesList.find(place => place.place_id === button.getAttribute("data-placeid"));
+        addModalContent(modal, place);
         openModal(modal);
       }
     });
@@ -46,8 +46,6 @@ function closeModal(modal) {
 function addModalContent(modal, place) {
   const modalBody = modal.querySelector('#modal-body');
   const modalName = modalBody?.getAttribute("data-modal-name")
-  console.log(place);
-
   /*
   * VOUCHERS MODAL
   */
@@ -83,7 +81,7 @@ function addModalContent(modal, place) {
               </p>
             </div>
             ${place.photos && 
-              `<f igure class="bar-item__bar-image-container">
+              `<figure class="bar-item__bar-image-container">
                 <img class="bar-item__bar-image-container_img" src=${place.photos[0]?.getUrl()} alt="Bar Image">
               </figure>`
             }

@@ -34,6 +34,7 @@ async function fetchPlaceDetails(service, placeIds) {
       place.geometry.location
     );
     place.radius = distanceInMeters;
+    place.place_id = placeId;
     placesList.push(place);
   }
 
@@ -60,7 +61,6 @@ function createHtmlPlacesList(places) {
     const openingHour = calculateOpeningHour(place.opening_hours);
     const closingHour = calculateClosingHour(place.opening_hours);
 
-    state.place = place;
     return `
       <div class="bar-item">
         <div class="bar-item__info-container">
@@ -77,7 +77,7 @@ function createHtmlPlacesList(places) {
               `<span class="bar-item__is-opening__open">Open</span> - Closes ${closingHour}` :
               `<span class="bar-item__is-opening__closed">Closed</span> - Opens ${openingHour}`}
           </p>
-          <button data-modal-target="voucherModal" data-place=${place} class="bar-item__claim-voucher-button hover:bg-light-red transition-all">CLAIM VOUCHER</button>
+          <button data-modal-target="voucherModal" data-placeid=${place.place_id} class="bar-item__claim-voucher-button hover:bg-light-red transition-all">CLAIM VOUCHER</button>
         </div>
         <figure class="bar-item__bar-image-container">
           <img class="bar-item__bar-image-container_img" src=${place.photos[0].getUrl()} alt="Bar Image">
@@ -176,8 +176,9 @@ export async function initMap() {
     const barListDesktop = document.querySelector("#bar-list-desktop");
     
     const placeIds = await fetchPlaceIdList();
-    const placesList = await fetchPlaceDetails(service, placeIds);
-    const orderedPlacesList = await filterAndOrderPlaces(placesList, state.distance, state.popularity);
+    state.placesList = await fetchPlaceDetails(service, placeIds);
+
+    const orderedPlacesList = await filterAndOrderPlaces(state.placesList, state.distance, state.popularity);
     clearListContainers([barListMobile, barListDesktop]);
     const htmlPlacesList = createHtmlPlacesList(orderedPlacesList);
 

@@ -3,7 +3,7 @@ import { getLocation } from "./helpers.js";
 const state = {
   distance: 3,
   orderByPopularity: false,
-  place: {},
+  placesList: [],
   currentUserLocation: await getLocation()
 }
 

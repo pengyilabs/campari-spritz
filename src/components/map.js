@@ -58,7 +58,7 @@ async function filterAndOrderPlaces(places, distance, orderByPopularity) {
 }
 
 function createHtmlPlacesList(places) {
-  return places.map(place => {
+  const htmlPlaces = places.map(place => {
     const openingHour = calculateOpeningHour(place.opening_hours);
     const closingHour = calculateClosingHour(place.opening_hours);
 
@@ -86,6 +86,17 @@ function createHtmlPlacesList(places) {
       </div>
     `;
   });
+
+  if(places.length === 0) {
+    htmlPlaces.push(`
+      <div class="bars-not-found">
+        <h2 class="bars-not-found__title">We couldn't find any bars near you ;(</h2>
+        <p class="bars-not-found__description">Try searching for another location or expand the maximum distance</p>
+      </div>
+    `)
+  }
+  
+  return htmlPlaces;
 }
 
 function createMarkers(places, map) {

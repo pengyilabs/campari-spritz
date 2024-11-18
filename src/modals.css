@@ -1,3 +1,89 @@
+.distance-input-range {
+  appearance: none;
+  background-color: var(--light-red);
+  height: 2px;
+}
+
+.distance-input-range::-webkit-slider-thumb {
+  box-sizing: border-box;
+  appearance: none;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  border-radius: 24px;
+  width: 20px;
+  height: 20px;
+}
+
+.distance-input-range::-moz-range-thumb {
+  box-sizing: border-box;
+  appearance: none;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  border-radius: 24px;
+  width: 20px;
+  height: 20px;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.checkbox {
+  appearance: none;
+  background: var(--dark-red);
+  border: 1px solid var(--light-red);
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  transition: all ease 0.15s;
+  position: relative;
+}
+
+.checkbox:checked {
+  background: var(--light-red);
+}
+
+.checkbox:checked::after {
+  content: "✔"; 
+  color: white;
+  font-size: 16px; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.voucher-modal__container {
+  overflow-y: auto;
+}
+
+#voucher-section {
+  background-image: url("./assets/images/table-with-campari-bottle.png");
+}
+
+#voucher-section::before {
+  content: "";
+  z-index: 0;
+  position: absolute;
+  background-color: var(--red-campari);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 90%;
+  color:#00000021
+}
+
+.success-modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--background-modal-transparency);
+}
+
 .voucher-section {
   display: flex;
   flex-direction: column;
@@ -223,3 +309,4 @@
     line-height: 1.75rem;
   }
 } 
+

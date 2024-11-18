@@ -5,7 +5,6 @@ const state = {
   orderByPopularity: false,
   placesList: [],
   currentUserLocation: null,
-  isLoading: false
 }
 
 export default state;

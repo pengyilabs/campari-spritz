@@ -1,5 +1,6 @@
-import { getLocation, calculateClosingHour, calculateOpeningHour } from "../utils/helpers.js";
+import { calculateClosingHour, calculateOpeningHour, clearListContainers } from "../utils/helpers.js";
 import state from "../utils/state.js";
+import { drawLoadingSkeleton } from "./loading-skeleton.js";
 import { setupModals } from "./modal.js";
 
 async function fetchPlaceIdList() {
@@ -138,12 +139,6 @@ function createMarker(place, map) {
   });
 }
 
-function clearListContainers(containerList) {
-  containerList.forEach((container) => {
-    container.innerHTML = "";
-  })
-}
-
 export async function initMap() {
   try {
     const { lat, lng } = await state.currentUserLocation;
@@ -171,6 +166,9 @@ export async function initMap() {
     });
 
     // Búsqueda de lugares cercanos
+
+    // Loading Skeleton
+    drawLoadingSkeleton();
     const service = new google.maps.places.PlacesService(map);
     const barListMobile = document.querySelector("#bar-list-mobile");
     const barListDesktop = document.querySelector("#bar-list-desktop");

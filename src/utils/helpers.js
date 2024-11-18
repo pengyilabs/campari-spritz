@@ -105,3 +105,9 @@ export const calculateClosingHour = (openingHours) => {
     return 'N/A';
   }
 }
+
+export const clearListContainers =(containerList) => {
+  containerList.forEach((container) => {
+    container.innerHTML = "";
+  })
+}

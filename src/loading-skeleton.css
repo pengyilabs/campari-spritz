@@ -1,0 +1,54 @@
+.skeleton-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  animation: shimmer 1.5s infinite linear;
+  overflow: hidden;
+  padding: 15px;
+  margin: 0px 16px;
+  max-width: 100%;
+}
+
+/* Animación del shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* Efecto del shimmer */
+.skeleton-image,
+.skeleton-info-container > * {
+  background: linear-gradient(
+    to right,
+    #f0f0f0 0%,
+    #e0e0e0 30%,
+    #f0f0f0 60%,
+    #f0f0f0 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-header {
+  height: 30px;
+  width: 100%;
+}
+
+.skeleton-info-container {
+  width: calc(100% - 160px - 2rem);
+  overflow: hidden;
+}
+.skeleton-details {
+  min-height: 100%;
+  margin-top: 1rem;
+}
+
+.skeleton-image {
+  width: 160px;
+  height: 130px;
+}

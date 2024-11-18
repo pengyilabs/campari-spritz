@@ -4,7 +4,8 @@ const state = {
   distance: 3,
   orderByPopularity: false,
   placesList: [],
-  currentUserLocation: null
+  currentUserLocation: null,
+  isLoading: false
 }
 
 export default state;

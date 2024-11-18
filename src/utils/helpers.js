@@ -1,4 +1,4 @@
-// Ejemplo: Función auxiliar para validaciones
+// TODO: función para realizar validaciones
 export function validateEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);

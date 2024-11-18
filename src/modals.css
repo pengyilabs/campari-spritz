@@ -137,6 +137,7 @@
 @media (min-width: 768px) {
   .voucher-section__title {
     font-size: 3rem;
+    line-height: 3rem;
   }
 
   .voucher-section__campari-logo {

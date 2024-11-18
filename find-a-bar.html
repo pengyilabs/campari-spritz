@@ -25,23 +25,34 @@
       </button>
     <div class="flex justify-center mb-6 px-8">
       <input type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 border shadow-md">
-      <button class="ml-2 p-2 bg-white text-gray-800 shadow-md" data-modal-target="filtersModal">
+      <button class="ml-2 p-2 bg-white text-gray-800 shadow-md lg:hidden" data-modal-target="filtersModal">
           <img src="./src/assets/icons/burger-menu.svg">
       </button>
     </div>
 
     <!-- Filters -->
-    <div class="hidden lg:block flex justify-center gap-4 mb-8 text-gray-800 border-y border-light-red py-4">
-      <select class="p-2 py-3 border ">
-        <option>Distance</option>
-        <option>Nearest</option>
-        <option>Farthest</option>
-      </select>
-      <select class="p-2 py-3 border">
-        <option>Popularity</option>
-        <option>Top Rated</option>
-        <option>Most Visited</option>
-      </select>
+    <div class="hidden lg:flex justify-center gap-4 mb-8 text-gray-800 border-y border-light-red py-4">
+      <select class="p-2 py-3 border cursor-pointer bg-dark-red text-white border-light-red" onclick="distanceHandlerForDesktop(event)">
+        <option value="1">1 Km</option>
+        <option value="2">2 Km</option>
+        <option value="3" selected>3 Km</option>
+        <option value="4">4 Km</option>
+        <option value="5">5 Km</option>
+        <option value="6">6 Km</option>
+        <option value="7">7 Km</option>
+        <option value="8">8 Km</option>
+        <option value="9">9 Km</option>
+        <option value="10">10 Km</option>
+        <option value="11">11 Km</option>
+        <option value="12">12 Km</option>
+        <option value="13">13 Km</option>
+        <option value="14">14 Km</option>
+        <option value="15">15 Km</option>
+       </select>
+      <div class="flex justify-between items-center pl-32">
+        <p class="text-sm pr-4 text-white">Order by popularity</p>
+        <input type="checkbox" class="checkbox cursor-pointer" id="orderByPopularityCheckbox" onclick="popularityHandler(event)"/>
+      </div>
     </div>
   </div>
 
@@ -97,6 +108,7 @@
       .catch(err => console.error('Error loading app:', err));
   }
 </script>
+<script src="./src/utils/eventHandlers.js" type="module"></script>
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgogrnISz9ccFj6kNFkYo7Fc22UnU3Jkc&libraries=places&callback=initGoogleMaps"
   async

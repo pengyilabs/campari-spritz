@@ -832,14 +832,6 @@ video {
   padding-top: 254px;
 }
 
-.pr-2 {
-  padding-right: 0.5rem;
-}
-
-.pr-8 {
-  padding-right: 2rem;
-}
-
 .text-center {
   text-align: center;
 }
@@ -886,6 +878,11 @@ video {
 
 .leading-8 {
   line-height: 2rem;
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-gray-800 {

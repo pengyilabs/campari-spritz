@@ -134,6 +134,43 @@
   right: 20px;
 }
 
+.info-window-container {
+  background-color: #ffffff;
+  color: var(--dark-gray);
+  padding: 0.5rem;
+}
+
+.info-window-image-container {
+  width: 15rem;
+  height: 8rem;
+  overflow: hidden;
+}
+
+.info-window-image {
+  object-fit: fill;
+  width: 100%;
+}
+
+.info-window-title {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.info-window-rating {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-window-button {
+  background-color: var(--red-campari);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  margin-top: 0.25rem;
+}
+
 @media (min-width: 768px) {
   .voucher-section__title {
     font-size: 3rem;
@@ -173,9 +210,16 @@
   }
 }
 
-
+.gm-title {
+  color: black;
+}
 @media (min-width: 1024px) {
   .voucher-section__title {
     font-size: 3rem;
+  }
+
+  .info-window-title {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 } 

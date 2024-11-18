@@ -4,7 +4,7 @@ const state = {
   distance: 3,
   orderByPopularity: false,
   placesList: [],
-  currentUserLocation: await getLocation()
+  currentUserLocation: null
 }
 
 export default state;

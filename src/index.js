@@ -3,12 +3,15 @@ import { setupModals } from './components/modal.js';
 import { setupFormHandlers } from './components/form.js';
 import state from './utils/state.js';
 import { getLocation } from './utils/helpers.js';
+import { initPlacesAutocomplete } from './components/searchBar.js';
 
 // Exporta una función por defecto que inicializa todo
-export default function initializeApp() {
+export default async function initializeApp() {
   setupModals();
   setupFormHandlers();
+  state.currentUserLocation = await getLocation();
   initMap(); // Inicializa el mapa
+  initPlacesAutocomplete();
 
   const claimDrinkButton = document.getElementById('claim-drink-button');
   if (claimDrinkButton) {

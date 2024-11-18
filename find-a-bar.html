@@ -24,7 +24,7 @@
       use my current location
       </button>
     <div class="flex justify-center mb-6 px-8">
-      <input type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 border shadow-md">
+      <input id="searchBar" type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 border shadow-md text-black">
       <button class="ml-2 p-2 bg-white text-gray-800 shadow-md lg:hidden" data-modal-target="filtersModal">
           <img src="./src/assets/icons/burger-menu.svg">
       </button>
@@ -59,7 +59,7 @@
   <!-- Bar List & Map -->
   <div class="grid grid-cols-1 lg:grid-cols-2">
     <!-- Desktop: Bar List -->
-    <div id="bar-list-desktop" class="hidden gap-6 lg:grid grid-col"></div>
+    <div id="bar-list-desktop" class="hidden gap-6 lg:grid grid-col items-start"></div>
 
     <!-- Map Section -->
     <div id="map" class="min-h-96 bg-gray-300 lg:min-h-[600px]"></div>
@@ -101,16 +101,16 @@
 
 <script>
   function initGoogleMaps() {
-    import('./src/index.js')
-      .then(module => {
-        module.default();
-      })
-      .catch(err => console.error('Error loading app:', err));
+  import('./src/index.js')
+    .then(module => {
+      module.default();
+    })
+    .catch(err => console.error('Error loading app:', err));
   }
 </script>
 <script src="./src/utils/eventHandlers.js" type="module"></script>
 <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgogrnISz9ccFj6kNFkYo7Fc22UnU3Jkc&libraries=places&callback=initGoogleMaps"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgogrnISz9ccFj6kNFkYo7Fc22UnU3Jkc&libraries=places,geometry&callback=initGoogleMaps"
   async
   defer
 ></script>

@@ -11,7 +11,7 @@ async function fetchPlaceIdList() {
 async function fetchPlaceDetails(service, placeIds) {
   const { spherical } = await google.maps.importLibrary("geometry");
   const placesList = [];
-  const userLocation = await getLocation();
+  const userLocation = state.currentUserLocation;
 
   for (const placeId of placeIds) {
     const request = {
@@ -113,19 +113,19 @@ function createMarker(place, map) {
 
   const infoWindow = new google.maps.InfoWindow({
     content: `
-    <div class="bg-white text-dark-gray p-2">
+    <div class="info-window-container">
       ${photoUrl !== "" && `
-        <figure class="w-60 h-32 overflow-hidden">
-          <image src=${photoUrl} class="fit-fill w-full">
+        <figure class="info-window-image-container">
+          <image src=${photoUrl} class="info-window-image">
         </figure>
       `}
-      <h3 class="font-bold mb-1 lg:text-lg" style="font-weight: bold; margin-bottom: 5px;">${place.name}</h3>
+      <h3 class="info-window-title">${place.name}</h3>
       <p>${place.vicinity || ''}</p>
-      <div class="flex gap-2 mb-4">
+      <div class="info-window-rating">
         ${place.rating ? `<p>Rating: ${place.rating}</p><img src="./src/assets/icons/star.svg"/>` : ''}
       </div>
       <button id="claimVoucherButton" data-modal-target="voucherModal"
-        class="bg-red-campari text-white py-2 px-4 border-none rounded mt-1">
+        class="info-window-button">
         Claim Voucher
       </button>
     </div>

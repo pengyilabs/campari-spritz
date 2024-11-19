@@ -1,7 +1,7 @@
 import { calculateClosingHour, calculateOpeningHour, clearListContainers } from "../utils/helpers.js";
 import state from "../utils/state.js";
 import { drawLoadingSkeleton } from "./loading-skeleton.js";
-import { setupModals } from "./modal.js";
+import { setupModals } from "../utils/modalRendering.js";
 
 async function fetchPlaceIdList() {
   const result = await fetch("https://api.gratisspritz.com/places");

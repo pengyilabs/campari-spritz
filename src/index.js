@@ -1,5 +1,5 @@
 import { initMap } from './components/map.js';
-import { setupModals } from './components/modal.js';
+import { setupModals } from './utils/modalRendering.js';
 import { setupFormHandlers } from './components/form.js';
 import state from './utils/state.js';
 import { getLocation } from './utils/helpers.js';

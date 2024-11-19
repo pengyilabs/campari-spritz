@@ -11,34 +11,32 @@ async function fetchPlaceIdList() {
 
 async function fetchPlaceDetails(service, placeIds) {
   const { spherical } = await google.maps.importLibrary("geometry");
-  const placesList = [];
   const userLocation = state.currentUserLocation;
 
-  for (const placeId of placeIds) {
+  const placesPromises = placeIds.map(placeId => {
     const request = {
-      placeId: placeId,
+      placeId,
       fields: ["name", "rating", "formatted_address", "geometry", "vicinity", "photos", "opening_hours"],
     };
 
-    const place = await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       service.getDetails(request, (place, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
+          const distanceInMeters = spherical.computeDistanceBetween(
+            userLocation,
+            place.geometry.location
+          );
+          place.radius = distanceInMeters;
+          place.place_id = placeId;
           resolve(place);
         } else {
           reject(new Error(`Error obtaining place: ${status}`));
         }
       });
     });
+  });
 
-    const distanceInMeters = await spherical.computeDistanceBetween(
-      userLocation,
-      place.geometry.location
-    );
-    place.radius = distanceInMeters;
-    place.place_id = placeId;
-    placesList.push(place);
-  }
-
+  const placesList = await Promise.all(placesPromises);
   return placesList;
 }
 

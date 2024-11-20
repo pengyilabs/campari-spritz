@@ -1,6 +1,6 @@
 import state from "./state.js";
 import { insertFiltersModalLogic, renderFiltersModal } from "../components/filtersModal.js";
-import { renderVoucherModal } from "../components/voucherModal.js";
+import { insertVoucherModalLogic, renderVoucherModal } from "../components/voucherModal.js";
 import { renderSuccessModal } from "../components/successModal.js";
 
 export function setupModals() {
@@ -52,6 +52,7 @@ function addModalContent(modal, place) {
   /* VOUCHER MODAL */
   if (modalName && modalName === "voucherModal") {
     modalBody.innerHTML = renderVoucherModal(place);
+    insertVoucherModalLogic();
   }
   /* FILTERS MODAL */
   else if (modalName && modalName === "filtersModal") {

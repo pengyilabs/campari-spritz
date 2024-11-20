@@ -1,4 +1,8 @@
+import state from "../utils/state.js";
+
 export const renderVoucherModal = (place) => {
+  state.selectedPlaceId = place.place_Id;
+
   return `
       <div id="voucher-section" class="voucher-section">
         <img src="./src/assets/images/campari-logo.png" alt="Campari Logo" class="voucher-section__campari-logo">
@@ -37,7 +41,7 @@ export const renderVoucherModal = (place) => {
           </div>
 
         <!-- Form -->
-          <form class="voucher-section__form-container">
+          <form id="voucherForm" class="voucher-section__form-container">
             <label class="voucher-section__form-label">
               <figure class="voucher-section__input-icon">
                 <img src="./src/assets/icons/user-icon.svg">
@@ -49,7 +53,7 @@ export const renderVoucherModal = (place) => {
               <figure class="voucher-section__input-icon">
                 <img src="./src/assets/icons/email-icon.svg">
               </figure>
-              <input type="text" id="firstNameInput" name="email" class="voucher-section__text-input" placeholder="Enter your email here">
+              <input type="email" id="firstNameInput" name="email" class="voucher-section__text-input" placeholder="Enter your email here">
             </label>
 
             <div class="text-xs font-light leading-4 md:text-sm mt-4">
@@ -63,4 +67,46 @@ export const renderVoucherModal = (place) => {
         <span class="vouhcer-section__enjoyresponsibly">#ENJOYRESPONSIBLY</span>
       </div>  
     `;
+}
+
+export const insertVoucherModalLogic = () => {
+  const form = document.querySelector("#voucherForm")
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const name = form.firstName.value;
+    const email = form.email.value;
+
+    const payload = {
+      name,
+      email,
+      placeId: state.selectedPlaceId
+    };
+
+    try {
+      const response = await fetch('https://api.gratisspritz.com/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+
+      if (response.ok) {
+        console.log("success")
+        const data = await response.json();
+        console.log(`Voucher enviado con éxito: ${data.message}`);
+        //successModal(`Voucher enviado con éxito: ${data.message}`);
+      } else {
+        const error = await response.json();
+        console.error(`Error: ${error.message}`);
+        //failedModal(`Error: ${error.message}`);
+      }
+    } catch (err) {
+      console.error(`Error Inesperado: ${err.message}`);
+      //failedModal(`Error inesperado: ${err.message}`);
+    }
+  })
 }

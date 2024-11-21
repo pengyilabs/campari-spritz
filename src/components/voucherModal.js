@@ -1,4 +1,5 @@
 import state from "../utils/state.js";
+import { openFailedModal, openSuccessModal } from "../utils/modalRendering.js";
 
 export const renderVoucherModal = (place) => {
   state.selectedPlaceId = place.place_Id;
@@ -70,7 +71,7 @@ export const renderVoucherModal = (place) => {
 }
 
 export const insertVoucherModalLogic = () => {
-  const form = document.querySelector("#voucherForm")
+  const form = document.querySelector("#voucherForm");
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -84,29 +85,42 @@ export const insertVoucherModalLogic = () => {
       placeId: state.selectedPlaceId
     };
 
-    try {
-      const response = await fetch('https://api.gratisspritz.com/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+    /* const response = await fetch('https://api.gratisspritz.com/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    console.log(response); */
 
+    const response = {
+      ok: true,
+      status: 200,
+      json: async () => ({
+        message: "Voucher enviado sin exito :(",
+        name,
+        email,
+        placeId: state.selectedPlaceId,
+      }),
+    };
 
-      if (response.ok) {
-        console.log("success")
-        const data = await response.json();
-        console.log(`Voucher enviado con éxito: ${data.message}`);
-        //successModal(`Voucher enviado con éxito: ${data.message}`);
+    if (response.ok) {
+      const data = await response.json();
+      state.userEmail = data.email;
+
+      openSuccessModal();
+    } else {
+      const messages = [];
+      const error = await response.json();
+
+      if(response.status === 409) {
+        messages.push("The email entered already has a coupon assigned to this bar");
       } else {
-        const error = await response.json();
-        console.error(`Error: ${error.message}`);
-        //failedModal(`Error: ${error.message}`);
+        messages.push('Unknown error. Please send a message to <span class="message-error-email">support@gratis-spritz.com</span> sharing this error and we will help you to get your voucher.');
       }
-    } catch (err) {
-      console.error(`Error Inesperado: ${err.message}`);
-      //failedModal(`Error inesperado: ${err.message}`);
-    }
-  })
+
+      openFailedModal(messages);
+    } 
+  });
 }

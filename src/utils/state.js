@@ -3,7 +3,8 @@ const state = {
   orderByPopularity: false,
   placesList: [],
   selectedPlaceId: null,
-  currentUserLocation: null
+  currentUserLocation: null,
+  userEmail: null,
 }
 
 export default state;

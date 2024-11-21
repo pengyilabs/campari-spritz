@@ -2,6 +2,7 @@ import state from "./state.js";
 import { insertFiltersModalLogic, renderFiltersModal } from "../components/filtersModal.js";
 import { insertVoucherModalLogic, renderVoucherModal } from "../components/voucherModal.js";
 import { renderSuccessModal } from "../components/successModal.js";
+import { insertFailedModalLogic, renderFailedModal } from "../components/failedModal.js";
 
 export function setupModals() {
 
@@ -37,30 +38,46 @@ export function setupModals() {
   });
 }
 
-function openModal(modal) {
+export function openModal(modal) {
   modal.classList.remove('hidden');
 }
 
-function closeModal(modal) {
+export function closeModal(modal) {
   modal.classList.add('hidden');
 }
 
-function addModalContent(modal, place) {
+function addModalContent(modal, place, messages) {
   const modalBody = modal.querySelector('#modal-body');
   const modalName = modalBody?.getAttribute("data-modal-name")
 
-  /* VOUCHER MODAL */
+  // Render Modal
   if (modalName && modalName === "voucherModal") {
     modalBody.innerHTML = renderVoucherModal(place);
     insertVoucherModalLogic();
   }
-  /* FILTERS MODAL */
   else if (modalName && modalName === "filtersModal") {
     modalBody.innerHTML = renderFiltersModal();
     insertFiltersModalLogic();
   }
-  /* SUCCESS MODAL */
   else if(modalName && modalName === "successModal") {
     modalBody.innerHTML = renderSuccessModal();
   }
+  else if(modalName && modalName === "failedModal") {
+    modalBody.innerHTML = renderFailedModal(messages);
+    insertFailedModalLogic();
+  }
+}
+
+
+export const openSuccessModal = () => {
+  const modal = document.querySelector("#successModal");
+  const place = state.placesList.find(place => place.place_id === state.selectedPlaceId);
+  addModalContent(modal, place);
+  openModal(modal);
+}
+
+export const openFailedModal = (messages) => {
+  const modal = document.querySelector("#failedModal");
+  addModalContent(modal, null, messages);
+  openModal(modal);
 }

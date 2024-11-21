@@ -1,3 +1,7 @@
+.gm-title {
+  color: black;
+}
+
 .distance-input-range {
   appearance: none;
   background-color: var(--light-red);
@@ -257,7 +261,83 @@
   margin-top: 0.25rem;
 }
 
+.result-modal-container {
+  width: 370px;
+  height: 340px;
+  background-color: white;
+  position: absolute;
+  top: 160px;
+  color: #4a4a4a; /* Ajusta el valor según `dark-gray` */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.result-modal-icon {
+  width: 96px;
+  margin-bottom: 16px;
+}
+
+.result-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-modal-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.result-modal-text {
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  margin-bottom: 16px;
+}
+
+.result-modal-text .margin-bottom-p {
+  margin-bottom: 16px;
+}
+
+.result-modal-text.error {
+  color: var(--red-campari);
+}
+.result-modal-email {
+  color: var(--red-campari);
+}
+.result-modal-button {
+  padding: 8px;
+  width: 192px;
+  background-color: var(--red-campari);
+  color: white;
+  font-size: 0.875rem;
+  text-align: center;
+  display: inline-block; /* Asegura que el enlace tenga comportamiento de bloque */
+  transition: background-color 0.2s;
+}
+
+.result-modal-button:hover {
+  background-color: var(--light-red);
+}
+
+.message-error-email {
+  color: rgb(61, 61, 248);
+}
+.result-modal-text.align-start {
+  text-align: start;
+}
+
+.error-msg {
+  padding-bottom: 16px;
+}
 @media (min-width: 768px) {
+
   .voucher-section__title {
     font-size: 3rem;
     line-height: 3rem;
@@ -296,9 +376,6 @@
   }
 }
 
-.gm-title {
-  color: black;
-}
 @media (min-width: 1024px) {
   .voucher-section__title {
     font-size: 3rem;
@@ -307,6 +384,14 @@
   .info-window-title {
     font-size: 1.125rem;
     line-height: 1.75rem;
+  }
+
+  .result-modal-container {
+    width: 450px;
+    height: 340px;
+  }
+  .result-modal-title {
+    font-size: 1.25rem;
   }
 } 
 

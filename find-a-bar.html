@@ -26,7 +26,12 @@
       use my current location
       </button>
     <div class="flex justify-center mb-6 px-8">
-      <input id="searchBar" type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 border shadow-md text-black">
+      <label class="w-full max-w-lg relative">
+          <input id="searchBar" type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 pr-12 border shadow-md text-black">
+          <figure class="absolute top-[27%] right-4">
+            <img src="./src/assets/icons/lens.svg">
+          </figure>
+      </label>
       <button class="ml-2 p-2 bg-white text-gray-800 shadow-md lg:hidden" data-modal-target="filtersModal">
           <img src="./src/assets/icons/burger-menu.svg">
       </button>

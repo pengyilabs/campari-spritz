@@ -341,6 +341,46 @@
 .error-msg {
   padding-bottom: 16px;
 }
+
+@keyframes vibration-1 {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2px, 2px); }
+  20% { transform: translate(2px, -2px); }
+  30% { transform: translate(-2px, -2px); }
+  40% { transform: translate(2px, 2px); }
+  50% { transform: translate(-2px, 0); }
+  60% { transform: translate(2px, 2px); }
+  70% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, -2px); }
+  90% { transform: translate(0, 2px); }
+}
+
+@keyframes vibration-2 {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(0, 2px); }
+  20% { transform: translate(-2px, 2px); }
+  30% { transform: translate(2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  50% { transform: translate(-2px, 0); }
+  60% { transform: translate(2px, 2px); }
+  70% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, 2px); }
+  90% { transform: translate(-2px, 2px); }
+}
+
+.failed-name-input {
+  display: inline-block;
+  animation: vibration-1 0.5s linear;
+}
+
+.failed-email-input {
+  display: inline-block;
+  animation: vibration-2 0.5s linear;
+}
+
+.placeholder-red::placeholder {
+  color: var(--light-red);
+}
 @media (min-width: 768px) {
 
   .voucher-section__title {

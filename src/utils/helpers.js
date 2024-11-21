@@ -1,7 +1,19 @@
 // TODO: función para realizar validaciones
+export function validateName(name) {
+  return typeof name === "string" && name.trim() !== "";
+}
+
 export function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
+  return typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+export function formatName(name) {
+  return name
+      .trim()
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
 }
 
 export const getLocation = async () => {

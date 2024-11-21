@@ -1,6 +1,6 @@
 import state from "../utils/state.js";
 import { openFailedModal, openSuccessModal } from "../utils/modalRendering.js";
-
+import { formatName, validateName, validateEmail } from "../utils/helpers.js";
 export const renderVoucherModal = (place) => {
   state.selectedPlaceId = place.place_id;
   return `
@@ -48,12 +48,11 @@ export const renderVoucherModal = (place) => {
               </figure>
               <input type="text" id="firstNameInput" name="firstName" class="voucher-section__text-input" placeholder="Enter your name here">
             </label>
-
             <label class="voucher-section__form-label">
               <figure class="voucher-section__input-icon">
                 <img src="./src/assets/icons/email-icon.svg">
               </figure>
-              <input type="email" id="firstNameInput" name="email" class="voucher-section__text-input" placeholder="Enter your email here">
+              <input type="email" id="emailInput" name="email" class="voucher-section__text-input" placeholder="Enter your email here">
             </label>
 
             <div class="text-xs font-light leading-4 md:text-sm mt-4">
@@ -71,55 +70,102 @@ export const renderVoucherModal = (place) => {
 
 export const insertVoucherModalLogic = () => {
   const form = document.querySelector("#voucherForm");
+  if (!form) return;
+
   form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+      event.preventDefault();
 
-    const form = event.target;
-    const name = form.firstName.value;
-    const email = form.email.value;
+      const { name, email } = getFormData(event.target);
+      if (!validateForm(name, email)) return;
 
-    const payload = {
+      const payload = createPayload(name, email);
+      const response = await sendRequest(payload);
+
+      handleResponse(response);
+  });
+};
+
+function getFormData(form) {
+  return {
+      name: formatName(form.firstName.value),
+      email: form.email.value.trim(),
+  };
+}
+
+function validateForm(name, email) {
+  const isNameValid = validateName(name);
+  const isEmailValid = validateEmail(email);
+
+  const nameInput = document.querySelector("#firstNameInput");
+  const emailInput = document.querySelector("#emailInput");
+
+  const originalNamePlaceholder = nameInput.placeholder;
+  const originalEmailPlaceholder = emailInput.placeholder;
+
+  // Cambiar el placeholder y color si no es válido
+  if (!isNameValid) {
+    nameInput.value = "";
+    nameInput.placeholder = "You must insert a name";
+    nameInput.classList.add("failed-name-input", "placeholder-red");
+
+    nameInput.addEventListener("input", (e) => {
+        e.target.placeholder = originalNamePlaceholder;
+        e.target.classList.remove("failed-name-input", "placeholder-red");
+        console.log(e.target.classList)
+    });
+  }
+  if (!isEmailValid) {
+    emailInput.value = "";
+    emailInput.placeholder = "The email format is invalid";
+    emailInput.classList.add("failed-email-input", "placeholder-red");
+
+    // Recuperar el placeholder original cuando el usuario escriba
+    emailInput.addEventListener("input", (e) => {
+      e.target.placeholder = originalEmailPlaceholder;
+      e.target.classList.remove("failed-email-input", "placeholder-red");
+    });
+  }
+
+  return isNameValid && isEmailValid;
+}
+
+function createPayload(name, email) {
+  return {
       name,
       email,
-      placeId: state.selectedPlaceId
-    };
+      placeId: state.selectedPlaceId,
+  };
+}
 
-    /* const response = await fetch('https://api.gratisspritz.com/subscribe', {
+async function sendRequest(payload) {
+  return fetch('https://api.gratisspritz.com/subscribe', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
-    });
-    console.log(response); */
+  });
+}
 
-    const response = {
-      ok: true,
-      status: 200,
-      json: async () => ({
-        message: "Voucher enviado sin exito :(",
-        name,
-        email,
-        placeId: state.selectedPlaceId,
-      }),
-    };
-
-    if (response.ok) {
+async function handleResponse(response) {
+  if (response.ok) {
       const data = await response.json();
       state.userEmail = data.email;
-
       openSuccessModal();
-    } else {
-      const messages = [];
-      const error = await response.json();
+  } else {
+      const errorMessages = await generateErrorMessages(response);
+      openFailedModal(errorMessages);
+  }
+}
 
-      if(response.status === 409) {
-        messages.push("The email entered already has a coupon assigned to this bar");
-      } else {
-        messages.push('Unknown error. Please send a message to <span class="message-error-email">support@gratis-spritz.com</span> sharing this error and we will help you to get your voucher.');
-      }
+async function generateErrorMessages(response) {
+  if (response.status === 409) {
+      return ["The email entered already has a coupon assigned to this bar"];
+  }
+  const error = await response.json();
+  console.error("Error response:", error);
 
-      openFailedModal(messages);
-    } 
-  });
+  return [
+      'Unknown error. Please send a message to <span class="message-error-email">support@gratis-spritz.com</span> sharing this error and we will help you get your voucher.',
+  ];
 }

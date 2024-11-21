@@ -1,6 +1,5 @@
 import { initMap } from './components/map.js';
 import { setupModals } from './utils/modalRendering.js';
-import { setupFormHandlers } from './components/form.js';
 import state from './utils/state.js';
 import { getLocation } from './utils/helpers.js';
 import { initPlacesAutocomplete } from './components/searchBar.js';
@@ -8,7 +7,6 @@ import { initPlacesAutocomplete } from './components/searchBar.js';
 // Exporta una función por defecto que inicializa todo
 export default async function initializeApp() {
   setupModals();
-  setupFormHandlers();
   state.currentUserLocation = await getLocation();
   initMap(); // Inicializa el mapa
   initPlacesAutocomplete();
@@ -23,8 +21,8 @@ export default async function initializeApp() {
 
   const useMyCurrentLocationButton = document.querySelector("#useMyCurrentLocationButton");
   if(useMyCurrentLocationButton) {
-    useMyCurrentLocationButton.addEventListener('click', () => {
-      state.currentUserLocation = getLocation();
+    useMyCurrentLocationButton.addEventListener('click', async () => {
+      state.currentUserLocation = await getLocation();
       initMap();
     })
   }

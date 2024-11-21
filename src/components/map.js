@@ -134,7 +134,7 @@ const createMarker = (place, map) => {
       <div class="info-window-rating">
         ${place.rating ? `<p>Rating: ${place.rating}</p><img src="./src/assets/icons/star.svg"/>` : ''}
       </div>
-      <button id="claimVoucherButton" data-modal-target="voucherModal"
+      <button id="claimVoucherButton" data-modal-target="voucherModal"  data-placeid=${place.place_id} 
         class="info-window-button">
         Claim Voucher
       </button>
@@ -142,6 +142,7 @@ const createMarker = (place, map) => {
     `
   });
 
+  const claimVoucherButton = document.querySelector("#claimVoucherButton");
   marker.addListener('click', async () => {
     await infoWindow.open(map, marker);
     setupModals()
@@ -151,7 +152,6 @@ const createMarker = (place, map) => {
 export const initMap = async () => {
   try {
     const { lat, lng } = await state.currentUserLocation;
-
     const mapElement = document.getElementById('map');
     if (!mapElement) {
       console.error('Map element not found');

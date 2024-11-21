@@ -111,7 +111,6 @@ const validateForm = (name, email) => {
     nameInput.addEventListener("input", (e) => {
         e.target.placeholder = originalNamePlaceholder;
         e.target.classList.remove("failed-name-input", "placeholder-red");
-        console.log(e.target.classList)
     });
   }
   if (!isEmailValid) {

@@ -85,14 +85,14 @@ export const insertVoucherModalLogic = () => {
   });
 };
 
-function getFormData(form) {
+const getFormData = (form) => {
   return {
       name: formatName(form.firstName.value),
       email: form.email.value.trim(),
   };
 }
 
-function validateForm(name, email) {
+const validateForm = (name, email) => {
   const isNameValid = validateName(name);
   const isEmailValid = validateEmail(email);
 
@@ -129,7 +129,7 @@ function validateForm(name, email) {
   return isNameValid && isEmailValid;
 }
 
-function createPayload(name, email) {
+const createPayload = (name, email) => {
   return {
       name,
       email,
@@ -137,7 +137,7 @@ function createPayload(name, email) {
   };
 }
 
-async function sendRequest(payload) {
+const sendRequest = async (payload) => {
   return fetch('https://api.gratisspritz.com/subscribe', {
       method: 'POST',
       headers: {
@@ -147,7 +147,7 @@ async function sendRequest(payload) {
   });
 }
 
-async function handleResponse(response) {
+const handleResponse = async (response) => {
   if (response.ok) {
       const data = await response.json();
       state.userEmail = data.email;
@@ -158,7 +158,7 @@ async function handleResponse(response) {
   }
 }
 
-async function generateErrorMessages(response) {
+const generateErrorMessages = async (response) => {
   if (response.status === 409) {
       return ["The email entered already has a coupon assigned to this bar"];
   }

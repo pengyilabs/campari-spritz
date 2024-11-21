@@ -3,13 +3,13 @@ import state from "../utils/state.js";
 import { drawLoadingSkeleton } from "./loading-skeleton.js";
 import { setupModals } from "../utils/modalRendering.js";
 
-async function fetchPlaceIdList() {
+const fetchPlaceIdList = async () => {
   const result = await fetch("https://api.gratisspritz.com/places");
   const data = await result.json();
   return data;
 }
 
-async function fetchPlaceDetails(service, placeIds) {
+const fetchPlaceDetails = async (service, placeIds) => {
   const { spherical } = await google.maps.importLibrary("geometry");
   const userLocation = state.currentUserLocation;
 
@@ -40,7 +40,7 @@ async function fetchPlaceDetails(service, placeIds) {
   return placesList;
 }
 
-async function filterAndOrderPlaces(places, distance, orderByPopularity) {
+const filterAndOrderPlaces = async (places, distance, orderByPopularity) => {
   // convert km to mts
   const maxDistance = distance * 1000;
 
@@ -55,7 +55,7 @@ async function filterAndOrderPlaces(places, distance, orderByPopularity) {
     });
 }
 
-function createHtmlPlacesList(places) {
+const createHtmlPlacesList = (places) => {
   const htmlPlaces = places.map(place => {
     const openingHour = calculateOpeningHour(place.opening_hours);
     const closingHour = calculateClosingHour(place.opening_hours);
@@ -97,13 +97,13 @@ function createHtmlPlacesList(places) {
   return htmlPlaces;
 }
 
-function createMarkers(places, map) {
+const createMarkers = (places, map) => {
   places.forEach(place => {
     createMarker(place, map);
   });
 }
 
-function createMarker(place, map) {
+const createMarker = (place, map) => {
   if (!place.geometry || !place.geometry.location) return;
 
   const marker = new google.maps.Marker({
@@ -148,7 +148,7 @@ function createMarker(place, map) {
   });
 }
 
-export async function initMap() {
+export const initMap = async () => {
   try {
     const { lat, lng } = await state.currentUserLocation;
 

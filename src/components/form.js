@@ -1,4 +1,4 @@
-export function setupFormHandlers() {
+export const setupFormHandlers = () => {
   // Ejemplo: Manejo de validación del formulario
   const form = document.querySelector('#miFormulario');
   if (form) {

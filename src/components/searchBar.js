@@ -1,7 +1,7 @@
 import state from "../utils/state.js";
 import { initMap } from "./map.js";
 
-export function initPlacesAutocomplete() {
+export const initPlacesAutocomplete = () => {
   const searchInput = document.querySelector('#searchBar');
   const autocomplete = new google.maps.places.Autocomplete(searchInput);
   

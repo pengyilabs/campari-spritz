@@ -4,7 +4,7 @@ import { insertVoucherModalLogic, renderVoucherModal } from "../components/vouch
 import { renderSuccessModal } from "../components/successModal.js";
 import { insertFailedModalLogic, renderFailedModal } from "../components/failedModal.js";
 
-export function setupModals() {
+export const setupModals = () => {
 
   const openModalButtons = document.querySelectorAll('[data-modal-target]');
   const closeModalButtons = document.querySelectorAll('[data-modal-close]');
@@ -38,15 +38,15 @@ export function setupModals() {
   });
 }
 
-export function openModal(modal) {
+export const openModal = (modal) => {
   modal.classList.remove('hidden');
 }
 
-export function closeModal(modal) {
+export const closeModal = (modal) => {
   modal.classList.add('hidden');
 }
 
-function addModalContent(modal, place, messages) {
+const addModalContent = (modal, place, messages) => {
   const modalBody = modal.querySelector('#modal-body');
   const modalName = modalBody?.getAttribute("data-modal-name")
   // Render Modal

@@ -1,13 +1,13 @@
 // TODO: función para realizar validaciones
-export function validateName(name) {
+export const validateName = (name) => {
   return typeof name === "string" && name.trim() !== "";
 }
 
-export function validateEmail(email) {
+export const validateEmail = (email) => {
   return typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export function formatName(name) {
+export const formatName = (name) => {
   return name
       .trim()
       .toLowerCase()

@@ -329,10 +329,15 @@
 .message-error-email {
   color: rgb(61, 61, 248);
 }
+
 .result-modal-text.align-start {
   text-align: start;
 }
 
+.result-modal-place-name {
+  color: var(--red-campari);
+  font-weight: bold;
+}
 .error-msg {
   padding-bottom: 16px;
 }

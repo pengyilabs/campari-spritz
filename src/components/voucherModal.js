@@ -2,8 +2,7 @@ import state from "../utils/state.js";
 import { openFailedModal, openSuccessModal } from "../utils/modalRendering.js";
 
 export const renderVoucherModal = (place) => {
-  state.selectedPlaceId = place.place_Id;
-
+  state.selectedPlaceId = place.place_id;
   return `
       <div id="voucher-section" class="voucher-section">
         <img src="./src/assets/images/campari-logo.png" alt="Campari Logo" class="voucher-section__campari-logo">

@@ -49,7 +49,6 @@ export function closeModal(modal) {
 function addModalContent(modal, place, messages) {
   const modalBody = modal.querySelector('#modal-body');
   const modalName = modalBody?.getAttribute("data-modal-name")
-
   // Render Modal
   if (modalName && modalName === "voucherModal") {
     modalBody.innerHTML = renderVoucherModal(place);
@@ -60,7 +59,7 @@ function addModalContent(modal, place, messages) {
     insertFiltersModalLogic();
   }
   else if(modalName && modalName === "successModal") {
-    modalBody.innerHTML = renderSuccessModal();
+    modalBody.innerHTML = renderSuccessModal(place);
   }
   else if(modalName && modalName === "failedModal") {
     modalBody.innerHTML = renderFailedModal(messages);
@@ -72,6 +71,7 @@ function addModalContent(modal, place, messages) {
 export const openSuccessModal = () => {
   const modal = document.querySelector("#successModal");
   const place = state.placesList.find(place => place.place_id === state.selectedPlaceId);
+
   addModalContent(modal, place);
   openModal(modal);
 }

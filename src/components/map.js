@@ -2,9 +2,10 @@ import { calculateClosingHour, calculateOpeningHour, clearListContainers } from 
 import state from "../utils/state.js";
 import { drawLoadingSkeleton } from "./loading-skeleton.js";
 import { setupModals } from "../utils/modalRendering.js";
+import ENVIRONMENT from "../../env.js";
 
 const fetchPlaceIdList = async () => {
-  const result = await fetch("https://api.gratisspritz.com/places");
+  const result = await fetch(ENVIRONMENT.CAMPARI_PLACES_URL);
   const data = await result.json();
   return data;
 }

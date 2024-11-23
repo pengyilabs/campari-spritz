@@ -1,6 +1,7 @@
 import state from "../utils/state.js";
 import { openFailedModal, openSuccessModal } from "../utils/modalRendering.js";
 import { formatName, validateName, validateEmail } from "../utils/helpers.js";
+import ENVIRONMENT from "../../env.js";
 export const renderVoucherModal = (place) => {
   state.selectedPlaceId = place.place_id;
   return `
@@ -137,7 +138,7 @@ const createPayload = (name, email) => {
 }
 
 const sendRequest = async (payload) => {
-  return fetch('https://api.gratisspritz.com/subscribe', {
+  return fetch(ENVIRONMENT.CAMPARI_SUBSCRIPTION_URL, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',

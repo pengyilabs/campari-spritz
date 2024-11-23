@@ -111,7 +111,7 @@
   </div>
 </div>
 
-<script>
+<!-- <script>
   function initGoogleMaps() {
   import('./src/index.js')
     .then(module => {
@@ -119,12 +119,8 @@
     })
     .catch(err => console.error('Error loading app:', err));
   }
-</script>
+</script> -->
+<script src="./src/index.js" type="module" async defer></script>
 <script src="./src/utils/eventHandlers.js" type="module"></script>
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgogrnISz9ccFj6kNFkYo7Fc22UnU3Jkc&libraries=places,geometry&callback=initGoogleMaps"
-  async
-  defer
-></script>
 </body>
 </html>

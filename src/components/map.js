@@ -107,46 +107,53 @@ const createMarkers = (places, map) => {
 const createMarker = (place, map) => {
   if (!place.geometry || !place.geometry.location) return;
 
-  const marker = new google.maps.Marker({
+  const markerContent = document.createElement("div");
+  markerContent.className = "custom-marker";
+  markerContent.innerHTML = `
+    <img src="./src/assets/images/map-marker.svg" alt="${place.name}" style="width: 32px; height: 32px;" />
+  `;
+  
+  const marker = new google.maps.marker.AdvancedMarkerElement({
     map: map,
     position: place.geometry.location,
     title: place.name,
-    icon: {
-      url: './src/assets/images/map-marker.svg',
-      scaledSize: new google.maps.Size(32, 32)
-    }
+    content: markerContent,
   });
-
+  
   let photoUrl = "";
-  if(place.photos) {
+  if (place.photos) {
     photoUrl = place.photos[0].getUrl();
   }
-
-  const infoWindow = new google.maps.InfoWindow({
-    content: `
+  
+  const infoWindowContent = `
     <div class="info-window-container">
-      ${photoUrl !== "" && `
+      ${photoUrl !== "" ? `
         <figure class="info-window-image-container">
-          <image src=${photoUrl} class="info-window-image">
+          <img src="${photoUrl}" class="info-window-image" alt="${place.name}" />
         </figure>
-      `}
+      ` : ""}
       <h3 class="info-window-title">${place.name}</h3>
       <p>${place.vicinity || ''}</p>
       <div class="info-window-rating">
-        ${place.rating ? `<p>Rating: ${place.rating}</p><img src="./src/assets/icons/star.svg"/>` : ''}
+        ${place.rating ? `<p>Rating: ${place.rating}</p><img src="./src/assets/icons/star.svg" alt="Star" />` : ''}
       </div>
-      <button id="claimVoucherButton" data-modal-target="voucherModal"  data-placeid=${place.place_id} 
+      <button id="claimVoucherButton" data-modal-target="voucherModal" data-placeid="${place.place_id}" 
         class="info-window-button">
         Claim Voucher
       </button>
     </div>
-    `
+  `;
+  
+  const infoWindow = new google.maps.InfoWindow({
+    content: infoWindowContent,
   });
-
-  const claimVoucherButton = document.querySelector("#claimVoucherButton");
+  
   marker.addListener('click', async () => {
-    await infoWindow.open(map, marker);
-    setupModals()
+    await infoWindow.open({
+      anchor: marker,
+      map,
+    });
+    setupModals();
   });
 }
 
@@ -164,12 +171,12 @@ export const initMap = async () => {
     const mapOptions = {
       center: { lat: lat(), lng: lng() },
       zoom: 14,
-      styles: [],
+      mapId: ENVIRONMENT.MAP_ID
     };
 
     const map = new google.maps.Map(mapElement, mapOptions);
     
-    new google.maps.Marker({
+    new google.maps.marker.AdvancedMarkerElement({
       position: { lat: lat(), lng: lng() },
       map: map,
       title: 'Your location'

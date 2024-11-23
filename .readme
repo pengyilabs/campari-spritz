@@ -16,19 +16,12 @@ This application is purely frontend-based, and for testing purposes, it uses a *
 
 ### Variables and Their Locations
 
-You need to replace the following mock environment variables with your actual environment variables:  
+You need to replace the following mock environment variables with your actual environment variables (Search for those variables with the searcher and simply replace the code): 
 
 - **`ENVIRONMENT.MAPS_API_KEY`**  
-  - **File:** `index.js`  
-  - **Line:** 16  
-
+- **`ENVIRONMENT.MAP_ID`**  
 - **`ENVIRONMENT.CAMPARI_PLACES_URL`**  
-  - **File:** `components/map.js`  
-  - **Line:** 8  
-
 - **`ENVIRONMENT.CAMPARI_SUBSCRIPTION_URL`**  
-  - **File:** `components/voucherModal.js`  
-  - **Line:** 141  
 
 ### Testing the Application Locally
 

@@ -111,8 +111,10 @@ export const clearListContainers =(containerList) => {
 
 export const checkCachedData = (data) => {
   // Only one sample is necessary to check the persisted data has the right structure
-  const sample = data[0];
-  if(sample?.name && sample?.place_id && sample?.radius && checkUpdatedTime(sample.updatedDate)) return true;
+  if(data) {
+    const sample = data[0];
+    if(sample?.name && sample?.place_id && sample?.radius && checkUpdatedTime(sample.updatedDate)) return true;
+  }
   return false;
 }
 

@@ -85,7 +85,6 @@ export const calculateClosingHour = (openingHours) => {
     }
 
     const todayPeriod = periods.find(period => period.close.day === today);
-    
     if (!todayPeriod) {
       return 'N/A';
     }
@@ -109,3 +108,28 @@ export const clearListContainers =(containerList) => {
     container.innerHTML = "";
   })
 }
+
+export const checkCachedData = (data) => {
+  // Only one sample is necessary to check the persisted data has the right structure
+  const sample = data[0];
+  if(sample?.name && sample?.place_id && sample?.radius && checkUpdatedTime(sample.updatedDate)) return true;
+  return false;
+}
+
+export const persistData = (key, data) => {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+export const retrieveData = (key) => {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : null;
+}
+
+const checkUpdatedTime = (storedTimestamp) => {
+  // Limit of 10 minutes
+  const tenMinutesInMilliseconds = 10 * 60 * 1000;
+  const currentTime = Date.now();
+
+  // Return true if it doesn't pass the limit
+  return (currentTime - storedTimestamp) <= tenMinutesInMilliseconds;
+};

@@ -32,6 +32,10 @@
   color: var(--red-campari);
 }
 
+.bar-item__is-opening__unknown {
+  color: var(--dark-gray);
+}
+
 .bar-item__rating {
   display:flex;
   align-items: center;

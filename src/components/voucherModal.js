@@ -29,14 +29,14 @@ export const renderVoucherModal = (place) => {
               ${place.rating || 'N/A'} ${'<img src="./src/assets/icons/star.svg" />'.repeat(Math.round(place.rating || 0))}
               </div>
               <p class="bar-item__is-opening">
-                ${place.opening_hours?.isOpen() ?
+                ${place.isOpen ?
                   '<span class="bar-item__is-opening__open">Open</span> - Closes 12:00 PM' :
                   `<span class="bar-item__is-opening__closed">Closed</span> - Opens 09:00 AM`}
               </p>
             </div>
             ${place.photos && 
               `<figure class="bar-item__bar-image-container">
-                <img class="bar-item__bar-image-container_img" src=${place.photos[0]?.getUrl()} alt="Bar Image">
+                <img class="bar-item__bar-image-container_img" src=${place.photo} alt="Bar Image">
               </figure>`
             }
           </div>

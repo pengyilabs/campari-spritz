@@ -13,6 +13,7 @@
   padding-right: 15px;
   font-family: "Roboto Condensed";
   font-size: .75rem;
+  text-align: start;
 }
 .bar-item__title {
   font-family: "Rubik";

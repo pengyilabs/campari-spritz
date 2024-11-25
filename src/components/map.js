@@ -20,8 +20,6 @@ const fetchPlaceDetails = async (service, placeIds) => {
 
   /* If data exists and has the correct structure, then update distance between user and place */
   if (checkCachedData(cachedData)) {
-    console.log("Returns cached data");
-
     const userLocation = state.currentUserLocation;
     const updatedPlacesList = cachedData.map(place => {
       const distanceInMeters = spherical.computeDistanceBetween(
@@ -34,7 +32,6 @@ const fetchPlaceDetails = async (service, placeIds) => {
     persistData("placesDetails", updatedPlacesList);
     return updatedPlacesList;
   }
-  console.log("returns new data");
   const userLocation = state.currentUserLocation;
 
   const placesPromises = placeIds.map(placeId => {

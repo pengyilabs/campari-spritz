@@ -1,7 +1,7 @@
 export const insertBarListMobileLogic = () => {
-  const swipeContainer = document.getElementById('swipe-container');
-  const dragHandle = document.getElementById('drag-handle');
-  
+  const swipeContainer = document.querySelector('#swipe-container');
+  const dragHandle = document.querySelector('#drag-handle');
+  const barList = document.querySelector("#bar-list-mobile");
   let startY = 0;
   let currentY = 0;
   let initialTop = 0;
@@ -15,19 +15,14 @@ export const insertBarListMobileLogic = () => {
   let currentState = STATES.EXPANDED;
   
   const POSITIONS = {
-    COLLAPSED: '0%',
-    EXPANDED: '90%'
+    COLLAPSED: '90%',
+    EXPANDED: '0%'
   };
   
   const handleStart = (event) => {
-    startY = event.type === 'mousedown' ? event.clientY : event.touches[0].clientY;
+    startY = event.touches[0].clientY;
     initialTop = parseFloat(window.getComputedStyle(swipeContainer).top);
     currentState = STATES.DRAGGING;
-    
-    if (event.type === 'mousedown') {
-      document.addEventListener('mousemove', handleMove);
-      document.addEventListener('mouseup', handleEnd);
-    }
     
     swipeContainer.style.transition = 'none';
   }
@@ -52,10 +47,12 @@ export const insertBarListMobileLogic = () => {
     // Determine if expand or collapse according to position
     if (currentTop < window.innerHeight * 0.45) {
       expandList();
-      swipeContainer.style.overflowY = "scroll";
+      barList.style.overflowY = "scroll";
+      console.log("expanded")
   } else {
       collapseList();
-    swipeContainer.style.overflowY = "hidden";
+      barList.style.overflowY = "hidden";
+      console.log("collapsed")
   }
     
     document.removeEventListener('mousemove', handleMove);
@@ -73,7 +70,6 @@ export const insertBarListMobileLogic = () => {
   }
   
   // Event Listeners
-  dragHandle.addEventListener('mousedown', handleStart);
   dragHandle.addEventListener('touchstart', handleStart);
   document.addEventListener('touchmove', handleMove);
   document.addEventListener('touchend', handleEnd);

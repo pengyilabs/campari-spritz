@@ -18,23 +18,23 @@ export const formatName = (name) => {
 
 export const getLocation = async () => {
   if (navigator.geolocation) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
           const userLocation = new google.maps.LatLng(lat, lng);
-          resolve(userLocation); 
+          resolve(userLocation);
         },
-        (error) => {
-          console.error('Error obtaining location:', error);
-          reject(error); 
+        () => {
+          const munichLocation = new google.maps.LatLng(52.5200, 13.4050); // Munich
+          resolve(munichLocation);
         }
       );
     });
   } else {
-    console.error('Geolocalización no disponible');
-    reject(new Error('Geolocalización no disponible'));
+    const munichLocation = new google.maps.LatLng(52.5200, 13.4050); // Munich
+    return Promise.resolve(munichLocation);
   }
 };
 

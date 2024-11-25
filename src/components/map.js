@@ -77,17 +77,11 @@ const fetchPlaceDetails = async (service, placeIds) => {
   return placesList;
 }
 
-const filterAndOrderPlaces = async (places, distance, orderByPopularity) => {
-  // convert km to mts
-  const maxDistance = distance * 1000;
+/* A version that filters by distance and popularity is available on deprecated.js file */
+const filterAndOrderPlaces = async (places) => {
   return await places
-    .filter(place => place.radius <= maxDistance)
     .sort((a, b) => {
-      if (orderByPopularity) {
-        return b.rating - a.rating;
-      } else {
-        return a.radius - b.radius;
-      }
+      return a.radius - b.radius;
     });
 }
 

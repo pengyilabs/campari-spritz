@@ -135,3 +135,15 @@ const checkUpdatedTime = (storedTimestamp) => {
   // Return true if it doesn't pass the limit
   return (currentTime - storedTimestamp) <= tenMinutesInMilliseconds;
 };
+
+const isMobile = () => window.innerWidth < 1024;
+
+export const handleResize = (callback) => {
+  // Ejecuta el callback inicialmente
+  callback(isMobile());
+  
+  // Escucha cambios en el tamaño de la ventana
+  window.addEventListener('resize', () => {
+    callback(isMobile());
+  });
+}

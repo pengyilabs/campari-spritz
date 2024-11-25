@@ -17,7 +17,7 @@
   <!-- Section 2: Bar Listing & Map Section -->
 <div id="find-a-bar-section" class="py-8 bg-gray-100 text-white min-h-screen bg-red-campari pt-[254px] lg:pt-4 shadow-lg">
   <!-- Heading -->
-  <div class="text-center flex flex-col align-center justify-center w-full pb-4 pt-6 px-8 fixed top-0 bg-red-campari z-50 lg:static lg:px-0 lg:pt-0">
+  <div class="text-center flex flex-col align-center justify-center w-full pb-4 pt-6  fixed top-0 bg-red-campari z-40 lg:static lg:px-0 lg:pt-0">
     <h2 class="text-3xl font-bold mb-5">FIND A BAR NEAR YOU</h2>
     <p class="text-base font-medium">CHOOSE A BAR FROM THE MAP OR LIST TO CLAIM YOUR FREE DRINKS 🍹</p>
 
@@ -56,13 +56,13 @@
         <option value="13">13 Km</option>
         <option value="14">14 Km</option>
         <option value="15">15 Km</option>
-       </select>
+      </select>
       <div class="flex justify-between items-center pl-32">
         <p class="text-sm pr-4 text-white">Order by popularity</p>
         <input type="checkbox" class="checkbox cursor-pointer" id="orderByPopularityCheckbox" onchange="popularityHandler(event)"/>
       </div>
-    </div>
-  </div> -->
+    </div>-->
+  </div> 
 
   <!-- Bar List & Map -->
   <div class="grid grid-cols-1 lg:grid-cols-2">
@@ -70,14 +70,14 @@
     <div id="bar-list-desktop" class="hidden gap-6 lg:grid grid-col items-start"></div>
 
     <!-- Map Section -->
-    <div id="map" class="min-h-96 bg-gray-300 lg:min-h-[600px]"></div>
+    <div id="map" class="min-h-96 bg-gray-300 lg:h-[600px] "></div>
 
     <!-- Mobile: Bar List -->
-     <div id="swipe-container" class="fixed top-[70%] left-0 w-full bg-red-campari border-t-white border-t lg:hidden max-h-full">
+     <div id="swipe-container" class="fixed top-[90%] left-0 w-full bg-red-campari border-t-white border-t lg:hidden max-h-full z-40">
       <div id="drag-handle" class="w-full h-10 flex justify-center items-center cursor-grab pt-4">
         <div class="bg-white w-40 h-2 rounded"></div>
       </div>
-      <div id="bar-list-mobile" class="space-y-4 lg:hidden mt-4"></div>
+      <div id="bar-list-mobile" class="space-y-4 lg:hidden mt-4 h-[100vh] overflow-y-scroll"></div>
      </div>
 </div>
 
@@ -117,15 +117,6 @@
   </div>
 </div>
 
-<!-- <script>
-  function initGoogleMaps() {
-  import('./src/index.js')
-    .then(module => {
-      module.default();
-    })
-    .catch(err => console.error('Error loading app:', err));
-  }
-</script> -->
 <script src="./src/index.js" type="module" async defer></script>
 <script src="./src/utils/eventHandlers.js" type="module"></script>
 </body>

@@ -199,7 +199,14 @@ export const initMap = async () => {
       return;
     }
 
-    mapElement.style.height = '400px'; 
+    const resizeMap = ()=> {
+      const isMobile = window.innerWidth < 1024;
+      // calc values: (device height - header height - collapsed bar list distance from the bottom)
+      mapElement.style.height = isMobile ? "calc(100vh - 222px - 10%)" : "600px"
+    }
+    
+    window.addEventListener("resize", resizeMap);
+    resizeMap();
 
     const mapOptions = {
       center: { lat: lat(), lng: lng() },

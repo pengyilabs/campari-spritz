@@ -5,6 +5,7 @@ const state = {
   selectedPlaceId: null,
   currentUserLocation: null,
   userEmail: null,
+  firstTimeUsingGeolocation: true
 }
 
 export default state;

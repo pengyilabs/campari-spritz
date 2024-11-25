@@ -1,8 +1,9 @@
 export const insertBarListMobileLogic = () => {
   const swipeContainer = document.querySelector('#swipe-container');
+  const handleBar = document.querySelector('#handle-bar');
   let isExpanded = false;
   const POSITIONS = {
-    COLLAPSED: '90%',
+    COLLAPSED: '85%',
     EXPANDED: '0%'
   };
 
@@ -28,5 +29,5 @@ export const insertBarListMobileLogic = () => {
     swipeContainer.style.top = POSITIONS.COLLAPSED;
   }
 
-  document.addEventListener('touchend', handleEnd);
+  handleBar.addEventListener('touchend', handleEnd);
 }

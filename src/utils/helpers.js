@@ -1,3 +1,4 @@
+import state from "./state.js";
 // TODO: función para realizar validaciones
 export const validateName = (name) => {
   return typeof name === "string" && name.trim() !== "";
@@ -27,14 +28,26 @@ export const getLocation = async () => {
           resolve(userLocation);
         },
         () => {
-          const munichLocation = new google.maps.LatLng(52.5200, 13.4050); // Munich
-          resolve(munichLocation);
+
+          if(state.firstTimeUsingGeolocation) {
+            state.firstTimeUsingGeolocation = false;
+            let standardLocation = new google.maps.LatLng(52.5200, 13.4050); // Berlin
+            resolve(standardLocation);
+          } else {
+            alert("Please enable geolocation so we can find your location")
+          }
+          
         }
       );
     });
   } else {
-    const munichLocation = new google.maps.LatLng(52.5200, 13.4050); // Munich
-    return Promise.resolve(munichLocation);
+    if(state.firstTimeUsingGeolocation) {
+      state.firstTimeUsingGeolocation = false;
+      const standardLocation = new google.maps.LatLng(52.5200, 13.4050); // Berlin
+      return Promise.resolve(standardLocation);
+    } else {
+      alert("Please enable geolocation so we can find your location")
+    }
   }
 };
 

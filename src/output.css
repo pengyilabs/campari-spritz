@@ -654,6 +654,10 @@ video {
   margin-top: 1rem;
 }
 
+.mb-\[10vh\] {
+  margin-bottom: 10vh;
+}
+
 .flex {
   display: flex;
 }
@@ -891,6 +895,10 @@ video {
 
 .pt-\[254px\] {
   padding-top: 254px;
+}
+
+.pb-\[10vh\] {
+  padding-bottom: 10vh;
 }
 
 .text-center {

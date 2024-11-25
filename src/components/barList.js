@@ -45,7 +45,6 @@ export const insertBarListMobileLogic = () => {
     const currentTop = parseFloat(window.getComputedStyle(swipeContainer).top);
     
     // Determine if expand or collapse according to position
-    console.log(currentTop < window.innerHeight * 0.45)
     if (currentTop < window.innerHeight * 0.45) {
       expandList();
       console.log("expanded")

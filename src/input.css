@@ -122,8 +122,24 @@
 .shadow-container::before {
   content: '';
   position: absolute;
-  inset: 0; /* Ocupa todo el contenedor */
+  inset: 0;
   box-shadow: inset 0 0px 12px rgba(0, 0, 0, 0.6);
-  pointer-events: none; /* No bloquea la interacción */
-  z-index: 10; /* Coloca la sombra sobre los hijos */
+  pointer-events: none;
+  z-index: 10;
 }
+
+.shadow-bottom::before {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    left: 0;
+    z-index: 90;
+    box-shadow: 0 0 50px 40px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s;
+}
+
+.shadow-bottom-hide::before {
+  opacity: 0;
+}
+  

@@ -115,3 +115,15 @@
 .bg-red-campari {
   background: var(--red-campari);
 }
+
+.shadow-container {
+  position: relative;
+}
+.shadow-container::before {
+  content: '';
+  position: absolute;
+  inset: 0; /* Ocupa todo el contenedor */
+  box-shadow: inset 0 0px 12px rgba(0, 0, 0, 0.6);
+  pointer-events: none; /* No bloquea la interacción */
+  z-index: 10; /* Coloca la sombra sobre los hijos */
+}

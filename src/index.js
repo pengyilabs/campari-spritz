@@ -1,10 +1,10 @@
-import { initMap } from './components/map.js';
-import { setupModals } from './utils/modalRendering.js';
-import state from './utils/state.js';
-import { getLocation } from './utils/helpers.js';
-import { initPlacesAutocomplete } from './components/searchBar.js';
-import ENVIRONMENT from '../env.js';
-import { insertBarListMobileLogic } from './components/barList.js';
+import { initMap } from "./components/map.js";
+import { setupModals } from "./utils/modalRendering.js";
+import state from "./utils/state.js";
+import { getLocation, resetInput } from "./utils/helpers.js";
+import { initPlacesAutocomplete } from "./components/searchBar.js";
+import ENVIRONMENT from "../env.js";
+import { insertBarListMobileLogic } from "./components/barList.js";
 
 function loadGoogleMapsAPI() {
   return new Promise((resolve, reject) => {
@@ -13,12 +13,12 @@ function loadGoogleMapsAPI() {
       return;
     }
 
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.src = `https://maps.googleapis.com/maps/api/js?key=${ENVIRONMENT.MAPS_API_KEY}&libraries=places,geometry,marker`;
     script.async = true;
     script.defer = true;
     script.onload = resolve;
-    script.onerror = () => reject(new Error('Error loading Google Maps API'));
+    script.onerror = () => reject(new Error("Error loading Google Maps API"));
     document.head.appendChild(script);
   });
 }
@@ -28,26 +28,31 @@ export default async function initializeApp() {
     await loadGoogleMapsAPI();
     setupModals();
     state.currentUserLocation = await getLocation();
-    initMap(); 
+    initMap();
     initPlacesAutocomplete();
     insertBarListMobileLogic();
-    const claimDrinkButton = document.getElementById('claim-drink-button');
+    const claimDrinkButton = document.getElementById("claim-drink-button");
     if (claimDrinkButton) {
-      claimDrinkButton.addEventListener('click', () => {
-        document.getElementById('promotion-section').classList.add('hidden');
-        document.getElementById('bar-listing-section').classList.remove('hidden');
+      claimDrinkButton.addEventListener("click", () => {
+        document.getElementById("promotion-section").classList.add("hidden");
+        document
+          .getElementById("bar-listing-section")
+          .classList.remove("hidden");
       });
     }
 
-    const useMyCurrentLocationButton = document.querySelector("#useMyCurrentLocationButton");
+    const useMyCurrentLocationButton = document.querySelector(
+      "#useMyCurrentLocationButton"
+    );
     if (useMyCurrentLocationButton) {
-      useMyCurrentLocationButton.addEventListener('click', async () => {
+      useMyCurrentLocationButton.addEventListener("click", async () => {
         state.currentUserLocation = await getLocation();
+        resetInput("searchBar");
         initMap();
       });
     }
   } catch (error) {
-    console.error('Error initializing app:', error);
+    console.error("Error initializing app:", error);
   }
 }
 

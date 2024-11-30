@@ -20,21 +20,30 @@ export const renderVoucherModal = (place) => {
         <!-- Bar Item -->
           <div class="voucher-section__bar-item">
             <div class="bar-item__info-container">
-              <h3 class="bar-item__title">${place.name || 'Bar Name'}</h3>
+              <h3 class="bar-item__title">${place.name || "Bar Name"}</h3>
               <div class="bar-item__address-container flex gap-2">
                 <img src="src/assets/icons/map-pin.svg" />
-                <p class="bar-item__address-text">${place.formatted_address || 'Address not available'}</p>
+                <p class="bar-item__address-text">${
+                  place.formatted_address || "Address not available"
+                }</p>
               </div>
               <div class="bar-item__rating text-yellow-500 mb-2">
-              ${place.rating || 'N/A'} ${'<img src="./src/assets/icons/star.svg" />'.repeat(Math.round(place.rating || 0))}
+              ${
+                place.rating || "N/A"
+              } ${'<img src="./src/assets/icons/star.svg" />'.repeat(
+    Math.round(place.rating || 0)
+  )}
               </div>
               <p class="bar-item__is-opening">
-                ${place.isOpen ?
-                  '<span class="bar-item__is-opening__open">Open</span> - Closes 12:00 PM' :
-                  `<span class="bar-item__is-opening__closed">Closed</span> - Opens 09:00 AM`}
+                ${
+                  place.isOpen
+                    ? '<span class="bar-item__is-opening__open">Open</span> - Closes 12:00 PM'
+                    : `<span class="bar-item__is-opening__closed">Closed</span> - Opens 09:00 AM`
+                }
               </p>
             </div>
-            ${place.photos && 
+            ${
+              place.photos &&
               `<figure class="bar-item__bar-image-container">
                 <img class="bar-item__bar-image-container_img" src=${place.photo} alt="Bar Image">
               </figure>`
@@ -67,31 +76,31 @@ export const renderVoucherModal = (place) => {
         <span class="vouhcer-section__enjoyresponsibly">#ENJOYRESPONSIBLY</span>
       </div>  
     `;
-}
+};
 
 export const insertVoucherModalLogic = () => {
   const form = document.querySelector("#voucherForm");
   if (!form) return;
 
   form.addEventListener("submit", async (event) => {
-      event.preventDefault();
+    event.preventDefault();
 
-      const { name, email } = getFormData(event.target);
-      if (!validateForm(name, email)) return;
+    const { name, email } = getFormData(event.target);
+    if (!validateForm(name, email)) return;
 
-      const payload = createPayload(name, email);
-      const response = await sendRequest(payload);
+    const payload = createPayload(name, email);
+    const response = await sendRequest(payload);
 
-      handleResponse(response);
+    handleResponse(response);
   });
 };
 
 const getFormData = (form) => {
   return {
-      name: formatName(form.firstName.value),
-      email: form.email.value.trim(),
+    name: formatName(form.firstName.value),
+    email: form.email.value.trim(),
   };
-}
+};
 
 const validateForm = (name, email) => {
   const isNameValid = validateName(name);
@@ -110,8 +119,8 @@ const validateForm = (name, email) => {
     nameInput.classList.add("failed-name-input", "placeholder-red");
 
     nameInput.addEventListener("input", (e) => {
-        e.target.placeholder = originalNamePlaceholder;
-        e.target.classList.remove("failed-name-input", "placeholder-red");
+      e.target.placeholder = originalNamePlaceholder;
+      e.target.classList.remove("failed-name-input", "placeholder-red");
     });
   }
   if (!isEmailValid) {
@@ -127,45 +136,77 @@ const validateForm = (name, email) => {
   }
 
   return isNameValid && isEmailValid;
-}
+};
 
 const createPayload = (name, email) => {
   return {
-      name,
-      email,
-      placeId: state.selectedPlaceId,
+    name,
+    email,
+    placeId: state.selectedPlaceId,
   };
-}
+};
 
-const sendRequest = async (payload) => {
+/* const sendRequest = async (payload) => {
   return fetch(ENVIRONMENT.CAMPARI_SUBSCRIPTION_URL, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
   });
-}
+}; */
 
 const handleResponse = async (response) => {
   if (response.ok) {
-      const data = await response.json();
-      state.userEmail = data.email;
-      openSuccessModal();
+    const data = await response.json();
+    state.userEmail = data.email;
+    openSuccessModal();
   } else {
-      const errorMessages = await generateErrorMessages(response);
-      openFailedModal(errorMessages);
+    const errorMessages = await generateErrorMessages(response);
+    openFailedModal(errorMessages);
   }
-}
+};
 
 const generateErrorMessages = async (response) => {
   if (response.status === 409) {
-      return ["The email entered already has a coupon assigned to this bar"];
+    return ["The email entered already has a coupon assigned to this bar"];
   }
   const error = await response.json();
   console.error("Error response:", error);
 
   return [
-      'Unknown error. Please send a message to <span class="message-error-email">support@gratis-spritz.com</span> sharing this error and we will help you get your voucher.',
+    'Unknown error. Please send a message to <span class="message-error-email">support@gratis-spritz.com</span> sharing this error and we will help you get your voucher.',
   ];
-}
+};
+
+const sendRequest = async (payload) => {
+  // Simular un retardo como si fuera una llamada a una API
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  // Mocks para simular respuestas
+  const mockSuccessResponse = {
+    ok: true,
+    json: async () => ({ email: payload.email }),
+  };
+
+  const mockError409Response = {
+    ok: false,
+    status: 409,
+    json: async () => ({}),
+  };
+
+  const mockError500Response = {
+    ok: false,
+    status: 500,
+    json: async () => ({ message: "Internal Server Error" }),
+  };
+
+  // Cambiar el comportamiento del mock según el caso
+  if (payload.email === "test@gmail.com") {
+    return mockError409Response; // Caso de error 409 (email ya registrado)
+  } else if (payload.email === "test1@gmail.com") {
+    return mockError500Response; // Caso de error 500 (error desconocido)
+  }
+
+  return mockSuccessResponse; // Caso de éxito
+};

@@ -7,13 +7,13 @@ export const renderSuccessModal = (place) => {
         <img src="./src/assets/icons/cup-modal-icon.png" >
       </figure>
       <div class="result-modal-content">
-        <h2 class="result-modal-title">YOU'RE ALL SET!</h2>
+        <h2 class="result-modal-title">LOS GEHT'S!</h2>
         <div class="result-modal-text">
-          <p class="margin-bottom-p">We’ve sent your voucher to <span class="result-modal-email">${state.userEmail}</span></p>
-          <p>Check your inbox for your QR code and bring it to <span class="result-modal-place-name">${place.name}</span> to claim your free Campari Spritz!</p>
+          <p class="margin-bottom-p">Wir haben deinen Gutschein gesendet an <span class="result-modal-email">${state.userEmail}</span></p>
+          <p>Check deine Inbox für deinen QR-Code und bring ihn mit zu <span class="result-modal-place-name">${place.name}</span> um deinen kostenlosen Campari Spritz zu erhalten!</p>
         </div>
         <a role="button" href="/" class="result-modal-button">GOT IT</a>
       </div>
     </div>
   `;
-};
+}

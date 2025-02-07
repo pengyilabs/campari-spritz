@@ -3,8 +3,8 @@ import { setupModals } from "./utils/modalRendering.js";
 import state from "./utils/state.js";
 import { getLocation, resetInput } from "./utils/helpers.js";
 import { initPlacesAutocomplete } from "./components/searchBar.js";
-import ENVIRONMENT from "../env.js";
-import { insertBarListMobileLogic } from "./components/barList.js";
+import ENVIRONMENT from "../env.Development.js";
+import { switchBarView } from "./utils/eventHandlers.js";
 
 function loadGoogleMapsAPI() {
   return new Promise((resolve, reject) => {
@@ -24,13 +24,15 @@ function loadGoogleMapsAPI() {
 }
 
 export default async function initializeApp() {
+  // console.log("Test");
+  // john = await fetch("https://maps.googleapis.com/maps/api/geocode/json");
+
   try {
     await loadGoogleMapsAPI();
     setupModals();
     state.currentUserLocation = await getLocation();
     initMap();
     initPlacesAutocomplete();
-    insertBarListMobileLogic();
     const claimDrinkButton = document.getElementById("claim-drink-button");
     if (claimDrinkButton) {
       claimDrinkButton.addEventListener("click", () => {
@@ -51,6 +53,12 @@ export default async function initializeApp() {
         initMap();
       });
     }
+
+    const mapViewSwitcher = document.querySelector("#map-view-switcher");
+    const listViewSwitcher = document.querySelector("#list-view-switcher");
+    mapViewSwitcher.addEventListener("click", () => switchBarView("map"));
+    listViewSwitcher.addEventListener("click", () => switchBarView("list"));
+    
   } catch (error) {
     console.error("Error initializing app:", error);
   }

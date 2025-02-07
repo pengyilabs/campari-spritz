@@ -5,7 +5,7 @@ export const renderFailedModal = (messages) => {
         <figure class="result-modal-icon">
           <img src="./src/assets/icons/cross.png" />
         </figure>
-        <h2 class="result-modal-title">OOPS! SOMETHING GOT WRONG</h2>
+        <h2 class="result-modal-title">DAS HAT LEIDER NICHT FUNKTIONIERT</h2>
         <div class="result-modal-text error ${messages.length > 1 ? "align-start" : ""}">
           ${messages.map(msg => `<p class="error-msg">${messages.length > 1 ? "*" : ""}${msg}</p>`).join("")}
         </div>

@@ -11,5 +11,23 @@ const popularityHandler = (e) => {
   initMap();
 }
 
+export const switchBarView = (view) => {
+  const map = document.querySelector("#map");
+  const barList = document.querySelector("#bar-list-mobile");
+  const switchToMapButton = document.querySelector("#map-view-switcher");
+  const switchToListButton = document.querySelector("#list-view-switcher");
+
+  if(view === "map") {
+    barList.style.display = "none";
+    map.style.display = "block";
+    switchToMapButton.classList.add("active-switch");
+    switchToListButton.classList.remove("active-switch");
+  } else {
+    map.style.display = "none";
+    barList.style.display = "block";
+    switchToMapButton.classList.remove("active-switch");
+    switchToListButton.classList.add("active-switch");
+  }
+}
 window.distanceHandlerForDesktop = distanceHandlerForDesktop;
 window.popularityHandler = popularityHandler;

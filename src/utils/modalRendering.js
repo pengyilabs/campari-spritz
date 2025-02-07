@@ -3,6 +3,7 @@ import { insertFiltersModalLogic, renderFiltersModal } from "../components/filte
 import { insertVoucherModalLogic, renderVoucherModal } from "../components/voucherModal.js";
 import { renderSuccessModal } from "../components/successModal.js";
 import { insertFailedModalLogic, renderFailedModal } from "../components/failedModal.js";
+import { validateIsOpen } from "./helpers.js";
 
 export const setupModals = () => {
 
@@ -14,7 +15,9 @@ export const setupModals = () => {
       const modalId = button.getAttribute('data-modal-target');
       const modal = document.getElementById(modalId);
       if (modal) {
-        const place = state.placesList.find(place => place.place_id === button.getAttribute("data-placeid"));
+        const place = state.placesList.find(place => place.placeId === button.getAttribute("data-placeid"));
+        // ToDo: actually we need to update the place object and check if it is still open
+        place.isOpen = validateIsOpen(place.openingHours);
         addModalContent(modal, place);
         openModal(modal);
       }
@@ -70,7 +73,7 @@ const addModalContent = (modal, place, messages) => {
 
 export const openSuccessModal = () => {
   const modal = document.querySelector("#successModal");
-  const place = state.placesList.find(place => place.place_id === state.selectedPlaceId);
+  const place = state.placesList.find(place => place.placeId === state.selectedPlaceId);
 
   addModalContent(modal, place);
   openModal(modal);

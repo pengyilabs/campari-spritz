@@ -1,3 +1,4 @@
+/* Deprecated */
 export const insertBarListMobileLogic = () => {
   const findABarSection = document.querySelector("#find-a-bar-section");
   const swipeContainer = document.querySelector("#swipe-container");

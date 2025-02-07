@@ -62,13 +62,13 @@ export const calculateOpeningHour = (openingHours) => {
       return "N/A";
     }
 
-    const todayPeriod = periods.find((period) => period.open.day === today);
+    const todayPeriod = periods.find((period) => period.openDay === today);
 
     if (!todayPeriod) {
       return "N/A";
     }
 
-    const time = todayPeriod.open.time;
+    const time = todayPeriod.openTime;
     const hours = parseInt(time.substring(0, 2));
     const minutes = time.substring(2, 4);
 
@@ -95,12 +95,12 @@ export const calculateClosingHour = (openingHours) => {
       return "N/A";
     }
 
-    const todayPeriod = periods.find((period) => period.close.day === today);
+    const todayPeriod = periods.find((period) => period.closeDay === today);
     if (!todayPeriod) {
       return "N/A";
     }
 
-    const time = todayPeriod.close.time;
+    const time = todayPeriod.closeTime;
     const hours = parseInt(time.substring(0, 2));
     const minutes = time.substring(2, 4);
 
@@ -126,7 +126,7 @@ export const checkCachedData = (data) => {
     const sample = data[0];
     if (
       sample?.name &&
-      sample?.place_id &&
+      sample?.placeId &&
       sample?.radius &&
       checkUpdatedTime(sample.updatedDate)
     )
@@ -172,5 +172,45 @@ export const resetInput = (inputId) => {
     console.error(
       `resetInput error: "${inputId}" is not a valid input on document`
     );
+  }
+};
+export const validateIsOpen = (openingHours) => {
+  if (!openingHours) {
+    return false;
+  }
+
+  try {
+    const now = new Date();
+    const today = now.getDay();
+    const periods = openingHours.periods;
+
+    if (!periods || periods.length === 0) {
+      return false;
+    }
+
+    const todayPeriod = periods.find((period) => period.openDay === today);
+    const openTime = todayPeriod.openTime;
+    const closeTime = todayPeriod.closeTime;
+    const nowHourStr = now.getHours().toString()
+    const nowHour = nowHourStr.length === 1 ? '0' + nowHourStr : nowHourStr;
+    const nowMinuteStr = now.getMinutes().toString()
+    const nowMinute = nowMinuteStr.length === 1 ? '0' + nowMinuteStr : nowMinuteStr;
+    const timeNow =  nowHour + nowMinute;
+
+    // sort three strings asc and check if today is in between?
+    let timeMap = {
+      0: openTime,
+      1: timeNow,
+      2: closeTime,
+    }
+
+    const entries = Object.entries(timeMap);
+    entries.sort((a, b) => a[1] - b[1]);
+
+    return entries[1][0] === '1';
+  }
+  catch (error) {
+    console.error(error);
+    return false;
   }
 };

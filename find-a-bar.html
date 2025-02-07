@@ -15,29 +15,35 @@
 </head>
 <body>
   <!-- Section 2: Bar Listing & Map Section -->
-<div id="find-a-bar-section" class="py-8 bg-gray-100 text-white min-h-screen bg-red-campari pt-[254px] lg:pt-4">
+<div id="find-a-bar-section" class="pt-8 bg-gray-100 text-white min-h-screen bg-red-campari pt-[322px] lg:pt-4">
   <!-- Heading -->
-  <div class="text-center flex flex-col align-center justify-center w-full pb-4 pt-6  fixed top-0 bg-red-campari z-40 lg:static lg:px-0 lg:pt-0">
-    <h2 class="text-3xl font-bold mb-5">FIND A BAR NEAR YOU</h2>
-    <p class="text-base font-medium">CHOOSE A BAR FROM THE MAP OR LIST TO CLAIM YOUR FREE DRINKS 🍹</p>
+  <div id="find-bar-heading" class="text-center flex flex-col align-center justify-center w-full pb-4 pt-6  fixed top-0 bg-red-campari z-40 lg:static lg:px-0 lg:pt-0">
+    <h2 class="text-3xl font-bold mb-5">FINDE EINE BAR IN DEINER NÄHE</h2>
+    <p class="text-base font-medium">WÄHLE EINE BAR AUS DER KARTE ODER LISTE, UM DEINE GRATISGETRÄNKE ZU BEKOMMEN 🍹</p>
 
     <!-- Search Bar -->
     <button id="useMyCurrentLocationButton" class="m-auto mb-4 text-sm font-light flex gap-2">
       <img src="./src/assets/icons/map-pin-white.svg"/>
-      use my current location
+      Verwende meinen aktuellen Standort
       </button>
-    <div class="flex justify-center mb-6 px-8">
+    <div class="mb-6 px-8">
       <label class="w-full max-w-lg relative">
           <input id="searchBar" type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 pr-12 border shadow-md text-black">
           <figure class="absolute top-[27%] right-4">
             <img src="./src/assets/icons/lens.svg">
           </figure>
       </label>
-<!--       <button class="ml-2 p-2 bg-white text-gray-800 shadow-md lg:hidden" data-modal-target="filtersModal">
+
+      <!--       <button class="ml-2 p-2 bg-white text-gray-800 shadow-md lg:hidden" data-modal-target="filtersModal">
           <img src="./src/assets/icons/burger-menu.svg">
       </button> -->
+
     </div>
 
+    <div>
+      <button id="map-view-switcher" class="bg-light-red text-white opacity-75 transition-all active-switch p-2 px-4 w-[100px] lg:hidden rounded-l-full">Map</button>
+      <button id="list-view-switcher" class="bg-light-red text-white opacity-75 transition-all p-2 px-4 w-[100px] lg:hidden rounded-r-full">List</button>
+    </div>
     <!-- Filters -->
     <!-- <div class="hidden lg:flex justify-center gap-4 mb-8 text-gray-800 border-y border-light-red py-4">
       <select class="p-2 py-3 border cursor-pointer bg-dark-red text-white border-light-red" onchange="distanceHandlerForDesktop(event)">
@@ -65,7 +71,7 @@
   </div> 
 
   <!-- Bar List & Map -->
-  <div class="grid grid-cols-1 lg:grid-cols-2">
+  <div class="lg:grid lg:grid-cols-2">
     <!-- Desktop: Bar List -->
     <div class="mx-4">
       <div id="bar-list-desktop" class="hidden gap-6 lg:grid grid-col items-start h-[100vh] overflow-y-scroll "></div>
@@ -74,12 +80,7 @@
     <div id="map" class="bg-gray-300 lg:h-[100vh]"></div>
 
     <!-- Mobile: Bar List -->
-     <div id="swipe-container" class="fixed top-[85%] left-0 w-full bg-red-campari lg:hidden max-h-full z-40 transition-all duration-300 ease-in-out">
-      <div id="handle-bar" class="w-full h-10 flex justify-center items-center cursor-grab pt-4">
-        <div class="bg-white w-40 h-2 rounded"></div>
-      </div>
-      <div id="bar-list-mobile" class="space-y-4 lg:hidden mt-4 h-[100vh] overflow-y-hidden pb-[10vh]"></div>
-     </div>
+    <div id="bar-list-mobile" class="hidden space-y-4 lg:hidden mt-4 h-[100vh] overflow-y-hidden pb-[10vh]"></div>
 </div>
 
 <!-- Modals -->
@@ -117,7 +118,7 @@
       <!-- Aquí se insertará el contenido dinámico -->
   </div>
 </div>
-
+</div>
 <script src="./src/index.js" type="module" async defer></script>
 <script src="./src/utils/eventHandlers.js" type="module"></script>
 </body>

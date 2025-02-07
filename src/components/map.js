@@ -1,96 +1,46 @@
 import {
+  validateIsOpen,
   calculateClosingHour,
   calculateOpeningHour,
   checkCachedData,
   clearListContainers,
   persistData,
-  retrieveData,
 } from "../utils/helpers.js";
 import state from "../utils/state.js";
-import { drawLoadingSkeleton } from "./loading-skeleton.js";
-import { setupModals } from "../utils/modalRendering.js";
-import ENVIRONMENT from "../../env.js";
-
-const fetchPlaceIdList = async () => {
-  const cachedData = retrieveData("placeIdList");
-  if (cachedData) return cachedData;
-
-  const result = await fetch(ENVIRONMENT.CAMPARI_PLACES_URL);
-  const data = await result.json();
-  persistData("placeIdList", data);
-  return data;
-};
+import {drawLoadingSkeleton} from "./loading-skeleton.js";
+import {setupModals} from "../utils/modalRendering.js";
+import ENVIRONMENT from "../../env.Development.js";
+import { switchBarView } from "../utils/eventHandlers.js";
 
 const fetchPlaceDetails = async (service, placeIds) => {
   const { spherical } = await google.maps.importLibrary("geometry");
-  const cachedData = retrieveData("placesDetails");
 
-  /* If data exists and has the correct structure, then update distance between user and place */
-  if (checkCachedData(cachedData)) {
-    const userLocation = state.currentUserLocation;
-    const updatedPlacesList = cachedData.map((place) => {
-      const distanceInMeters = spherical.computeDistanceBetween(
-        userLocation,
-        place.geometry.location
-      );
-      place.radius = distanceInMeters;
-      return place;
-    });
-    persistData("placesDetails", updatedPlacesList);
-    return updatedPlacesList;
+  const result = await fetch(ENVIRONMENT.CAMPARI_PLACES_DETAILS_URL);
+  const data = await result.json();
+
+  if (!checkCachedData(data)) {
+    persistData("placesDetailsBE", data);
   }
-  const userLocation = state.currentUserLocation;
-
-  const placesPromises = placeIds.map((placeId) => {
-    const request = {
-      placeId,
-      fields: [
-        "name",
-        "rating",
-        "formatted_address",
-        "geometry",
-        "vicinity",
-        "photos",
-        "opening_hours",
-        "utc_offset_minutes",
-      ],
-    };
-
-    return new Promise((resolve, reject) => {
-      service.getDetails(request, (place, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          /*
-            Due getUrl and isOpen function can't be cached, a static result replaces the function. 
-            This force to update the cache frequently, but it's enough to save costs for queries
-          */
-          const placePhoto = place?.photos ? place.photos[0].getUrl() : "";
-          const isOpen = place.opening_hours?.isOpen
-            ? place.opening_hours.isOpen()
-            : null;
-
-          /* The radius must be calculated again each time the user changes it's location */
-          const distanceInMeters = spherical.computeDistanceBetween(
-            userLocation,
-            place.geometry.location
-          );
-
-          place.radius = distanceInMeters;
-          place.place_id = placeId;
-          place.photo = placePhoto;
-          place.isOpen = isOpen;
-          place.updatedDate = Date.now();
-          resolve(place);
-        } else {
-          reject(new Error(`Error obtaining place: ${status}`));
-        }
-      });
-    });
+  // const cachedData = retrieveData("placesDetailsBE");
+  const updatedPlacesList = data.map((place) => {
+    let loc = {
+      lat: place.lat,
+      lng: place.long
+    }
+    place.radius = spherical.computeDistanceBetween(
+        state.currentUserLocation,
+        loc
+    );
+    place.photo = place.photoUrl;
+    place.isOpen = validateIsOpen(place.openingHours);
+    place.updatedDate = Date.now();
+    return place;
   });
 
-  const placesList = await Promise.all(placesPromises);
-  persistData("placesDetails", placesList);
-  return placesList;
+  persistData("placesDetails", updatedPlacesList);
+  return updatedPlacesList;
 };
+
 
 /* A version that filters by distance and popularity is available on deprecated.js file */
 const filterAndOrderPlaces = async (places) => {
@@ -99,10 +49,11 @@ const filterAndOrderPlaces = async (places) => {
   });
 };
 
+// Create bar items for each place id
 const createHtmlPlacesList = (places) => {
   const htmlPlaces = places.map((place) => {
-    const openingHour = calculateOpeningHour(place.opening_hours);
-    const closingHour = calculateClosingHour(place.opening_hours);
+    const openingHour = calculateOpeningHour(place.openingHours);
+    const closingHour = calculateClosingHour(place.openingHours);
 
     const open = place.isOpen === true && typeof place.isOpen === "boolean";
     const closed = place.isOpen === false && typeof place.isOpen === "boolean";
@@ -116,7 +67,7 @@ const createHtmlPlacesList = (places) => {
           <div class="bar-item__address-container flex gap-2">
             <img src="src/assets/icons/map-pin.svg" />
             <p class="bar-item__address-text">${
-              place.formatted_address || "Address not available"
+              place.formattedAddress || "Address not available"
             }</p>
           </div>
           <div class="bar-item__rating text-yellow-500 mb-2">
@@ -144,8 +95,8 @@ const createHtmlPlacesList = (places) => {
             }
           </p>
           <button data-modal-target="voucherModal" data-placeid=${
-            place.place_id
-          } class="bar-item__claim-voucher-button hover:bg-light-red transition-all">CLAIM VOUCHER</button>
+            place.placeId
+          } class="bar-item__claim-voucher-button hover:bg-light-red transition-all">GUTSCHEIN EINLÖSEN</button>
         </div>
         <figure class="bar-item__bar-image-container">
           <img class="bar-item__bar-image-container_img" src=${
@@ -159,8 +110,8 @@ const createHtmlPlacesList = (places) => {
   if (places.length === 0) {
     htmlPlaces.push(`
       <div class="bars-not-found">
-        <h2 class="bars-not-found__title">We couldn't find any bars near you ;(</h2>
-        <p class="bars-not-found__description">Try searching for another location or expand the maximum distance</p>
+        <h2 class="bars-not-found__title">Wir konnten keine Bars in deiner Nähe finden ;(</h2>
+        <p class="bars-not-found__description">Versuche eine andere Location oder erhöhe die maximale Entfernung.</p>
       </div>
     `);
   }
@@ -175,7 +126,7 @@ const createMarkers = (places, map) => {
 };
 
 const createMarker = (place, map) => {
-  if (!place.geometry || !place.geometry.location) return;
+  if (!place.lat || !place.long) return;
 
   const markerContent = document.createElement("div");
   markerContent.className = "custom-marker";
@@ -183,20 +134,30 @@ const createMarker = (place, map) => {
     <img src="./src/assets/images/map-marker.svg" alt="${place.name}" style="width: 32px; height: 32px;" />
   `;
 
+  let loc = {
+    lat: place.lat,
+    lng: place.long
+  }
   const marker = new google.maps.marker.AdvancedMarkerElement({
     map: map,
-    position: place.geometry.location,
+    position: loc,
     title: place.name,
     content: markerContent,
   });
 
-  let photoUrl = "";
-  if (place.photos) {
-    photoUrl = place.photo;
-  }
+  let photoUrl = place.photoUrl;
+  // if (place.photos) {
+  //   photoUrl = place.photo;
+  // }
 
   const infoWindowContent = `
     <div class="info-window-container">
+      <button id="claimVoucherButton" data-modal-target="voucherModal" data-placeid="${
+        place.placeId
+      }" 
+        class="info-window-button">
+        GUTSCHEIN EINLÖSEN
+      </button>
       ${
         photoUrl !== ""
           ? `
@@ -215,17 +176,12 @@ const createMarker = (place, map) => {
             : ""
         }
       </div>
-      <button id="claimVoucherButton" data-modal-target="voucherModal" data-placeid="${
-        place.place_id
-      }" 
-        class="info-window-button">
-        Claim Voucher
-      </button>
     </div>
   `;
 
   const infoWindow = new google.maps.InfoWindow({
     content: infoWindowContent,
+    maxWidth: 300,
   });
 
   marker.addListener("click", async () => {
@@ -240,7 +196,8 @@ const createMarker = (place, map) => {
 export const initMap = async () => {
   try {
     const { lat, lng } = await state.currentUserLocation;
-    const mapElement = document.getElementById("map");
+    const mapElement = document.querySelector("#map");
+    const findBarHeading = document.querySelector("#find-bar-heading");
     if (!mapElement) {
       console.error("Map element not found");
       return;
@@ -249,7 +206,11 @@ export const initMap = async () => {
     const resizeMap = () => {
       const isMobile = window.innerWidth < 1024;
       // calc values: (device height - header height - collapsed bar list distance from the bottom)
-      mapElement.style.height = isMobile ? "calc(100vh - 390px - 15%)" : "100%";
+      mapElement.style.height = isMobile ? `calc(100vh - ${findBarHeading.clientHeight}px)` : "100%";
+      if(!isMobile) {
+        /* reset to default view if the screen pass from mobile to desktop */
+        switchBarView("map");
+      }
     };
 
     window.addEventListener("resize", resizeMap);
@@ -270,16 +231,14 @@ export const initMap = async () => {
     });
 
     drawLoadingSkeleton();
-    const service = new google.maps.places.PlacesService(map);
     const barListMobile = document.querySelector("#bar-list-mobile");
     const barListDesktop = document.querySelector("#bar-list-desktop");
 
-    const placeIds = await fetchPlaceIdList();
-    state.placesList = await fetchPlaceDetails(service, placeIds);
+
+    // Get all place id infos including image url
+    state.placesList = await fetchPlaceDetails();
     const orderedPlacesList = await filterAndOrderPlaces(
-      state.placesList,
-      state.distance,
-      state.orderByPopularity
+      state.placesList
     );
     clearListContainers([barListMobile, barListDesktop]);
     const htmlPlacesList = createHtmlPlacesList(orderedPlacesList);

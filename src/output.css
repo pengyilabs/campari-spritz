@@ -570,6 +570,10 @@ video {
   inset: 0px;
 }
 
+.bottom-\[0px\] {
+  bottom: 0px;
+}
+
 .bottom-\[90px\] {
   bottom: 90px;
 }
@@ -584,10 +588,6 @@ video {
 
 .top-0 {
   top: 0px;
-}
-
-.top-\[27\%\] {
-  top: 27%;
 }
 
 .z-40 {
@@ -732,10 +732,6 @@ video {
   overflow-y: auto;
 }
 
-.overflow-y-hidden {
-  overflow-y: hidden;
-}
-
 .overflow-y-scroll {
   overflow-y: scroll;
 }
@@ -833,10 +829,6 @@ video {
 
 .pb-4 {
   padding-bottom: 1rem;
-}
-
-.pb-\[10vh\] {
-  padding-bottom: 10vh;
 }
 
 .pl-32 {

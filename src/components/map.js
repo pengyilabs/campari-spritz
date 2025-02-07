@@ -206,7 +206,7 @@ export const initMap = async () => {
     const resizeMap = () => {
       const isMobile = window.innerWidth < 1024;
       // calc values: (device height - header height - collapsed bar list distance from the bottom)
-      mapElement.style.height = isMobile ? `calc(100vh - ${findBarHeading.clientHeight}px)` : "100%";
+      mapElement.style.height = isMobile ? `calc(100vh - ${findBarHeading.offsetHeight}px)` : "100%";
       if(!isMobile) {
         /* reset to default view if the screen pass from mobile to desktop */
         switchBarView("map");
@@ -220,6 +220,7 @@ export const initMap = async () => {
       center: { lat: lat(), lng: lng() },
       zoom: 14,
       mapId: ENVIRONMENT.MAP_ID,
+      gestureHandling: "greedy"
     };
 
     const map = new google.maps.Map(mapElement, mapOptions);

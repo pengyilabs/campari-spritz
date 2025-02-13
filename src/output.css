@@ -594,8 +594,16 @@ video {
   top: 0px;
 }
 
+.top-\[80\%\] {
+  top: 80%;
+}
+
 .top-\[85\%\] {
   top: 85%;
+}
+
+.top-\[75\%\] {
+  top: 75%;
 }
 
 .z-40 {
@@ -664,10 +672,6 @@ video {
 
 .hidden {
   display: none;
-}
-
-.h-10 {
-  height: 2.5rem;
 }
 
 .h-2 {
@@ -938,6 +942,42 @@ video {
 
 .leading-8 {
   line-height: 2rem;
+}
+
+.leading-none {
+  line-height: 1;
+}
+
+.leading-\[\] {
+  line-height: ;
+}
+
+.leading-\[1\.5\] {
+  line-height: 1.5;
+}
+
+.leading-\[1\] {
+  line-height: 1;
+}
+
+.leading-\[0\.5\] {
+  line-height: 0.5;
+}
+
+.leading-\[0\.1\] {
+  line-height: 0.1;
+}
+
+.leading-\[0\] {
+  line-height: 0;
+}
+
+.leading-10 {
+  line-height: 2.5rem;
+}
+
+.leading-tight {
+  line-height: 1.25;
 }
 
 .text-black {

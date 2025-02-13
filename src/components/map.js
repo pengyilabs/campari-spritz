@@ -10,11 +10,9 @@ import state from "../utils/state.js";
 import {drawLoadingSkeleton} from "./loading-skeleton.js";
 import {setupModals} from "../utils/modalRendering.js";
 import ENVIRONMENT from "../../env.Development.js";
-console.log(ENVIRONMENT.CAMPARI_PLACES_DETAILS_URL)
-console.log("WORKIN")
+
 const fetchPlaceDetails = async (service, placeIds) => {
   const { spherical } = await google.maps.importLibrary("geometry");
-  console.log(ENVIRONMENT.CAMPARI_PLACES_DETAILS_URL)
   const result = await fetch(ENVIRONMENT.CAMPARI_PLACES_DETAILS_URL);
   const data = await result.json();
 

@@ -6,7 +6,7 @@ export const insertBarListMobileLogic = () => {
 
   let isExpanded = false;
   const POSITIONS = {
-    COLLAPSED: "85%",
+    COLLAPSED: "75%",
     EXPANDED: "0%",
   };
 
@@ -36,5 +36,7 @@ export const insertBarListMobileLogic = () => {
     findABarSection.classList.remove("shadow-bottom-hide");
   };
 
-  handleBar.addEventListener("touchend", handleEnd);
+  /* The code above could be reduced to simplify the process, but just in case we want to revert these changes, this logic will be enough */
+  barList.addEventListener("touchend", () => !isExpanded && handleEnd());
+  handleBar.addEventListener("touchend", () => handleEnd());
 };

@@ -10,11 +10,11 @@ import state from "../utils/state.js";
 import {drawLoadingSkeleton} from "./loading-skeleton.js";
 import {setupModals} from "../utils/modalRendering.js";
 import ENVIRONMENT from "../../env.Development.js";
-import { switchBarView } from "../utils/eventHandlers.js";
-
+console.log(ENVIRONMENT.CAMPARI_PLACES_DETAILS_URL)
+console.log("WORKIN")
 const fetchPlaceDetails = async (service, placeIds) => {
   const { spherical } = await google.maps.importLibrary("geometry");
-
+  console.log(ENVIRONMENT.CAMPARI_PLACES_DETAILS_URL)
   const result = await fetch(ENVIRONMENT.CAMPARI_PLACES_DETAILS_URL);
   const data = await result.json();
 
@@ -196,20 +196,16 @@ const createMarker = (place, map) => {
 export const initMap = async () => {
   try {
     const { lat, lng } = await state.currentUserLocation;
-    const mapElement = document.querySelector("#map");
-    const findBarHeading = document.querySelector("#find-bar-heading");
+    const mapElement = document.getElementById("map");
     if (!mapElement) {
       console.error("Map element not found");
       return;
     }
+
     const resizeMap = () => {
       const isMobile = window.innerWidth < 1024;
       // calc values: (device height - header height - collapsed bar list distance from the bottom)
-      mapElement.style.height = `calc(100vh - ${findBarHeading.offsetHeight}px)`;
-      if(!isMobile) {
-        /* reset to default view if the screen pass from mobile to desktop */
-        switchBarView("map");
-      }
+      mapElement.style.height = isMobile ? "calc(100vh - 390px - 15%)" : "100%";
     };
 
     window.addEventListener("resize", resizeMap);
@@ -233,7 +229,6 @@ export const initMap = async () => {
     drawLoadingSkeleton();
     const barListMobile = document.querySelector("#bar-list-mobile");
     const barListDesktop = document.querySelector("#bar-list-desktop");
-    barListDesktop.style.height = `calc(100vh - ${findBarHeading.offsetHeight}px)`;
 
 
     // Get all place id infos including image url

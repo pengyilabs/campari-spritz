@@ -174,6 +174,11 @@ const generateErrorMessages = async (response) => {
   if (response.status === 422) {
       return ["Die eingegebene E-Mail kann nicht zugestellt werden"];
   }
+  if (response.status === 400) {
+    return [
+      'There is a inconsistency between the client and the server. Please send a message to <span class="message-error-email">support@gratis-spritz.com</span> sharing this error and we will help you get your voucher.',
+    ];
+  }
   const error = await response.json();
   console.error("Error response:", error);
 

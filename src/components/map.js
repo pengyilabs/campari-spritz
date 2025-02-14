@@ -13,6 +13,7 @@ import ENVIRONMENT from "../../env.Development.js";
 
 const fetchPlaceDetails = async (service, placeIds) => {
   const { spherical } = await google.maps.importLibrary("geometry");
+
   const result = await fetch(ENVIRONMENT.CAMPARI_PLACES_DETAILS_URL);
   const data = await result.json();
 
@@ -194,16 +195,24 @@ const createMarker = (place, map) => {
 export const initMap = async () => {
   try {
     const { lat, lng } = await state.currentUserLocation;
-    const mapElement = document.getElementById("map");
+    const mapElement = document.querySelector("#map");
+    const findBarHeading = document.querySelector("#find-bar-heading");
+
     if (!mapElement) {
       console.error("Map element not found");
       return;
     }
 
+    console.log(findBarHeading.offsetHeight);
     const resizeMap = () => {
       const isMobile = window.innerWidth < 1024;
       // calc values: (device height - header height - collapsed bar list distance from the bottom)
-      mapElement.style.height = isMobile ? "calc(100vh - 390px - 25%)" : "100%";
+      mapElement.style.height = isMobile ? `calc(100vh - ${findBarHeading.offsetHeight}px - 25vh)` : "100%";
+      console.log(mapElement.style.height)
+      if(!isMobile) {
+        /* reset to default view if the screen pass from mobile to desktop */
+        switchBarView("map");
+      }
     };
 
     window.addEventListener("resize", resizeMap);
@@ -227,6 +236,7 @@ export const initMap = async () => {
     drawLoadingSkeleton();
     const barListMobile = document.querySelector("#bar-list-mobile");
     const barListDesktop = document.querySelector("#bar-list-desktop");
+    barListDesktop.style.height = `calc(100vh - ${findBarHeading.offsetHeight}px)`;
 
 
     // Get all place id infos including image url

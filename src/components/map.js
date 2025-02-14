@@ -202,14 +202,13 @@ export const initMap = async () => {
       console.error("Map element not found");
       return;
     }
-
-    console.log(findBarHeading.offsetHeight);
+    console.log(mapElement.clientHeight)
     const resizeMap = () => {
       const isMobile = window.innerWidth < 1024;
-      // calc values: (device height - header height - collapsed bar list distance from the bottom)
-      mapElement.style.height = isMobile ? `calc(100vh - ${findBarHeading.offsetHeight}px - 25vh)` : "100%";
-      console.log(mapElement.style.height)
-      if(!isMobile) {
+      // calc values: (device height - header height - collapsed bar list size, measured in %)
+      mapElement.style.height = isMobile ? `calc(100vh - ${findBarHeading.offsetHeight}px - ${document.body.clientHeight*0.25}px)` : "100%";
+    console.log(mapElement.clientHeight)
+    if(!isMobile) {
         /* reset to default view if the screen pass from mobile to desktop */
         switchBarView("map");
       }

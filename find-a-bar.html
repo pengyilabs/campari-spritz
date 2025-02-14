@@ -67,7 +67,7 @@
   </div> 
 
   <!-- Bar List & Map -->
-  <div class="grid grid-cols-1 lg:grid-cols-2">
+  <div class="grid grid-cols-1 lg:grid-cols-2 overflow-y-hidden">
     <!-- Desktop: Bar List -->
     <div class="mx-4">
       <div id="bar-list-desktop" class="hidden gap-6 lg:grid grid-col items-start h-[100vh] overflow-y-scroll "></div>
@@ -76,7 +76,7 @@
     <div id="map" class="bg-gray-300 lg:h-[100vh]"></div>
 
     <!-- Mobile: Bar List -->
-     <div id="swipe-container" class="fixed bottom-[-75%] left-0 w-full bg-red-campari lg:hidden max-h-full z-40 transition-all duration-300 ease-in-out">
+     <div id="swipe-container" class="absolute h-[25%] overflow-y-hidden top-[75%] left-0 w-full bg-red-campari lg:hidden max-h-full z-40 transition-all duration-300 ease-in-out">
       <div id="handle-bar" class="w-full h-8 flex justify-center items-center cursor-grab">
         <div class="bg-white w-40 h-2 rounded"></div>
       </div>

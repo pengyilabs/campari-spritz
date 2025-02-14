@@ -570,12 +570,12 @@ video {
   inset: 0px;
 }
 
-.bottom-\[0px\] {
-  bottom: 0px;
+.bottom-\[-228px\] {
+  bottom: -228px;
 }
 
-.bottom-\[250px\] {
-  bottom: 250px;
+.bottom-\[0px\] {
+  bottom: 0px;
 }
 
 .bottom-\[90px\] {
@@ -598,48 +598,16 @@ video {
   top: 0px;
 }
 
-.bottom-\[-250px\] {
-  bottom: -250px;
-}
-
-.top-\[250px\] {
-  top: 250px;
-}
-
-.top-\[750px\] {
-  top: 750px;
-}
-
-.top-\[550px\] {
-  top: 550px;
-}
-
-.top-\[650px\] {
-  top: 650px;
-}
-
-.top-\[600px\] {
-  top: 600px;
-}
-
-.top-\[670px\] {
-  top: 670px;
-}
-
-.bottom-\[670px\] {
-  bottom: 670px;
-}
-
-.bottom-\[-670px\] {
-  bottom: -670px;
+.bottom-\[228px\] {
+  bottom: 228px;
 }
 
 .bottom-\[-75\] {
   bottom: -75;
 }
 
-.bottom-\[-75\%\] {
-  bottom: -75%;
+.top-\[75\%\] {
+  top: 75%;
 }
 
 .z-40 {
@@ -690,6 +658,10 @@ video {
   margin-left: 0.5rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
 .flex {
   display: flex;
 }
@@ -722,6 +694,18 @@ video {
   height: 100vh;
 }
 
+.h-\[100\%\] {
+  height: 100%;
+}
+
+.h-\[228px\] {
+  height: 228px;
+}
+
+.h-\[25\%\] {
+  height: 25%;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -744,6 +728,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[100px\] {
+  width: 100px;
 }
 
 .max-w-lg {
@@ -804,12 +792,26 @@ video {
   overflow-y: auto;
 }
 
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
 .overflow-y-scroll {
   overflow-y: scroll;
 }
 
 .rounded {
   border-radius: 0.25rem;
+}
+
+.rounded-l-full {
+  border-top-left-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+}
+
+.rounded-r-full {
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
 }
 
 .border {
@@ -849,6 +851,11 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-light-red {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 93 116 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {
@@ -893,6 +900,11 @@ video {
   padding-bottom: 2rem;
 }
 
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .pb-6 {
   padding-bottom: 1.5rem;
 }
@@ -923,6 +935,18 @@ video {
 
 .pt-\[254px\] {
   padding-top: 254px;
+}
+
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
+.pt-8 {
+  padding-top: 2rem;
+}
+
+.pt-\[319px\] {
+  padding-top: 319px;
 }
 
 .text-center {
@@ -994,6 +1018,10 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.opacity-75 {
+  opacity: 0.75;
 }
 
 .shadow-md {

@@ -197,7 +197,7 @@ export const initMap = async () => {
     const { lat, lng } = await state.currentUserLocation;
     const mapElement = document.querySelector("#map");
     const findBarHeading = document.querySelector("#find-bar-heading");
-
+    const swipeContainer = document.querySelector("#swipe-container");
     if (!mapElement) {
       console.error("Map element not found");
       return;
@@ -206,8 +206,7 @@ export const initMap = async () => {
     const resizeMap = () => {
       const isMobile = window.innerWidth < 1024;
       // calc values: (device height - header height - collapsed bar list size, measured in %)
-      mapElement.style.height = isMobile ? `calc(100vh - ${findBarHeading.offsetHeight}px - ${document.body.clientHeight*0.25}px)` : "100%";
-    console.log(mapElement.clientHeight)
+      mapElement.style.height = isMobile ? `calc(100vh - ${findBarHeading.offsetHeight}px - ${swipeContainer?.clientHeight || "25%"}px)` : "100%";
     if(!isMobile) {
         /* reset to default view if the screen pass from mobile to desktop */
         switchBarView("map");

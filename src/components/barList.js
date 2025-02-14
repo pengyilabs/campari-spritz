@@ -6,8 +6,10 @@ export const insertBarListMobileLogic = () => {
 
   let isExpanded = false;
   const POSITIONS = {
-    COLLAPSED: "-75%",
+    COLLAPSED: "75%",
     EXPANDED: "0%",
+    HEIGHT_EXPANDED: "100%",
+    HEIGHT_COLLAPSED: "228px"
   };
 
   const handleEnd = () => {
@@ -24,13 +26,15 @@ export const insertBarListMobileLogic = () => {
 
   const expandList = () => {
     isExpanded = true;
-    swipeContainer.style.bottom = POSITIONS.EXPANDED;
+    swipeContainer.style.top = POSITIONS.EXPANDED;
+    swipeContainer.style.height = POSITIONS.HEIGHT_EXPANDED;
     // barList.style.overflowY = "scroll";
   };
 
   const collapseList = () => {
     isExpanded = false;
-    swipeContainer.style.bottom = POSITIONS.COLLAPSED;
+    swipeContainer.style.top = POSITIONS.COLLAPSED;
+    swipeContainer.style.height = POSITIONS.HEIGHT_COLLAPSED;
     // barList.style.overflowY = "hidden";
   };
 

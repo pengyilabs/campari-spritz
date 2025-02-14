@@ -203,7 +203,7 @@ export const initMap = async () => {
     const resizeMap = () => {
       const isMobile = window.innerWidth < 1024;
       // calc values: (device height - header height - collapsed bar list distance from the bottom)
-      mapElement.style.height = isMobile ? "calc(100vh - 390px - 15%)" : "100%";
+      mapElement.style.height = isMobile ? "calc(100vh - 390px - 25%)" : "100%";
     };
 
     window.addEventListener("resize", resizeMap);

@@ -37,6 +37,6 @@ export const insertBarListMobileLogic = () => {
   };
 
   /* The code above could be reduced to simplify the process, but just in case we want to revert these changes, this logic will be enough */
-  barList.addEventListener("touchend", () => !isExpanded && handleEnd());
-  handleBar.addEventListener("touchend", () => handleEnd());
+  barList.addEventListener("touchend", () => !isExpanded && expandList());
+  handleBar.addEventListener("touchend", toggleList);
 };

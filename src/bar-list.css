@@ -78,6 +78,23 @@
   margin-bottom: 1rem;
 }
 
+@keyframes bounce-subtle {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.bounce-barlist {
+  animation: bounce-subtle 1s ease-in-out 2;
+  animation-delay: 1s;  /
+}
+
 @media (min-width: 768px) {
   .bars-not-found__title {
     font-size: 2rem;

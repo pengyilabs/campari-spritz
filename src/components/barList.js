@@ -6,7 +6,7 @@ export const insertBarListMobileLogic = () => {
 
   let isExpanded = false;
   const POSITIONS = {
-    COLLAPSED: "75%",
+    COLLAPSED: "85%",
     EXPANDED: "0%",
   };
 
@@ -27,6 +27,7 @@ export const insertBarListMobileLogic = () => {
     swipeContainer.style.top = POSITIONS.EXPANDED;
     barList.style.overflowY = "scroll";
     findABarSection.classList.add("shadow-bottom-hide");
+    swipeContainer.classList.remove("bounce-barlist");
   };
 
   const collapseList = () => {
@@ -37,6 +38,9 @@ export const insertBarListMobileLogic = () => {
   };
 
   /* The code above could be reduced to simplify the process, but just in case we want to revert these changes, this logic will be enough */
-  barList.addEventListener("touchend", () => !isExpanded && handleEnd());
-  handleBar.addEventListener("touchend", () => handleEnd());
+  barList.addEventListener("touchend", () => !isExpanded && expandList());
+  handleBar.addEventListener("touchend", toggleList);
+
+  /* add bouncing animation */
+  swipeContainer.classList.add("bounce-barlist");
 };

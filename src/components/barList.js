@@ -6,8 +6,8 @@ export const insertBarListMobileLogic = () => {
 
   let isExpanded = false;
   const POSITIONS = {
-    COLLAPSED: "75vh",
-    EXPANDED: "0vh",
+    COLLAPSED: "75%",
+    EXPANDED: "0%",
   };
 
   const handleEnd = () => {

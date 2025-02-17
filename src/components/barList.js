@@ -28,14 +28,14 @@ export const insertBarListMobileLogic = () => {
     isExpanded = true;
     swipeContainer.style.top = POSITIONS.EXPANDED;
     swipeContainer.style.height = POSITIONS.HEIGHT_EXPANDED;
-    // barList.style.overflowY = "scroll";
+    barList.style.overflowY = "scroll";
   };
 
   const collapseList = () => {
     isExpanded = false;
     swipeContainer.style.top = POSITIONS.COLLAPSED;
     swipeContainer.style.height = POSITIONS.HEIGHT_COLLAPSED;
-    // barList.style.overflowY = "hidden";
+    barList.style.overflowY = "hidden";
   };
 
   /* The code above could be reduced to simplify the process, but just in case we want to revert these changes, this logic will be enough */

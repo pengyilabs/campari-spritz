@@ -4,7 +4,7 @@ import state from "./utils/state.js";
 import { getLocation, resetInput } from "./utils/helpers.js";
 import { initPlacesAutocomplete } from "./components/searchBar.js";
 import ENVIRONMENT from "../env.Development.js";
-import { insertBarListMobileLogic } from "./components/barList.js";
+import { switchBarView } from "./utils/eventHandlers.js";
 
 function loadGoogleMapsAPI() {
   return new Promise((resolve, reject) => {
@@ -33,7 +33,6 @@ export default async function initializeApp() {
     state.currentUserLocation = await getLocation();
     initMap();
     initPlacesAutocomplete();
-    insertBarListMobileLogic();
     const claimDrinkButton = document.getElementById("claim-drink-button");
     if (claimDrinkButton) {
       claimDrinkButton.addEventListener("click", () => {
@@ -54,6 +53,12 @@ export default async function initializeApp() {
         initMap();
       });
     }
+
+    const mapViewSwitcher = document.querySelector("#map-view-switcher");
+    const listViewSwitcher = document.querySelector("#list-view-switcher");
+    mapViewSwitcher.addEventListener("click", () => switchBarView("map"));
+    listViewSwitcher.addEventListener("click", () => switchBarView("list"));
+    
   } catch (error) {
     console.error("Error initializing app:", error);
   }

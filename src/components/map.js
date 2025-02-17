@@ -10,6 +10,7 @@ import state from "../utils/state.js";
 import {drawLoadingSkeleton} from "./loading-skeleton.js";
 import {setupModals} from "../utils/modalRendering.js";
 import ENVIRONMENT from "../../env.Development.js";
+import { switchBarView } from "../utils/eventHandlers.js";
 
 const fetchPlaceDetails = async (service, placeIds) => {
   const { spherical } = await google.maps.importLibrary("geometry");
@@ -197,17 +198,15 @@ export const initMap = async () => {
     const { lat, lng } = await state.currentUserLocation;
     const mapElement = document.querySelector("#map");
     const findBarHeading = document.querySelector("#find-bar-heading");
-    const swipeContainer = document.querySelector("#swipe-container");
     if (!mapElement) {
       console.error("Map element not found");
       return;
     }
-    console.log(mapElement.clientHeight)
     const resizeMap = () => {
       const isMobile = window.innerWidth < 1024;
-      // calc values: (device height - header height - collapsed bar list size, measured in %)
-      mapElement.style.height = isMobile ? `calc(100vh - ${findBarHeading.offsetHeight}px - ${swipeContainer?.clientHeight || "25%"}px)` : "100%";
-    if(!isMobile) {
+      // calc values: (device height - header height - collapsed bar list distance from the bottom)
+      mapElement.style.height = `calc(100vh - ${findBarHeading.offsetHeight}px)`;
+      if(!isMobile) {
         /* reset to default view if the screen pass from mobile to desktop */
         switchBarView("map");
       }

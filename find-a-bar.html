@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    const segments = window.location.pathname.split('/').filter(s => s);
+    const firstSegment = segments.length && !/\..+$/.test(segments[0]) ? segments[0] : null;
+    const basePath = `/${firstSegment}/`;
+    let baseTag = document.querySelector('base');
+
+    if (!baseTag) {
+      baseTag = document.createElement('base');
+      document.head.insertBefore(baseTag, document.head.firstChild);
+    }
+    baseTag.href = basePath ? basePath : "";
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Campari Spritz Campaign</title>

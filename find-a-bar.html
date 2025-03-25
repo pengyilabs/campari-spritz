@@ -3,10 +3,10 @@
 <head>
   <script>
     const segments = window.location.pathname.split('/').filter(s => s);
-    const firstSegment = segments.length && !/\..+$/.test(segments[0]) ? segments[0] : null;
-    const basePath = `/${firstSegment}/`;
+    const firstSegment = segments.length && !/\..+$/.test(segments[0]) ? segments[0] : '';
+    const basePath = firstSegment.length > 0 ? `/${firstSegment}/` : '';
     let baseTag = document.querySelector('base');
-
+    console.log("base path", basePath)
     if (!baseTag) {
       baseTag = document.createElement('base');
       document.head.insertBefore(baseTag, document.head.firstChild);

@@ -3,15 +3,15 @@
 <head>
   <script>
     const segments = window.location.pathname.split('/').filter(s => s);
-    const firstSegment = segments.length && !/\..+$/.test(segments[0]) ? segments[0] : null;
-    const basePath = firstSegment ? `/${firstSegment }/` : "";
+    const firstSegment = segments.length && !/\..+$/.test(segments[0]) ? segments[0] : '';
+    const basePath = firstSegment.length > 0 ? `/${firstSegment}/` : '';
     let baseTag = document.querySelector('base');
-
+    console.log("base path", basePath)
     if (!baseTag) {
       baseTag = document.createElement('base');
       document.head.insertBefore(baseTag, document.head.firstChild);
     }
-    baseTag.href = basePath;
+    baseTag.href = basePath ? basePath : "";
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

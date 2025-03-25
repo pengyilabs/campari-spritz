@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    const segments = window.location.pathname.split('/').filter(s => s);
+    const firstSegment = segments.length && !/\..+$/.test(segments[0]) ? segments[0] : '';
+    const basePath = firstSegment.length > 0 ? `/${firstSegment}/` : '';
+    console.log("base path", basePath)
+    let baseTag = document.querySelector('base');
+
+    if (!baseTag) {
+      baseTag = document.createElement('base');
+      document.head.insertBefore(baseTag, document.head.firstChild);
+    }
+    baseTag.href = basePath ? basePath : "";
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Sarti Spritz Campaign</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link href="./src/output.css" rel="stylesheet">
+  <link href="./src/modals.css" rel="stylesheet">
+  <link href="./src/loading-skeleton.css" rel="stylesheet">
+  <link href="./src/bar-list.css" rel="stylesheet">
+  
+</head>
+<body>
+  <!-- Section 2: Bar Listing & Map Section -->
+<div id="find-a-bar-section" class="text-white custom-drop-shadow min-h-screen pt-[271px] lg:pt-0"> <!-- pt-[319px] -->
+  <!-- Heading -->
+  <div id="find-bar-heading" class="text-center flex flex-col align-center justify-center w-full py-6 px-6 fixed top-0 z-40 lg:static lg:px-0 lg:pt-8">
+    <h2 class="text-[26px] lg:text-3xl font-bold mb-4 leading-tight custom-drop-shadow">FINDE EINE BAR IN <br> DEINER NÄHE</h2>
+    <!-- <p class="text-base font-medium mb-4 leading-tight custom-drop-shadow">WÄHLE EINE BAR AUS DER KARTE ODER LISTE, UM DEINE GRATISGETRÄNKE ZU BEKOMMEN 🍹</p> -->
+
+    <!-- Search Bar -->
+    <button id="useMyCurrentLocationButton" class="m-auto mb-2 px-1 py-1 text-sm font-light flex gap-2  rounded-md bg-white text-pink-sarti border-md">
+      <img src="./src/assets/icons/map-pin-pink.svg"/>
+      Verwende meinen aktuellen Standort
+      </button>
+    <div class="mb-6 px-8">
+      <label class="w-full max-w-lg relative">
+          <input id="searchBar" type="text" placeholder="Enter your location" class="w-full max-w-lg p-2 pr-12 border shadow-md text-black">
+          <figure class="absolute bottom-[0px] right-4">
+            <img src="./src/assets/icons/lens.svg">
+          </figure>
+      </label>
+
+      <!--       <button class="ml-2 p-2 bg-white text-gray-800 shadow-md lg:hidden" data-modal-target="filtersModal">
+          <img src="./src/assets/icons/burger-menu.svg">
+      </button> -->
+
+    </div>
+
+    <div>
+      <button id="map-view-switcher" class="bg-extra-light-green standard-shadow text-opaque-pink-sarti opacity-75 transition-all active-switch p-2 px-4 w-[100px] lg:hidden rounded-l-full">Map</button>
+      <button id="list-view-switcher" class="bg-extra-light-green standard-shadow text-opaque-pink-sarti  opacity-75 transition-all p-2 px-4 w-[100px] lg:hidden rounded-r-full">List</button>
+    </div>
+    <!-- Filters -->
+    <!-- <div class="hidden lg:flex justify-center gap-4 mb-8 text-gray-800 border-y border-light-red py-4">
+      <select class="p-2 py-3 border cursor-pointer bg-dark-red text-white border-light-red" onchange="distanceHandlerForDesktop(event)">
+        <option value="1">1 Km</option>
+        <option value="2">2 Km</option>
+        <option value="3" selected>3 Km</option>
+        <option value="4">4 Km</option>
+        <option value="5">5 Km</option>
+        <option value="6">6 Km</option>
+        <option value="7">7 Km</option>
+        <option value="8">8 Km</option>
+        <option value="9">9 Km</option>
+        <option value="10">10 Km</option>
+        <option value="11">11 Km</option>
+        <option value="12">12 Km</option>
+        <option value="13">13 Km</option>
+        <option value="14">14 Km</option>
+        <option value="15">15 Km</option>
+      </select>
+      <div class="flex justify-between items-center pl-32">
+        <p class="text-sm pr-4 text-white">Order by popularity</p>
+        <input type="checkbox" class="checkbox cursor-pointer" id="orderByPopularityCheckbox" onchange="popularityHandler(event)"/>
+      </div>
+    </div>-->
+  </div> 
+
+  <!-- Bar List & Map -->
+  <div class="lg:grid lg:grid-cols-2">
+    <!-- Desktop: Bar List -->
+    <div id="bar-list-desktop" class="hidden gap-6 py-6 lg:grid grid-col items-start h-[100vh] overflow-y-scroll w-full"></div>
+    <!-- Map Section -->
+    <div id="map" class="bg-gray-300 lg:h-[100vh]"></div>
+
+    <!-- Mobile: Bar List -->
+    <div id="bar-list-mobile" class="hidden lg:hidden h-[calc(100vh-271px)] py-4 overflow-y-scroll space-y-4 pb-4"></div>
+</div>
+
+<!-- Modals -->
+
+<!-- Voucher Modal -->
+<div id="voucherModal" class="hidden fixed inset-0 flex items-start justify-center bg-opacity-50 z-50 overflow-y-auto overflow-x-none bg-pink-sarti max-h-screen">
+  <div id="modal-body" data-modal-name="voucherModal" class="">
+      <!-- Aquí se insertará el contenido dinámico -->
+  </div>
+  <button data-modal-close="voucherModal" class="pt-4 pr-4 absolute top-0 right-0">
+    <img src="./src/assets/icons/close-modal-button.svg" alt="" class=" w-10 h-10">
+  </button>
+</div>
+
+<!-- Filters Modal -->
+<div id="filtersModal" class="hidden fixed inset-0 z-50">
+  <div id="modal-body" data-modal-name="filtersModal" class="bg-pink-sarti text-white w-full h-full flex flex-col items-center p-4">
+      <!-- Aquí se insertará el contenido dinámico -->
+  </div>
+  <button data-modal-close="filtersModal" class="pt-4 pr-4 absolute top-0 right-0">
+    <img src="./src/assets/icons/close-modal-button.svg" alt="">
+  </button>
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="success-modal hidden fixed inset-0 z-50">
+  <div id="modal-body" data-modal-name="successModal" class="text-white w-full h-full flex flex-col items-center p-4 ">
+      <!-- Aquí se insertará el contenido dinámico -->
+  </div>
+</div>
+
+<!-- Failed Modal -->
+<div id="failedModal" class="success-modal hidden fixed inset-0 z-50">
+  <div id="modal-body" data-modal-name="failedModal" class="text-white w-full h-full flex flex-col items-center p-4 ">
+      <!-- Aquí se insertará el contenido dinámico -->
+  </div>
+</div>
+</div>
+<script src="./src/index.js" type="module" async defer></script>
+<script src="./src/utils/eventHandlers.js" type="module"></script>
+</body>
+</html>

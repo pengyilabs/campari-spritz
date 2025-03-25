@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    const segments = window.location.pathname.split('/').filter(s => s);
+    const firstSegment = segments.length && !/\..+$/.test(segments[0]) ? segments[0] : '';
+    const basePath = firstSegment.length > 0 ? `/${firstSegment}/` : '';
+    let baseTag = document.querySelector('base');
+    console.log("base path", basePath)
+    if (!baseTag) {
+      baseTag = document.createElement('base');
+      document.head.insertBefore(baseTag, document.head.firstChild);
+    }
+    baseTag.href = basePath ? basePath : "";
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarti Spritz Campaign</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link href="./src/output.css" rel="stylesheet">
+</head>
+<body class="text-white h-screen flex flex-col">
+  <div class="text-center">
+    <img src="./src/assets/images/sarti-logo.svg" alt="Sarti Logo" class="mx-auto w-32 my-4 md:w-30 md:my-6">
+  </div>
+  <div class="promotion-container h-full pt-16">
+    <div id="promotion-section" class="flex flex-col items-center h-full text-white relative">
+      <h1 class="text-[40px] leading-8 font-bold mb-4 mx-4 text-center md:text-5xl lg:text-5xl font-[Afacad]">DEIN GRATIS<br>SARTI SPRITZ WARTET AUF DICH</h1>
+      <p class="text-base mb-16 mx-16 text-center md:text-2xl font-[Afacad]">FINDE EINE BAR IN DEINER NÄHE UND LÖSE DEINEN GUTSCHEIN EIN!</p>
+      <div class="text-center">
+        <a role="button" href="./find-a-bar.html"id="claim-drink-button" class="bg-white rounded-lg shadow-sm text-pink-sarti text-[20px] px-6 py-4 font-semibold hover:bg-red-200 transition duration-300 relative">GRATIS GETRÄNK HOLEN</a>
+      </div>
+      <p id="hashtag-p" class="text-xs absolute bottom-[90px] right-4 md:text-base md:bottom-[130px] md:right-16">#ENJOYRESPONSIBLY</p>
+    </div>
+  </div>
+</body>
+</html>

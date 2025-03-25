@@ -1,0 +1,495 @@
+.gm-title {
+  color: black;
+}
+
+.distance-input-range {
+  appearance: none;
+  background-color: var(--light-red);
+  height: 2px;
+}
+
+.distance-input-range::-webkit-slider-thumb {
+  box-sizing: border-box;
+  appearance: none;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  border-radius: 24px;
+  width: 20px;
+  height: 20px;
+}
+
+.distance-input-range::-moz-range-thumb {
+  box-sizing: border-box;
+  appearance: none;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  border-radius: 24px;
+  width: 20px;
+  height: 20px;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.checkbox {
+  appearance: none;
+  background: var(--opaque-pink-sarti);
+  border: 1px solid var(--light-red);
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  transition: all ease 0.15s;
+  position: relative;
+}
+
+.checkbox:checked {
+  background: var(--light-red);
+}
+
+.checkbox:checked::after {
+  content: "✔"; 
+  color: white;
+  font-size: 16px; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.voucher-modal__container {
+  overflow-y: auto;
+}
+
+#voucher-section {
+ /*  background-image: url("./assets/images/table-with-campari-bottle.png"); */
+ background-color: var(--white);
+}
+
+#voucher-section::before {
+  content: "";
+  z-index: 0;
+  position: absolute;
+  background-color: var(--white);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 90%;
+  color:#00000021
+}
+
+.success-modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--background-modal-transparency);
+}
+
+.voucher-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  min-height: 100vh;
+  width: 100vw;
+  color: var(--dark-blue);
+  position: relative;
+}
+
+.voucher-section__campari-logo {
+  margin: 0 auto;
+  width: 10rem;
+  margin-bottom: 1rem;
+  z-index: 10;
+}
+
+.voucher-section__title {
+  font-size: 1.75rem;
+  line-height: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  z-index: 10;
+}
+
+.voucher-section__subtitle {
+  font-size: 1rem;
+  line-height: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  text-align: center;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.voucher-section__info {
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  z-index: 10;
+  color: var(--pink-sarti);
+}
+
+.voucher-section__info-title {
+  font-weight: 600;
+}
+
+.voucher-section__info-description {
+  font-weight: 300;
+  padding-bottom: 1rem;
+  line-height: 1.25rem;
+
+}
+
+.voucher-section__info-age {
+  font-weight: 300;
+  line-height: 1.25rem;
+}
+
+.voucher-section__bar-item-container {
+  width: 100%;
+  max-width: 424px;
+  z-index: 10;
+}
+
+.voucher-section__bar-item {
+  background-color: white;
+  color: var(--dark-blue);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 3rem;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+}
+
+.voucher-section__form-container {
+  margin-top: 2rem;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.voucher-section__form-label {
+  position: relative;
+}
+
+.voucher-section__input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 35%;
+}
+
+.voucher-section__text-input {
+  color: var(--dark-blue);
+  width: 100%;
+  padding: 1rem;
+  padding-left: 3rem;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+}
+
+.voucher-section__policy-text {
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1rem;
+  margin-top: 1rem;
+}
+
+.second-p {
+  margin-top: 1rem;
+}
+
+.voucher-section__terms-of-services-label {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  border: var(--dark-blue);
+}
+
+.voucher-section__checkbox {
+  border: 1px solid var(--dark-blue);
+  background-color: initial;
+}
+
+.voucher-section__checkbox:checked {
+  background-color: var(--dark-blue);
+}
+
+.voucher-section__error-msg {
+  color: var(--pink-sarti);
+  display: none;
+}
+
+.voucher-section__submit-button {
+  background-color: var(--pink-sarti);;
+  color: white;
+  padding: 1rem 3rem;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+  position: relative;
+  transition: background-color 0.3s;
+  border-radius: 15px;
+}
+
+.voucher-section__submit-button:disabled {
+  background-color: lightgray
+}
+
+.voucher-section__submit-button:disabled:hover {
+  background-color: lightgray
+}
+
+.voucher-section__submit-button:hover {
+  background-color: #fecaca;
+}
+
+.voucher-section__enjoyresponsibly {
+  position: absolute;
+  font-size: 1rem;
+  bottom: 20px;
+  right: 0px;
+  color: var(--dark-blue);
+  width: 100%;
+  text-align: center;
+}
+
+.info-window-container {
+  background-color: #ffffff;
+  color: var(--dark-blue);
+  padding: 0.5rem;
+}
+
+.info-window-image-container {
+  width: 100%;
+  height: 8rem;
+  overflow: hidden;
+}
+
+.info-window-image {
+  object-fit: fill;
+  width: 100%;
+}
+
+.info-window-title {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.info-window-rating {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-window-button {
+  background-color: var(--pink-sarti);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+#claimVoucherButton {
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.result-modal-container {
+  width: 400px;
+  height: 340px;
+  background-color: white;
+  position: absolute;
+  top: 160px;
+  color: var(--dark-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-radius: 25px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.35);
+}
+
+.result-modal-icon {
+  width: 96px;
+  margin-bottom: 16px;
+}
+
+.result-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-modal-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.result-modal-text {
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  margin-bottom: 16px;
+}
+
+.result-modal-text .margin-bottom-p {
+  margin-bottom: 16px;
+}
+
+.result-modal-text.error {
+  color: var(--pink-sarti);
+}
+.result-modal-email {
+  color: var(--pink-sarti);
+}
+.result-modal-button {
+  padding: 8px;
+  width: 192px;
+  background-color: var(--pink-sarti);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  display: inline-block; /* Asegura que el enlace tenga comportamiento de bloque */
+  transition: background-color 0.2s;
+  border-radius: 10px;
+}
+
+.result-modal-button:hover {
+  background-color: var(--light-red);
+}
+
+.message-error-email {
+  color: rgb(61, 61, 248);
+}
+
+.result-modal-text.align-start {
+  text-align: start;
+}
+
+.result-modal-place-name {
+  color: var(--pink-sarti);
+  font-weight: bold;
+}
+.error-msg {
+  padding-bottom: 16px;
+}
+
+@keyframes vibration-1 {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2px, 2px); }
+  20% { transform: translate(2px, -2px); }
+  30% { transform: translate(-2px, -2px); }
+  40% { transform: translate(2px, 2px); }
+  50% { transform: translate(-2px, 0); }
+  60% { transform: translate(2px, 2px); }
+  70% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, -2px); }
+  90% { transform: translate(0, 2px); }
+}
+
+@keyframes vibration-2 {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(0, 2px); }
+  20% { transform: translate(-2px, 2px); }
+  30% { transform: translate(2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  50% { transform: translate(-2px, 0); }
+  60% { transform: translate(2px, 2px); }
+  70% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, 2px); }
+  90% { transform: translate(-2px, 2px); }
+}
+
+.failed-name-input {
+  display: inline-block;
+  animation: vibration-1 0.5s linear;
+}
+
+.failed-email-input {
+  display: inline-block;
+  animation: vibration-2 0.5s linear;
+}
+
+.placeholder-red::placeholder {
+  color: var(--light-red);
+}
+@media (min-width: 768px) {
+
+  .voucher-section__title {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+
+  .voucher-section__campari-logo {
+    width: 15rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .voucher-section__subtitle {
+    font-size: 1.5rem;
+  }
+
+  .voucher-section__info {
+    font-size: 1rem;
+    line-height: 1.25rem;
+
+  }
+
+  .voucher-section__info-description {
+      padding-bottom: 0;
+  }
+  
+  .voucher-section__bar-item {
+    margin-left: none;
+    margin-right: none;
+  }
+
+  .voucher-section__policy-text {
+    font-size: 0.875rem;
+  }
+
+  .voucher-section__enjoyresponsibly {
+    bottom: 50px;
+    right: 50px;
+    color: var(--dark-blue);
+    text-align: initial;
+    width: initial;
+  }
+}
+
+@media (min-width: 1024px) {
+  .voucher-section__title {
+    font-size: 3rem;
+  }
+
+  .info-window-title {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .result-modal-container {
+    width: 450px;
+    height: 340px;
+  }
+  .result-modal-title {
+    font-size: 1.25rem;
+  }
+} 
+

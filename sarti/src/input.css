@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Fonts */
+  font-family: "Rubik";
+
+  /* Colors */
+  --red-campari: #c8102e;
+  --dark-red: #94041c;
+  --dark-gray: #2f2f2f;
+  --light-green: #4DA166;
+  --light-red: #EA5D74;
+  --dark-blue: #182F5A;
+  --background-modal-transparency: #00000066;
+
+  /* Sarti Colors */
+  --pink-sarti: #FF1B4B;
+  --opaque-pink-sarti: #c81d3f;
+  --vibrant-pink: #FC4F91;
+  --green-sarti: #246156;
+  --light-green: #EEF3F2;
+  --white: #FFFFFF;
+}
+
+
+.promotion-container {
+/*   background: rgb(249,186,186);
+  background: linear-gradient(300deg, rgba(249,186,186,1) 0%, rgba(255,248,218,1) 100%); */
+  background: rgb(121,175,140);
+  background: linear-gradient(315deg, rgba(121,175,140,1) 0%, rgba(235,175,151,1) 83%);
+}
+#promotion-section {
+  background-image: 
+    url('./assets/images/orange-right.png'),
+    url('./assets/images/orange-left.png'),
+    url('./assets/images/sarti-cup.png'),
+    url('./assets/images/sarti-bottle.png')
+  ;
+  background-position: 
+    right 0% bottom 0%,
+    left 0% bottom 0%,
+    left 90% bottom -100px,
+    right 10% bottom -100px;
+  background-size: 
+    63%, 
+    40%, 
+    60%,
+    150%;
+  background-repeat: no-repeat;
+}
+
+/* #claim-drink-button::before {
+  content: url('./assets/icons/arrow-to-left.svg');
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#claim-drink-button::after {
+  content: url('./assets/icons/arrow-to-right.svg');
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+} */
+
+@media (min-width: 440px) {
+  #promotion-section {
+    background-position: 
+    right 0% bottom 0%,
+    left 0% bottom 0%,
+    right 80px bottom -100px,
+    right 30px bottom -100px;
+    background-size: 
+      63%, 
+      40%, 
+      45%,
+      110%;
+  }
+}
+
+@media (min-width: 678px) {
+  #promotion-section {
+    background-position: 
+    right 0% bottom 0%,
+    left 0% bottom 0%,
+    right 40% bottom -200px,
+    left 40% bottom -300px;
+    background-size: 400px, 280px, 300px, 800px;
+  }
+}
+
+@media (min-width: 1040px) {
+  #promotion-section {
+    background-position: 
+    right 0% bottom 0%,
+    left 0% bottom 0%,
+    right 40% bottom -200px,
+    left 40% bottom -300px;
+    background-size: 520px, 350px, 300px, 800px;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (min-width: 1440px) {
+  #promotion-section {
+    background-position: 
+    right 0% bottom 0%,
+    left 0% bottom 0%,
+    right 40% bottom -200px,
+    left 40% bottom -300px;
+    background-size: 520px, 350px, 300px, 800px;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (min-width: 1600px) {
+  #promotion-section {
+    background-position: 
+    right 0% bottom 0%,
+    left 0% bottom 0%,
+    right 40% bottom -500px,
+    left 40% bottom -650px;
+    background-size: 520px, 350px, 500px, 1200px;
+    background-repeat: no-repeat;
+  }
+}
+
+/* Find a Bar Section */
+
+#find-a-bar-section {
+  background: linear-gradient(300deg, rgba(249,186,186,1) 0%, rgba(255,248,218,1) 100%);
+}
+
+/* Look your Sarti Section */
+
+#lock-your-campari-modal {
+  background-color: var(--pink-sarti);
+}
+
+.font-roboto-condensed {
+  font-family: "Roboto Condensed";
+}
+
+.font-rubik {
+  font-family: "Rubik";
+}
+
+.bg-red-campari {
+  background: var(--red-campari);
+}
+
+.standard-shadow {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+}
+.active-switch {
+  background-color: white;
+  color: var(--green-sarti);
+  opacity: 1;
+}
+
+.text-stroke {
+  text-shadow:
+    1px 1px 0 var(--pink-sarti),
+    -1px 1px 0 var(--pink-sarti),
+    -1px -1px 0 var(--pink-sarti),
+    1px -1px 0 var(--pink-sarti);
+}
+
+.custom-drop-shadow {
+  filter: drop-shadow(0 0px 3px rgba(0, 0, 0, 0.3));
+}

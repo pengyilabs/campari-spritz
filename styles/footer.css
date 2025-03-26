@@ -40,3 +40,12 @@
   height: full;
   background-color: var(--border-dark-gray);
 }
+
+@media (min-width: 1048px) {
+  #footer {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: none;
+    height: 90px;
+  }
+}

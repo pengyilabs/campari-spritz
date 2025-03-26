@@ -65,7 +65,7 @@ const createHtmlPlacesList = (places) => {
         <div class="bar-item__info-container">
           <h3 class="bar-item__title">${place.name || "Bar Name"}</h3>
           <div class="bar-item__address-container flex gap-2">
-            <img src="src/assets/icons/map-pin.svg" />
+            <img src="../assets/icons/map-pin.svg" />
             <p class="bar-item__address-text">${
               place.formattedAddress || "Address not available"
             }</p>
@@ -73,7 +73,7 @@ const createHtmlPlacesList = (places) => {
           <div class="bar-item__rating text-yellow-500 mb-2">
           ${
             place.rating || "N/A"
-          } ${'<img src="./src/assets/icons/star.svg" />'.repeat(
+          } ${'<img src="../assets/icons/star.svg" />'.repeat(
       Math.round(place.rating || 0)
     )}
           </div>
@@ -131,7 +131,7 @@ const createMarker = (place, map) => {
   const markerContent = document.createElement("div");
   markerContent.className = "custom-marker";
   markerContent.innerHTML = `
-    <img src="./src/assets/images/map-marker.svg" alt="${place.name}" style="width: 32px; height: 32px;" />
+    <img src="../assets/images/map-marker.svg" alt="${place.name}" style="width: 32px; height: 32px;" />
   `;
 
   let loc = {
@@ -172,7 +172,7 @@ const createMarker = (place, map) => {
       <div class="info-window-rating">
         ${
           place.rating
-            ? `<p>Rating: ${place.rating}</p><img src="./src/assets/icons/star.svg" alt="Star" />`
+            ? `<p>Rating: ${place.rating}</p><img src="../assets/icons/star.svg" alt="Star" />`
             : ""
         }
       </div>

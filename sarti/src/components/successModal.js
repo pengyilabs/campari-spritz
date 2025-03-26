@@ -4,7 +4,7 @@ export const renderSuccessModal = (place) => {
   return `
     <div class="result-modal-container">
       <figure class="result-modal-icon">
-        <img src="./src/assets/icons/cup-modal-sarti-icon.png" >
+        <img src="../assets/icons/cup-modal-sarti-icon.png" >
       </figure>
       <div class="result-modal-content">
         <h2 class="result-modal-title">LOS GEHT'S!</h2>

@@ -10,7 +10,7 @@ export const renderVoucherModal = (place) => {
 
   return `
       <div id="voucher-section" class="voucher-section">
-        <img src="./src/assets/images/sarti-logo.png" alt="Sarti Logo" class="voucher-section__campari-logo">
+        <img src="../assets/images/sarti-logo.png" alt="Sarti Logo" class="voucher-section__campari-logo">
         <h1 class="voucher-section__title">SICHERE DIR DEINEN <br class="md:hidden"> GRATIS SARTI SPRITZ</h1>
         <p class="voucher-section__subtitle">TRAGE DEINE E-MAIL EIN UND ERHALTE DEINEN GUTSCHEIN SOFORT</p>
 
@@ -26,11 +26,11 @@ export const renderVoucherModal = (place) => {
             <div class="bar-item__info-container">
               <h3 class="bar-item__title">${place.name || 'Bar Name'}</h3>
               <div class="bar-item__address-container flex gap-2">
-                <img src="src/assets/icons/map-pin.svg" />
+                <img src="../assets/icons/map-pin.svg" />
                 <p class="bar-item__address-text">${place.formattedAddress || 'Adresse nicht verfügbar'}</p>
               </div>
               <div class="bar-item__rating text-yellow-500 mb-2">
-              ${place.rating || 'N/A'} ${'<img src="./src/assets/icons/star.svg" />'.repeat(Math.round(place.rating || 0))}
+              ${place.rating || 'N/A'} ${'<img src="../assets/icons/star.svg" />'.repeat(Math.round(place.rating || 0))}
               </div>
               <p class="bar-item__is-opening">
                 ${place.isOpen ?
@@ -49,13 +49,13 @@ export const renderVoucherModal = (place) => {
           <form id="voucherForm" class="voucher-section__form-container">
             <label class="voucher-section__form-label">
               <figure class="voucher-section__input-icon">
-                <img src="./src/assets/icons/user-icon.svg">
+                <img src="../assets/icons/user-icon.svg">
               </figure>
               <input type="text" id="firstNameInput" name="firstName" class="voucher-section__text-input" placeholder="Gib hier deinen Namen ein">
             </label>
             <label class="voucher-section__form-label">
               <figure class="voucher-section__input-icon">
-                <img src="./src/assets/icons/email-icon.svg">
+                <img src="../assets/icons/email-icon.svg">
               </figure>
               <input type="email" id="emailInput" name="email" class="voucher-section__text-input" placeholder="Gib hier deine E-Mail ein">
             </label>

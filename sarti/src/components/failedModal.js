@@ -3,7 +3,7 @@ export const renderFailedModal = (messages) => {
     <div class="result-modal-container">
       <div class="result-modal-content">
         <figure class="result-modal-icon">
-          <img src="./src/assets/icons/cross.png" />
+          <img src="../assets/icons/cross.png" />
         </figure>
         <h2 class="result-modal-title">DAS HAT LEIDER NICHT FUNKTIONIERT</h2>
         <div class="result-modal-text error ${messages.length > 1 ? "align-start" : ""}">
